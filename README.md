@@ -1,41 +1,65 @@
-# Project Atlas — GitHub Portfolio
+# Project Atlas Control Center
 
-**Live dashboard:** https://rat12-web.github.io/project-portfolio/
+**เว็บไซต์หลัก:** https://rat12-web.github.io/project-portfolio/
 
-ศูนย์รวม GitHub Projects ของ `rat12-web` รวม 13 Repository ที่ตรวจพบ ณ 15 ตุลาคม 2569:
-- **3 Public:** `thaipatch`, `rom2thai-hub-web`, `project-portfolio`
-- **10 Private:** `RetroThaiWorkbench`, `phangnga-live-queue`, `gov-exam-monitor`, `ThaiROM-Studio-Cloud`, `lufia2-thai`, `thai-rom-cloud`, `TYPEBEATS`, `phangnga-hr`, `Gecko-Offline`, `plaethai-bokduay-content-hub`
+ศูนย์ควบคุมโครงการทั้งหมดใน `rat12-web` พร้อมปุ่มไปยังเว็บที่ใช้งานจริง (หากมี), GitHub, Issues, Pull Requests, Actions, และ Workspace รายโครงการ
 
-## การซิงค์ที่ใช้งานจริง
+## สถานะล่าสุด
 
-1. **ข้อมูล Public (GitHub Actions):** [workflow](.github/workflows/sync-public.yml) ดึง Repository ของบัญชีใน [config/owners.json](config/owners.json) ทุก **30 นาที** (นาทีที่ 17 และ 47 UTC) และเมื่อตั้งค่าถูกแก้ไข ถ้าสำเร็จจะอัปเดต [data/public_snapshot.json](data/public_snapshot.json). ใช้แค่ GitHub Actions และ Public REST API ไม่มี PAT และไม่ต้องเปิดคอมพิวเตอร์ค้างไว้
-2. **เปิด Dashboard:** โปรแกรมดึงข้อมูล Public ล่าสุดจาก GitHub REST API ทุกครั้งที่เปิดเว็บ, ทุก **5 นาที** เมื่อแท็บยังเปิด และเมื่อกลับมาเปิดแท็บอีกครั้ง หาก API ไม่พร้อมจะใช้ข้อมูล Public Cache หรือรายการเริ่มต้นโดยระบุว่าไม่ใช่ Live
-3. **Private Repository:** หน้าเว็บมีรายชื่อจากรายการตั้งต้น แต่ไม่ดึง Issue, PR, รายละเอียด, หรือข้อมูลการแก้ไข Private จนกว่าจะเชื่อม Fine-grained Personal Access Token (PAT) ด้วยสิทธิ์ **Read-only** และการเลือก Repository ที่อนุญาต ขณะเปิดโหมดนี้ เว็บตรวจ Repository ที่มีสิทธิ์ รวมถึง Repo ใหม่และการย้ายโดย GitHub repository ID ทุก 5 นาทีเมื่อแท็บเปิด **Token ถูกเก็บในหน่วยความจำแท็บเท่านั้น** ไม่ส่งเข้าฐานข้อมูลและไม่ commit
-4. **บัญชีอื่น:** กด “เพิ่มบัญชี” ในหน้าเว็บ (จำ username ใน localStorage เฉพาะเบราว์เซอร์) หรือแก้ไฟล์ `config/owners.json` เพื่อให้ GitHub Actions จัดเก็บ Public Cache ของบัญชีเพิ่มเติมโดยอัตโนมัติ
+- GitHub: 13 Repository ที่ตรวจพบ (3 Public / 10 Private), ตามรายการ Repository ID ที่ใช้ติดตามแม้มีการย้ายชื่อหรือย้าย Owner
+- เว็บไซต์หลักที่เชื่อมจากหน้าการ์ด: [ROM2THAI Hub](https://rat12-web.github.io/rom2thai-hub-web/), [ThaiPatch](https://rat12-web.github.io/thaipatch/), [Project Atlas](https://rat12-web.github.io/project-portfolio/)
+- เว็บไซต์ที่มีสิทธิ์เจ้าของ: TYPEBEATS M3 และ ThaiROM Studio Cloud (ตาม README ของแต่ละโปรเจกต์)
+- โปรเจกต์ที่ไม่มีเว็บเปิดแยกจะมี Workspace บน Atlas เอง ไม่ได้ทำเว็บปลอมหรือเปิดเนื้อหาของ Private Repository สู่สาธารณะ
+- ผลทดสอบผ่านเว็บเบราว์เซอร์ 2026-10-15: การ์ดครบทั้ง 13, ปุ่มเว็บไซต์จริงของ ROM2THAI/ThaiPatch/TYPEBEATS ถูกต้อง, เปิด drawer, ลิงก์ Issues/PRs/Actions และฟอร์มยืนยันพักงานสำเร็จ **โดยไม่ได้กดบันทึกหรือเปลี่ยน Repository ใด**
 
-**ข้อจำกัดที่ต้องทราบ:** GitHub Actions ของ public repository ไม่ได้มีสิทธิ์อ่าน private repository อื่นโดยอัตโนมัติ การติดตาม **Private ทั้งหมดแบบไม่มีผู้ใช้เปิดหน้าเว็บหรือให้ Token** ยังไม่ได้ตั้งค่า และไม่ควรเผยข้อมูลนั้นบน Pages สาธารณะ สถานะขั้นตอนพัฒนา/งานถัดไปใน Dashboard เป็นการคัดข้อมูลจาก README หรือเอกสารที่เคยตรวจเมื่อ 15 ตุลาคม 2569 ไม่ได้สรุปอัตโนมัติจากทุก commit; สิ่งที่ซิงค์จาก GitHub จริงคือชื่อ repo, owner, visibility, branch, activity และ Issue/PR (เมื่อมีสิทธิ์) เปอร์เซ็นต์ไม่ถูกคำนวณจากจำนวน Issues
+## โครงสร้าง
 
-> **ความเป็นส่วนตัว:** เพราะเว็บนี้เป็น GitHub Pages แบบ Public รายชื่อและคำอธิบายทั่วไปในไฟล์ `index.html` ย่อมเผยแพร่สู่ผู้เข้าชมได้ อย่าใส่ API key, ข้อมูลบุคลากร, รหัสผ่าน, ROM ต้นฉบับ หรือข้อมูลลับลงในไฟล์ Public รายละเอียดที่เป็น Private จะอ่านโดยตรงจาก GitHub ไปยังเบราว์เซอร์ที่ได้รับอนุญาตเท่านั้น
+- `index.html` — shell ของ Dashboard
+- `assets/style.css` — UI แบบ Dark Navy / responsive
+- `assets/app.js` — ดึง GitHub API, แสดง workspace, ควบคุมการแก้ไข
+- `config/project-control.json` — ชื่อ/หมวด/สถานะเชิงบริหาร/ลิงก์หน้าเว็บที่ตั้งใจเผยแพร่ (ไม่ใส่ข้อมูลลับ)
+- `config/owners.json` — บัญชีเจ้าของสำหรับ Public sync
+- `data/public_snapshot.json` — GitHub Actions ดึงข้อมูล Public
+- `.github/workflows/deploy-pages.yml` — ส่งออกเฉพาะไฟล์ public-safe ไป Pages
+- `.github/workflows/sync-public.yml` — ดึง repo Public ทุก 30 นาที
 
-## ลิงก์ตรวจสอบระบบ
+## การควบคุมผ่าน UI
 
-- [GitHub Actions: Sync public project catalog](https://github.com/rat12-web/project-portfolio/actions/workflows/sync-public.yml)
-- [Public metadata cache](data/public_snapshot.json)
-- [Script ที่ใช้ซิงค์](scripts/sync_public.py)
-- [การตั้งค่า GitHub Pages](https://github.com/rat12-web/project-portfolio/settings/pages)
+เปิดการ์ด → **จัดการ** → เชื่อม GitHub ด้วย Fine-grained PAT ผ่านหน้าเว็บ
 
-## ถ้าต้องการย้ายไป GitHub owner ใหม่
+| ปุ่ม | สิ่งที่เกิดจริง | สิทธิ์ GitHub |
+| --- | --- | --- |
+| พักงาน / ดำเนินงานต่อ | PUT อัปเดต `config/project-control.json` ใน `project-portfolio` พร้อม commit; เมื่อ Deploy เสร็จทุกคนเห็นสถานะใหม่ | Contents: write ของ `project-portfolio` |
+| เปลี่ยนลิงก์หลัก | PUT อัปเดตลิงก์/ชื่อปุ่มใน `project-control.json` พร้อม commit | Contents: write ของ `project-portfolio` |
+| เก็บถาวร / คืนสถานะ | PATCH `/repos/{owner}/{repo}` ด้วย `archived=true/false` เพื่อ Archive จริง | Administration: write ที่ Repository เป้าหมาย |
+| ย้าย Repository | POST `/repos/{owner}/{repo}/transfer` แล้วตรวจ `202 Accepted` ซึ่งหมายถึงรับคำขอ มิใช่ย้ายเสร็จแล้ว; ผู้รับอาจต้องยอมรับ | Administration: write ที่ Repository เป้าหมาย |
+| เปิดเว็บจริง | เปิด URL HTTPS ที่ยืนยันจากเอกสารโครงการ | ไม่ต้อง Token หากเว็บเป็น Public |
 
-1. ย้าย Repository จากเมนู GitHub Settings ตามปกติ (GitHub repo ID เดิมจะคงอยู่เมื่อ transfer)
-2. เพิ่ม owner ใหม่ใน Dashboard หรือไฟล์ config/owners.json
-3. ระบบจะรวมรายการตาม **repo ID** เพื่อไม่แสดงซ้ำ
-4. หาก repo ส่วนตัวถูกย้ายและไม่ได้ให้สิทธิ์ GitHub ระบบจะคงรายการเดิมพร้อมสถานะ “ยังไม่ยืนยัน Live” แทนการเดาข้อมูลใหม่
+**ความสำคัญ:** การพักงานใน Atlas **ไม่หยุด** GitHub Actions, Live Stream, เซิร์ฟเวอร์, Agent หรือ CI ของโปรเจกต์อื่น. การ Archive บน GitHub ทำให้ Repository อ่านอย่างเดียว แต่ไม่ได้รับประกันว่าระบบที่ Deploy หรือเซิร์ฟเวอร์ภายนอกหยุดด้วย
 
-## สถานะการยืนยัน
+การเปลี่ยนสถานะและลิงก์บน GitHub ทำงานเป็น API call และ commit จริงเมื่อผู้ใช้ยืนยัน และแสดง error เมื่อไม่มีสิทธิ์ **การเขียน/Archive/Transfer ยังไม่ได้ทดสอบแบบ end-to-end กับ Token เจ้าของ** เพราะไม่สร้าง/เก็บ Token แทนผู้ใช้และไม่ดำเนินการกับ Repository ใดโดยไม่ได้เลือกและยืนยัน
 
-- [x] ตรวจพบ 13 Repository ผ่าน GitHub connector
-- [x] เพิ่มรายการครบ 13 ใน Dashboard รวม Project Atlas
-- [x] เขียน workflow public-only / privacy assertions
-- [x] เปิดการดึงข้อมูลซ้ำทุก 5 นาทีใน Dashboard
-- [ ] ตรวจให้แน่ใจว่า workflow ตั้งเวลารันสำเร็จและ push snapshot ได้ (ดู Runs)
-- [ ] เพิ่มวิธี private cloud sync สำหรับข้ามเบราว์เซอร์โดยไม่มี Token ในหน้าเว็บ (ต้องใช้สถาปัตยกรรมที่มี authentication)
+### ความปลอดภัย
+
+- Fine-grained PAT ใส่ในหน้าเว็บเท่านั้น ไม่ส่งผ่านแชต ไม่ hardcode ลง Source
+- Token อยู่เฉพาะหน่วยความจำ JavaScript ในแท็บ ไม่บันทึกใน Local Storage หรือ Repository
+- เบราว์เซอร์ส่ง Token ไปที่ `api.github.com` ผ่าน HTTPS เท่านั้น
+- ควรเลือกเฉพาะ Repository ที่จะจัดการและสิทธิ์ขั้นต่ำสำหรับแต่ละงาน
+- การใช้ PAT ที่มี Administration: write มีความเสี่ยงสูงกว่า Read-only; ใช้เมื่อจำเป็นและจำกัดวันหมดอายุ
+- `project-control.json` และรายชื่อ Private 10 รายการที่ระบุในหน้าเว็บเป็น **ข้อมูลสาธารณะ** ไม่ใส่รายละเอียดส่วนบุคคล ข้อมูลภายในหน่วยงานหรือ URL ที่มีโทเคน
+- GitHub Pages เป็นเว็บ static: ไม่มีเซิร์ฟเวอร์ API ที่เก็บ Token ลับ; จึงไม่ได้ทำให้เจ้าของเข้าใช้งานผ่าน ChatGPT/GitHub OAuth โดยอัตโนมัติ
+
+### ซิงค์อัตโนมัติ
+
+**Public:** GitHub Actions ตรวจรายชื่อ/metadata Public ทุก 30 นาที; หน้าเว็บดึง GitHub ทุกครั้งที่เปิดและทุก 5 นาทีที่แท็บเปิด, การเปลี่ยนสถานะ/ลิงก์ใน GitHub จะ Trigger การ Deploy.
+
+**Private:** ข้อมูล Private แบบสดต้องเชื่อม Token ที่มีสิทธิ์อ่านบนแท็บ (ข้อมูลจริงไม่ Export สู่ Pages), หรือเพิ่ม backend พร้อม authentication เป็นงานขั้นถัดไป
+
+**ย้ายชื่อหรือ Owner:** Repository ID ใช้ตรวจว่ากำลังตาม Repository เดิม ไม่ใช่เดาจากชื่อ หากไม่มีสิทธิ์อ่านหลังย้าย หน้าเว็บจะแสดงรายการเดิมเป็น Catalog จนกว่าจะเชื่อมสิทธิ์ใหม่
+
+## ตรวจสอบ
+
+- [Workflow: Deploy Project Atlas Pages](https://github.com/rat12-web/project-portfolio/actions/workflows/deploy-pages.yml)
+- [Workflow: Sync public project catalog](https://github.com/rat12-web/project-portfolio/actions/workflows/sync-public.yml)
+- [GitHub Actions Runs](https://github.com/rat12-web/project-portfolio/actions)
+
