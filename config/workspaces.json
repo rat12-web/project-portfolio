@@ -350,7 +350,8 @@
       "hosting": "github_pages",
       "source_status": "github_verified",
       "access": "public",
-      "operational_status": "status_mirror"
+      "operational_status": "status_mirror",
+      "audit_ref": "rom-lufia"
     },
     {
       "id": "page-thaipatch",
@@ -363,7 +364,8 @@
       "hosting": "github_pages",
       "source_status": "github_verified",
       "access": "public",
-      "operational_status": "published"
+      "operational_status": "published",
+      "audit_ref": null
     },
     {
       "id": "page-atlas",
@@ -376,7 +378,8 @@
       "hosting": "github_pages",
       "source_status": "github_verified",
       "access": "public",
-      "operational_status": "management"
+      "operational_status": "management",
+      "audit_ref": "atlas-private-pages"
     },
     {
       "id": "page-exam-path",
@@ -389,7 +392,8 @@
       "hosting": "github_pages",
       "source_status": "github_verified",
       "access": "public",
-      "operational_status": "published"
+      "operational_status": "published",
+      "audit_ref": null
     },
     {
       "id": "phangnga-jobs-chatgpt",
@@ -403,7 +407,9 @@
       "access": "public",
       "source_status": "no_linked_github_repo",
       "operational_status": "stale_data_review",
-      "status_label": "ChatGPT Sites · ต้องตรวจข้อมูล"
+      "status_label": "ChatGPT Sites · ต้องตรวจข้อมูล",
+      "audit_ref": "job-profiles-stale",
+      "service_label": "ChatGPT Sites"
     }
   ],
   "web_apps": [
@@ -420,7 +426,9 @@
       "hosting": "chatgpt_sites",
       "link_status": "known",
       "operational_status": "preview_unverified",
-      "source_status": "github_verified"
+      "source_status": "github_verified",
+      "audit_ref": "studio-site-name",
+      "service_label": "ChatGPT Sites"
     },
     {
       "id": "typebeats-preview",
@@ -435,7 +443,9 @@
       "hosting": "chatgpt_sites",
       "link_status": "known",
       "operational_status": "preview_unverified",
-      "source_status": "github_verified"
+      "source_status": "github_verified",
+      "audit_ref": "typebeats-preview",
+      "service_label": "ChatGPT Sites"
     },
     {
       "id": "phangnga-hr-sites",
@@ -450,7 +460,9 @@
       "link_status": "missing",
       "operational_status": "missing_confirmed_url",
       "source_status": "github_verified",
-      "status_label": "Owner-private · รอ URL"
+      "status_label": "Owner-private · รอ URL",
+      "audit_ref": "hr-private-url",
+      "service_label": "ChatGPT Sites"
     }
   ],
   "development": [
