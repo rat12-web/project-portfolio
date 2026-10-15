@@ -331,7 +331,12 @@
     },
     "known_repositories": 15,
     "notes": "Project names shown in UI are aliases; canonical GitHub repository URLs remain unchanged.",
-    "navigation_model": "web apps / development without live web / repository management"
+    "navigation_model": "web apps / development without live web / repository management",
+    "known_webapp_sources": {
+      "github_pages": 4,
+      "chatgpt_sites_with_links": 3,
+      "chatgpt_sites_missing_link": 1
+    }
   },
   "pages": [
     {
@@ -341,7 +346,11 @@
       "repo_id": 1418448691,
       "url": "https://rat12-web.github.io/rom2thai-hub-web/",
       "description": "หน้ารายงานสถานะงานแปล (ข้อมูล Public ที่คัดกรองแล้ว) ไม่ใช่ที่เก็บงานแปลหลัก",
-      "type": "status_mirror"
+      "type": "status_mirror",
+      "hosting": "github_pages",
+      "source_status": "github_verified",
+      "access": "public",
+      "operational_status": "status_mirror"
     },
     {
       "id": "page-thaipatch",
@@ -350,7 +359,11 @@
       "repo_id": 1415242573,
       "url": "https://rat12-web.github.io/thaipatch/",
       "description": "เว็บค้นหาแพตช์แปลไทยและเครดิตผู้แปล",
-      "type": "catalog"
+      "type": "catalog",
+      "hosting": "github_pages",
+      "source_status": "github_verified",
+      "access": "public",
+      "operational_status": "published"
     },
     {
       "id": "page-atlas",
@@ -359,7 +372,11 @@
       "repo_id": 1420150047,
       "url": "https://rat12-web.github.io/project-portfolio/",
       "description": "เว็บจัดการและแสดงงาน ไม่ใช่ Repository ผลิตเกมหรือแพตช์",
-      "type": "control_center"
+      "type": "control_center",
+      "hosting": "github_pages",
+      "source_status": "github_verified",
+      "access": "public",
+      "operational_status": "management"
     },
     {
       "id": "page-exam-path",
@@ -368,7 +385,25 @@
       "repo_id": 1420204360,
       "url": "https://rat12-web.github.io/exam-path-tracker/",
       "description": "เว็บติดตามบัญชีสอบและประกาศที่ตรวจสอบได้ เก็บข้อมูลลำดับส่วนตัวไว้ในเบราว์เซอร์",
-      "type": "application"
+      "type": "application",
+      "hosting": "github_pages",
+      "source_status": "github_verified",
+      "access": "public",
+      "operational_status": "published"
+    },
+    {
+      "id": "phangnga-jobs-chatgpt",
+      "title": "ศูนย์ข้อมูลตำแหน่งงานจังหวัดพังงา",
+      "owner_family": "standalone_chatgpt_site",
+      "repo_id": null,
+      "url": "https://phangnga-job-profiles.rat-creative1.chatgpt.site",
+      "description": "เว็บไซต์รวบรวมข้อมูลตำแหน่งงานผ่าน ChatGPT Sites · แหล่งข้อมูลที่หน้าเว็บระบุล่าสุด สิงหาคม 2569 ต้องตรวจความทันสมัยก่อนใช้สมัครงาน",
+      "type": "application",
+      "hosting": "chatgpt_sites",
+      "access": "public",
+      "source_status": "no_linked_github_repo",
+      "operational_status": "stale_data_review",
+      "status_label": "ChatGPT Sites · ต้องตรวจข้อมูล"
     }
   ],
   "web_apps": [
@@ -381,7 +416,11 @@
       "type": "restricted_preview",
       "access": "restricted",
       "description": "เว็บเครื่องมือแพตช์ BPS แบบทดลอง · Owner-private · ยังไม่ยืนยันความพร้อมใช้งานจริงทั้งหมด",
-      "status_label": "ทดสอบ · จำกัดสิทธิ์"
+      "status_label": "ทดสอบ · จำกัดสิทธิ์",
+      "hosting": "chatgpt_sites",
+      "link_status": "known",
+      "operational_status": "preview_unverified",
+      "source_status": "github_verified"
     },
     {
       "id": "typebeats-preview",
@@ -392,7 +431,26 @@
       "type": "restricted_preview",
       "access": "restricted",
       "description": "Godot Alpha M3 · เว็บทดลองเฉพาะผู้มีสิทธิ์ ไม่ใช่เกมเวอร์ชันสมบูรณ์",
-      "status_label": "Alpha · จำกัดสิทธิ์"
+      "status_label": "Alpha · จำกัดสิทธิ์",
+      "hosting": "chatgpt_sites",
+      "link_status": "known",
+      "operational_status": "preview_unverified",
+      "source_status": "github_verified"
+    },
+    {
+      "id": "phangnga-hr-sites",
+      "title": "ชาวดินพังงา HR · ChatGPT Sites",
+      "owner_family": "land-hr",
+      "repo_id": 1420054663,
+      "url": null,
+      "description": "README ยืนยันว่ามีเว็บ owner-private ผ่าน ChatGPT Sites แต่ยังไม่พบ URL ที่ตรวจสอบได้; ข้อมูลบุคลากรและสิทธิ์ต้องไม่เปิดสาธารณะ",
+      "type": "restricted_preview",
+      "access": "restricted",
+      "hosting": "chatgpt_sites",
+      "link_status": "missing",
+      "operational_status": "missing_confirmed_url",
+      "source_status": "github_verified",
+      "status_label": "Owner-private · รอ URL"
     }
   ],
   "development": [
