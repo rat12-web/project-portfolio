@@ -24,14 +24,14 @@
           "role": "พัฒนาหลัก"
         },
         {
-          "title": "ThaiROM Studio — โค้ดต้นทางเดิม",
+          "title": "ThaiROM Studio Online",
           "repo_id": 1413883614,
-          "role": "Legacy / มี 7 PR ค้าง ต้องตรวจสอบ"
+          "role": "เครื่องมือออนไลน์ที่พัฒนาต่อ · โปรเจกต์ Private; PR เดิม 7 รายการต้องตรวจ"
         },
         {
-          "title": "RetroThai Workbench — โค้ดต้นทางเดิม",
+          "title": "RetroThai Workbench · Archived",
           "repo_id": 1391725161,
-          "role": "Legacy / มี 1 PR ค้าง ต้องตรวจสอบ"
+          "role": "หยุดพัฒนาในต้นทาง · อ่านได้อย่างเดียว; PR #1 ค้างตรวจ"
         }
       ]
     },
