@@ -165,6 +165,17 @@
       "visibility": "public",
       "link_label": "เปิดเส้นทางบรรจุ",
       "role": "application"
+    },
+    "1420313793": {
+      "title": "สำนักงานที่ดินพังงา · ตารางเวร",
+      "status": "active",
+      "role": "application",
+      "category": "ระบบหน่วยงาน",
+      "summary": "Web App จัดเวรสำนักงานที่ดินที่เผยแพร่ผ่าน ChatGPT Sites แบบจำกัดสิทธิ์; GitHub มีเฉพาะซอร์ส/แม่แบบ ไม่เก็บข้อมูลบุคคลที่กรอกในเว็บ",
+      "next": "ตรวจ Actions Deploy ล่าสุดและทดสอบส่งออก Word/Excel ด้วยข้อมูลทดสอบก่อนใช้งานจริง",
+      "homepage": null,
+      "visibility": "restricted",
+      "last_verified_change": "README verified 2026-10-15"
     }
   }
 }
