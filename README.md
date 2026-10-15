@@ -120,3 +120,17 @@ To move *every source project* to Private without interrupting the live web expe
 - **RetroThaiWorkbench**: Archive จริงบน GitHub แล้ว (Private, read-only, ID `1391725161`) โดย README ชี้ไปยัง `thai-rom-cloud` สำหรับการพัฒนางานแปล ROM ใหม่ และ PR #1 ยังไม่ได้ถูกรวม/ปิด
 - Atlas เปลี่ยนชื่อและลิงก์ของทั้งสอง Repository ใน `config/project-control.json`, `config/workspaces.json`, `assets/app.js`, `assets/hierarchy.js` แล้ว
 - ลิงก์หน้าเว็บทดสอบแบบ owner-private ของ Studio ที่เคยใช้อยู่ยังใช้ URL เดิม (`thairom-studio-cloud.rat-creative1.chatgpt.site`) เพราะการ Rename GitHub Repository ไม่ได้เปลี่ยนชื่อโฮสต์อื่นโดยอัตโนมัติ
+
+## UI navigation update — 2026-10-15
+
+Project Atlas now separates visible work by **delivery surface**, not by the type of product being built:
+
+- **Home**: Two large selectable cards for **Web Apps** and **Development**.
+- **Web Apps**: 4 published/public URLs (ROM translation status mirror, ThaiPatch catalog, Atlas dashboard, Exam Path Tracker), plus 2 clearly marked restricted/alpha preview URLs (ThaiROM Studio Online, TYPEBEATS). Links open the deployed experience first. A preview is *not* a production-ready application.
+- **Development**: 7 project workspaces **without a verified published web app** — RetroThaiCraft ROM patch development, Digimon World Android, Gecko Offline, Gov Exam Monitor, Phangnga Live Queue, Land Office HR and ThaiPatch editorial/agent workspace. ROM work still expands **console → game → status/next task**.
+- **Repository Explorer**: Source/deployment mirrors, private repositories and Archived items stay available for administration; Archived remains hidden by default.
+- **Atlas Control**: Administrative tools remain separate.
+
+The previous dedicated comparison banner `งานแปลเกม ≠ สารบัญเกมแปลไทย` has been removed from the user interface. The two projects and their legitimate code/status data remain unchanged.
+
+Counts come from `config/workspaces.json`: `pages`, `web_apps` and `development`. New web app links should be added there with correct accessibility/preview labels; a URL is not proof that all features have completed QA. Changes were verified by an actual read-only browser test and GitHub Pages workflow [run 38694985243](https://github.com/rat12-web/project-portfolio/actions/runs/38694985243) succeeded.
