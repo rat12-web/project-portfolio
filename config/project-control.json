@@ -4,14 +4,14 @@
   "note": "Public-safe project catalog: do not add secrets, private data, credentials or internal asset URLs.",
   "projects": {
     "1391725161": {
-      "title": "RetroThaiCraft · Workbench (Legacy)",
+      "title": "RetroThai Workbench · Archived",
       "category": "เครื่องมือแปลเกม",
-      "status": "blocked",
-      "summary": "โค้ด Workbench ต้นทางเดิม: นำส่วนที่ตรวจแล้วเข้า ROM2THAI Hub; ยังมี PR #1 ต้องตรวจ",
-      "next": "แก้การ round-trip ตัวอักษร FE8 และพิสูจน์ Thai rendering",
+      "status": "archived",
+      "summary": "เครื่องมือ Desktop/CLI ต้นทางเดิม ถูก Archive เป็น Read-only เมื่อ 15 ตุลาคม 2569; ใช้ thai-rom-cloud เป็นจุดพัฒนาหลัก",
+      "next": "รักษาประวัติและตรวจ PR #1 เดิมก่อนสรุปว่างานถูกนำเข้าครบ",
       "homepage": null,
       "visibility": "no-live",
-      "role": "legacy_source",
+      "role": "archived_source",
       "canonical_repo_id": 1416748319
     },
     "1396825920": {
@@ -35,15 +35,14 @@
       "role": "application"
     },
     "1413883614": {
-      "title": "RetroThaiCraft · Studio (Legacy)",
+      "title": "ThaiROM Studio Online",
       "category": "เครื่องมือแปลเกม",
       "status": "active",
-      "summary": "โค้ด Studio ต้นทางเดิม: รวมเข้า Hub แล้วบางส่วน; ยังมี PR ค้าง 7 รายการ",
-      "next": "ทดสอบเบราว์เซอร์จริงและความครอบคลุมของเกม",
+      "summary": "เครื่องมือออนไลน์สำหรับแพตช์เกมภาษาไทย (BPS) และทดลองระบบแปลแบบใช้เบราว์เซอร์; มี 7 PR เดิมที่ยังต้องตรวจ ไม่ใช่การแปลจบทั้งเกม",
+      "next": "ตรวจ Browser QA และ PR เก่าหลังการเปลี่ยนชื่อ Repository ก่อนปล่อยรุ่นใช้งานจริง",
       "homepage": "https://thairom-studio-cloud.rat-creative1.chatgpt.site",
       "visibility": "restricted",
-      "role": "legacy_source",
-      "canonical_repo_id": 1416748319
+      "role": "online_tool"
     },
     "1415242573": {
       "title": "ThaiPatch Catalog · สารบัญเกมแปลไทย",
