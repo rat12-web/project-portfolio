@@ -4,7 +4,7 @@
 
 ## 🆕 Explorer v2 — 15 ตุลาคม 2569
 
-- **ภาพรวมโครงการ**: 7 กลุ่มงานหลัก; ROM2THAI แยก **เครื่องเกม → เกม → ขั้นตอนต่อไป**; Atlas ไม่แสดงปะปนกับโครงการผลิตงาน
+- **ภาพรวมโครงการ**: 8 กลุ่มงานหลัก; ROM2THAI แยก **เครื่องเกม → เกม → ขั้นตอนต่อไป**; Atlas ไม่แสดงปะปนกับโครงการผลิตงาน
 - **GitHub Pages**: แยกเว็บไซต์ที่ใช้งานจริง 3 รายการออกจาก Source Repository: ROM2THAI Status, ThaiPatch Catalog และ Atlas Dashboard
 - **Repository Explorer**: ซ่อน Archived เป็นค่าเริ่มต้น แต่เปิดกลับมาดูได้ด้วย Checkbox; ไม่ลบหรือเปลี่ยนสถานะ GitHub จริง
 - **Project Atlas · Control Center**: เมนูบริหารเฉพาะ ไม่ใช่โครงการสร้างเกม/แพตช์
@@ -12,19 +12,28 @@
 - **ThaiPatch** = สารบัญเกมแปลไทยจากทีมต่าง ๆ พร้อมเครดิตแหล่งที่มา (`thaipatch`)
 - **Responsive UI v2**: `assets/atlas-v2.css`, accessible navigation, cards แยกบทบาท, legacy details ยุบได้
 
-อ่านโครงสร้างและข้อกำหนดฉบับละเอียดใน [docs/ATLAS_EXPLORER_V2.md](docs/ATLAS_EXPLORER_V2.md). ทดสอบเบราว์เซอร์บนเว็บที่ Deploy แล้วว่าครบ 7 กลุ่ม, 10 รายการเกม, หน้า Pages, ซ่อน/แสดง Archived และหน้า Atlas แยกสำเร็จ
+อ่านโครงสร้างและข้อกำหนดฉบับละเอียดใน [docs/ATLAS_EXPLORER_V2.md](docs/ATLAS_EXPLORER_V2.md). ทดสอบเบราว์เซอร์บนเว็บที่ Deploy แล้วว่าครบ 8 กลุ่ม, 10 รายการเกม, หน้า Pages, ซ่อน/แสดง Archived และหน้า Atlas แยกสำเร็จ
 
 
 
 ศูนย์ควบคุมโครงการทั้งหมดใน `rat12-web` พร้อมปุ่มไปยังเว็บที่ใช้งานจริง (หากมี), GitHub, Issues, Pull Requests, Actions, และ Workspace รายโครงการ
 
+
+## 🆕 15 ตุลาคม 2569 — RetroThaiCraft / ThaiPatch Catalog
+
+**ชื่อแสดงผลใน Portfolio เท่านั้น:** \`ROM2THAI\` → **RetroThaiCraft** (ผลิตแพตช์แปลไทย), \`ThaiPatch\` → **ThaiPatch Catalog** (รวบรวมแพตช์และเครดิตทีมแปล). Repository จริงยังเป็น \`thai-rom-cloud\` และ \`thaipatch\`; URL และชื่อ internal family ID ไม่เปลี่ยน เพื่อหลีกเลี่ยงการกระทบระบบเก่า
+
+**ตรวจพบ Repository ใหม่ 2 รายการจากบัญชี rat12-web:** \`digimon-world-android\` (Private, Android ARM64 Alpha 5 ต้อง QA บนเครื่องจริง) และ \`exam-path-tracker\` (Public, GitHub Pages \`https://rat12-web.github.io/exam-path-tracker/\`). เพิ่ม Digimon เป็นโครงการหลักลำดับที่ 8 และเพิ่ม Exam Path Tracker ในกลุ่มงานสอบราชการเป็นงานย่อยของ Gov Exam
+
+ปัจจุบันพบ Repository **15 รายการ** (Public 4 / Private 11), เก็บถาวร \`lufia2-thai\` แล้ว 1 รายการจึงซ่อนไว้จากค่าเริ่มต้น เหลือแสดง 14 ในรายการ Active หากดึงข้อมูลครบทุกตัว ดูบันทึกใน \`docs/PROJECT_DISCOVERY_2026-10-15.md\`.
+
 ## สถานะล่าสุด
 
-- GitHub: 13 Repository ที่ตรวจพบ (3 Public / 10 Private), ตามรายการ Repository ID ที่ใช้ติดตามแม้มีการย้ายชื่อหรือย้าย Owner
+- GitHub: 15 Repository ที่ตรวจพบ (4 Public / 11 Private), ตามรายการ Repository ID ที่ใช้ติดตามแม้มีการย้ายชื่อหรือย้าย Owner
 - เว็บไซต์หลักที่เชื่อมจากหน้าการ์ด: [ROM2THAI Hub](https://rat12-web.github.io/rom2thai-hub-web/), [ThaiPatch](https://rat12-web.github.io/thaipatch/), [Project Atlas](https://rat12-web.github.io/project-portfolio/)
 - เว็บไซต์ที่มีสิทธิ์เจ้าของ: TYPEBEATS M3 และ ThaiROM Studio Cloud (ตาม README ของแต่ละโปรเจกต์)
 - โปรเจกต์ที่ไม่มีเว็บเปิดแยกจะมี Workspace บน Atlas เอง ไม่ได้ทำเว็บปลอมหรือเปิดเนื้อหาของ Private Repository สู่สาธารณะ
-- ผลทดสอบผ่านเว็บเบราว์เซอร์ 2026-10-15: การ์ดครบทั้ง 13, ปุ่มเว็บไซต์จริงของ ROM2THAI/ThaiPatch/TYPEBEATS ถูกต้อง, เปิด drawer, ลิงก์ Issues/PRs/Actions และฟอร์มยืนยันพักงานสำเร็จ **โดยไม่ได้กดบันทึกหรือเปลี่ยน Repository ใด**
+- ผลทดสอบผ่านเว็บเบราว์เซอร์ 2026-10-15: การ์ดครบทั้ง 13 ณ เวลาทดสอบเดิม (ปัจจุบันเพิ่มอีก 2), ปุ่มเว็บไซต์จริงของ ROM2THAI/ThaiPatch/TYPEBEATS ถูกต้อง, เปิด drawer, ลิงก์ Issues/PRs/Actions และฟอร์มยืนยันพักงานสำเร็จ **โดยไม่ได้กดบันทึกหรือเปลี่ยน Repository ใด**
 
 ## โครงสร้าง
 
@@ -80,7 +89,7 @@
 
 ## Project-family hierarchy (2026-10-15)
 
-**Verified in the deployed browser:** 8 expandable project families / 13 GitHub repositories. The ROM2THAI family expands into console → game with 10 public-safe game status records: GBA 5, SNES 2, GB/GBC 1, PS1 1, and Homebrew 1. Project status loads from the [public sanitized ROM2THAI status mirror](https://github.com/rat12-web/rom2thai-hub-web/blob/main/site/status.json), with a dated static fallback in `config/workspaces.json`. Repo/project labels are friendly display aliases, **not physical GitHub repository renames**.
+**Verified in the deployed browser:** 8 expandable project families / 15 GitHub repositories. The ROM2THAI family expands into console → game with 10 public-safe game status records: GBA 5, SNES 2, GB/GBC 1, PS1 1, and Homebrew 1. Project status loads from the [public sanitized ROM2THAI status mirror](https://github.com/rat12-web/rom2thai-hub-web/blob/main/site/status.json), with a dated static fallback in `config/workspaces.json`. Repo/project labels are friendly display aliases, **not physical GitHub repository renames**.
 
 ### Project families and role separation
 
