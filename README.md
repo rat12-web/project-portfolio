@@ -1,6 +1,20 @@
-# Project Atlas Control Center
+# Project Explorer · Atlas Control Center
 
 **เว็บไซต์หลัก:** https://rat12-web.github.io/project-portfolio/
+
+## 🆕 Explorer v2 — 15 ตุลาคม 2569
+
+- **ภาพรวมโครงการ**: 7 กลุ่มงานหลัก; ROM2THAI แยก **เครื่องเกม → เกม → ขั้นตอนต่อไป**; Atlas ไม่แสดงปะปนกับโครงการผลิตงาน
+- **GitHub Pages**: แยกเว็บไซต์ที่ใช้งานจริง 3 รายการออกจาก Source Repository: ROM2THAI Status, ThaiPatch Catalog และ Atlas Dashboard
+- **Repository Explorer**: ซ่อน Archived เป็นค่าเริ่มต้น แต่เปิดกลับมาดูได้ด้วย Checkbox; ไม่ลบหรือเปลี่ยนสถานะ GitHub จริง
+- **Project Atlas · Control Center**: เมนูบริหารเฉพาะ ไม่ใช่โครงการสร้างเกม/แพตช์
+- **ROM2THAI** = ทีมงานสร้างแพตช์แปลไทยจริง (canonical source `thai-rom-cloud`)
+- **ThaiPatch** = สารบัญเกมแปลไทยจากทีมต่าง ๆ พร้อมเครดิตแหล่งที่มา (`thaipatch`)
+- **Responsive UI v2**: `assets/atlas-v2.css`, accessible navigation, cards แยกบทบาท, legacy details ยุบได้
+
+อ่านโครงสร้างและข้อกำหนดฉบับละเอียดใน [docs/ATLAS_EXPLORER_V2.md](docs/ATLAS_EXPLORER_V2.md). ทดสอบเบราว์เซอร์บนเว็บที่ Deploy แล้วว่าครบ 7 กลุ่ม, 10 รายการเกม, หน้า Pages, ซ่อน/แสดง Archived และหน้า Atlas แยกสำเร็จ
+
+
 
 ศูนย์ควบคุมโครงการทั้งหมดใน `rat12-web` พร้อมปุ่มไปยังเว็บที่ใช้งานจริง (หากมี), GitHub, Issues, Pull Requests, Actions, และ Workspace รายโครงการ
 
