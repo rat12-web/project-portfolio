@@ -9,7 +9,7 @@ const repos={
 1413883614:'ThaiROM-Studio-Online',1415242573:'thaipatch',1416744545:'lufia2-thai',
 1416748319:'thai-rom-cloud',1418199034:'TYPEBEATS',1418448691:'rom2thai-hub-web',
 1420054663:'phangnga-hr',1420128168:'Gecko-Offline',1420142917:'RE2play-Content-Agent',
-1420150047:'project-portfolio',1420200967:'digimon-world-android',1420204360:'exam-path-tracker'};
+1420150047:'project-portfolio',1420200967:'digimon-world-android',1420204360:'exam-path-tracker',1420313793:'phangnga-duty-roster'};
 const archivedIds=new Set([1416744545,1391725161]);
 const repoURL=id=>repos[id]?'https://github.com/rat12-web/'+repos[id]:'';
 const link=(url,label,cls='family-link')=>safeURL(url)?'<a class="'+cls+'" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(label)+'</a>':'';
@@ -19,7 +19,7 @@ function statusKind(g){const x=(String(g.status||'')+' '+String(g.status_th||'')
 function gamesFor(p){
  return (gameData?.[p]||[]).map(g=>{
  const url='https://github.com/rat12-web/thai-rom-cloud/tree/main/games/'+encodeURI(String(g.id||''));
- return '<article class="game-item"><div class="game-primary"><span class="game-icon" aria-hidden="true">▣</span><div><strong>'+esc(g.title||g.name||g.id)+'</strong><div class="game-status '+statusKind(g)+'">'+esc(g.status||g.status_th||'ยังไม่ยืนยัน')+'</div></div></div><div class="game-actions">'+link(url,'ไฟล์งาน ↗')+'</div><div class="game-next"><span>ขั้นตอนต่อไป:</span> '+esc(g.next||g.next_action_th||'รอการตรวจสอบ')+'</div></article>'
+ return '<article class="game-item"><div class="game-primary"><span class="game-icon" aria-hidden="true">▣</span><div><strong>'+esc(g.title||g.name||g.id)+'</strong><div class="game-status '+statusKind(g)+'">'+esc(g.status||g.status_th||'ยังไม่ยืนยัน')+'</div></div></div><div class="game-actions">'+link(url,'ไฟล์งาน ↗')+'<button type="button" class="family-link" data-prompt-id="1416748319" data-prompt-game="'+esc(g.id)+'" data-prompt-title="'+esc(g.title||g.name||g.id)+'" data-prompt-next="'+esc(g.next||g.next_action_th||'ตรวจงานถัดไป')+'" data-prompt-status="'+esc(g.status||g.status_th||'ยังไม่ยืนยัน')+'" data-prompt-platform="'+esc(p)+'">⧉ Prompt</button></div><div class="game-next"><span>ขั้นตอนต่อไป:</span> '+esc(g.next||g.next_action_th||'รอการตรวจสอบ')+'</div></article>'
  }).join('')
 }
 function gameTree(){
@@ -50,7 +50,7 @@ function family(f){
  '<span class="family-chevron" aria-hidden="true">⌄</span></summary>'+
  '<div class="family-expanded"><div class="family-actions">'+
  (f.site?link(f.site,cat?'↗ เปิดเว็บ Catalog':rom?'↗ ดูสถานะงานแปล':'↗ เปิด Demo','family-primary'):'')+
- link(repoURL(f.root_repo_id),'⌘ เปิด Source Repository')+'</div>'+
+ link(repoURL(f.root_repo_id),'⌘ เปิด Source Repository')+(f.root_repo_id?'<button type="button" class="family-link" data-prompt-id="'+esc(f.root_repo_id)+'">⧉ Prompt ถัดไป</button>':'')+'</div>'+
  (rom?gameTree():'')+subs(f)+'</div></details></article>'
 }
 function renderPages(){
@@ -74,7 +74,7 @@ function renderPages(){
    '<div class="app-origin '+(isChatGPT?'chatgpt':'github')+'">'+(isChatGPT?'✦ ':'⌘ ')+esc(hosting)+'</div>'+
    '<h3>'+esc(p.title)+'</h3><p>'+esc(p.description||'')+'</p>'+
    '<div class="page-meta">'+sourceDesc+' · '+(preview?'จำกัดสิทธิ์ / Preview':url?'มีลิงก์เปิดเว็บ':'ยังไม่พบลิงก์')+'</div>'+
-   '<div class="page-actions">'+primary+source+'</div></article>';
+   '<div class="page-actions">'+primary+source+'<button type="button" class="action-muted" data-prompt-id="'+esc(p.repo_id||('site:'+p.id))+'">⧉ Prompt ทำต่อ</button></div></article>';
  };
  if($('pagesGrid'))$('pagesGrid').innerHTML=published.map(p=>card(p)).join('')||'<div class="notice">ยังไม่มี Web App ที่ยืนยันลิงก์</div>';
  if($('previewGrid'))$('previewGrid').innerHTML=previews.map(p=>card(p,true)).join('')||'<div class="notice">ยังไม่มีเว็บทดลองที่เผยแพร่</div>';
