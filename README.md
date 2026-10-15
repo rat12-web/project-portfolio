@@ -184,3 +184,19 @@ The homepage contains an editable project board implemented in `assets/home.js`.
 There are also **Export settings** / **Import settings** buttons for browser-local preferences and a reset button. The import parser only accepts whitelisted project fields. No access token is stored in an exported JSON or localStorage. If a project is a ChatGPT Site not linked to a GitHub Repository, it can be customized locally but cannot be cloud-saved via this particular GitHub config.
 
 **Verification:** JavaScript syntax checks passed. A read-only live browser test confirmed the homepage project board, searching/sorting controls, navigation isolation from Web Apps, and private/local controls. Pure status logic regression checks confirmed planning → local pause → resume, resume over a cloud pause, and archived precedence. The workflow also validates JavaScript syntax and expected UI markers before future deploys. Backend GitHub write commands remain opt-in and are not triggered by local actions.
+
+## README-aware Next Prompt Handoff (2026-10-15)
+
+**Every project card** on Home / Repository Explorer and each listed Web App, Development family and ROM console-game row now has a **⧉ Prompt ทำต่อ** action.
+
+- Prompt registry: `config/next-prompts.json` (published as `data/next-prompts.json`) contains **16 GitHub projects + 1 ChatGPT Site without matched repository**. Each entry holds canonical Repository path, where to start, evidence documents, current checked snapshot, next bounded step, scope, acceptance points and a date. Private file contents are not copied into the Public registry.
+- Prompt viewer: `assets/prompts.js`. Opens a readable/editable text handoff and has **⧉ คัดลอก Prompt**, reset, links to GitHub and starting file, and **↻ ตรวจ README สด**.
+- README verification is attempted automatically for Public projects. For Private, users must first connect GitHub with a suitable read permission. No token is stored in prompt data or persisted in the browser. A failed read is labeled **not verified live**, and the resulting prompt orders the next Agent to read the actual README/Handoff from an authorized checkout instead of guessing.
+- Verified task IDs from project docs are explicitly distinguished from Atlas proposed task names. For example, TYPEBEATS `PHONE-QA-001` is from `docs/AGENT_TASKS.md`, Gecko `M0-003` is from `docs/HANDOFF_CURRENT.md`; other labels are proposal IDs to be checked against the current project's own tracker.
+- Handoff prompt includes where to resume, what to read, GitHub URL, next bounded step, evidence/acceptance, permissions/privacy, git branch/SHA checks, tests, blockers and what to update in the next handoff.
+- ROM game cards add a **game-specific** source, latest public game-status string and next action instead of emitting one generic patch translation prompt for all games.
+- Newly found `rat12-web/phangnga-duty-roster` and its owner-private ChatGPT Site were registered in the catalog. The app stores user-entered roster data privately in its connected service, not in GitHub Pages; Prompt must not publish names/roles/personnel data.
+
+**Limitations:** This is not a server-side agent that reads every Private Repository continuously or runs tasks on copy. Copy provides instructions to paste into an Agent with appropriate GitHub credentials; it does not automatically start a new Agent, commit code, execute software or send messages. Live README lookup alone does not assert that the entire handoff is current or the step is still open.
+
+Validation in deploy workflow includes syntax checks for `assets/prompts.js`, prompt schema coverage and expected HTML controls. Do not publish passwords, government employee data, private ROM or music files into the Public JSON.
