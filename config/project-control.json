@@ -1,128 +1,146 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "updated_at": "2026-10-15",
   "note": "Public-safe project catalog: do not add secrets, private data, credentials or internal asset URLs.",
   "projects": {
     "1391725161": {
-      "title": "RetroThai Workbench",
+      "title": "ROM2THAI · Workbench (Legacy)",
       "category": "เครื่องมือแปลเกม",
       "status": "blocked",
-      "summary": "เครื่องมือทดสอบความเป็นไปได้ของแพตช์ภาษาไทยบน Windows / CLI",
+      "summary": "โค้ด Workbench ต้นทางเดิม: นำส่วนที่ตรวจแล้วเข้า ROM2THAI Hub; ยังมี PR #1 ต้องตรวจ",
       "next": "แก้การ round-trip ตัวอักษร FE8 และพิสูจน์ Thai rendering",
       "homepage": null,
-      "visibility": "no-live"
+      "visibility": "no-live",
+      "role": "legacy_source",
+      "canonical_repo_id": 1416748319
     },
     "1396825920": {
-      "title": "Phangnga Live Queue",
+      "title": "Land Office · Live Queue",
       "category": "ระบบหน่วยงาน",
       "status": "active",
       "summary": "ระบบแสดงคิวสำนักงานที่ดิน บนเครื่อง Windows; Facebook Live ยังไม่เปิดใช้งานจริง",
       "next": "ทดสอบการส่ง Live และการเริ่มอัตโนมัติ",
       "homepage": null,
-      "visibility": "local"
+      "visibility": "local",
+      "role": "application"
     },
     "1411532824": {
-      "title": "Gov Exam Monitor",
+      "title": "Gov Exam Monitor · Alerts",
       "category": "ระบบติดตาม",
       "status": "planning",
       "summary": "ติดตามประกาศสอบราชการและแนวทางแจ้งเตือน LINE OA",
       "next": "ตรวจระบบแจ้งเตือนกับประกาศต้นทาง",
       "homepage": null,
-      "visibility": "no-live"
+      "visibility": "no-live",
+      "role": "application"
     },
     "1413883614": {
-      "title": "ThaiROM Studio Cloud",
+      "title": "ROM2THAI · Studio (Legacy)",
       "category": "เครื่องมือแปลเกม",
       "status": "active",
-      "summary": "เว็บทดลองสร้างและใช้งานแพตช์ BPS แบบประมวลผลในเบราว์เซอร์",
+      "summary": "โค้ด Studio ต้นทางเดิม: รวมเข้า Hub แล้วบางส่วน; ยังมี PR ค้าง 7 รายการ",
       "next": "ทดสอบเบราว์เซอร์จริงและความครอบคลุมของเกม",
       "homepage": "https://thairom-studio-cloud.rat-creative1.chatgpt.site",
-      "visibility": "restricted"
+      "visibility": "restricted",
+      "role": "legacy_source",
+      "canonical_repo_id": 1416748319
     },
     "1415242573": {
-      "title": "ThaiPatch · แปลไทยบอกด้วย",
+      "title": "ThaiPatch · เว็บไซต์แปลไทยบอกด้วย",
       "category": "เว็บไซต์",
       "status": "live",
-      "summary": "สารบัญข้อมูลเกมและแพตช์แปลไทยจากหลายแหล่ง พร้อมเครดิตผู้สร้าง",
+      "summary": "เว็บไซต์ Public และฐานข้อมูลแพตช์ไทยพร้อมเครดิตต้นทาง",
       "next": "ตรวจสอบแหล่งข้อมูลและรายการแพตช์ใหม่",
       "homepage": "https://rat12-web.github.io/thaipatch/",
-      "visibility": "public"
+      "visibility": "public",
+      "role": "website_and_catalog"
     },
     "1416744545": {
-      "title": "Lufia II Thai",
+      "title": "ROM2THAI · Lufia II (Archived Legacy)",
       "category": "งานแปล ROM",
-      "status": "blocked",
-      "summary": "งานแปล Lufia II ยังมีปัญหาการแสดงภาษาไทยในฉากต้นเกม",
-      "next": "แก้ loader/เมนู และทดสอบผ่าน emulator",
+      "status": "archived",
+      "summary": "Repository เดิม Archive 15 ต.ค. 2569 งาน Lufia II อยู่ใน thai-rom-cloud/games/sfc/lufia2",
+      "next": "ติดตาม Lufia II ใน Hub เท่านั้น",
       "homepage": "https://rat12-web.github.io/rom2thai-hub-web/",
       "visibility": "public",
-      "link_label": "เปิดสถานะใน ROM2THAI Hub"
+      "link_label": "เปิดสถานะใน ROM2THAI Hub",
+      "role": "archived_source",
+      "canonical_repo_id": 1416748319
     },
     "1416748319": {
-      "title": "ROM2THAI · Thai ROM Cloud",
+      "title": "ROM2THAI · Core Project",
       "category": "งานแปล ROM",
       "status": "active",
-      "summary": "ศูนย์กลางงานแปล ROM หลายแพลตฟอร์ม แยกสถานะรายเกมและหลักฐานการทดสอบ",
+      "summary": "คลังหลักของงานแปล ROM ทุกเครื่อง แยกเกม/แพลตฟอร์มและหลักฐานการทดสอบ",
       "next": "ตรวจงานรายเกมใน PROJECT_STATUS.md และแก้ปัญหาค้าง",
       "homepage": "https://rat12-web.github.io/rom2thai-hub-web/",
       "visibility": "public",
-      "link_label": "เปิด ROM2THAI Hub"
+      "link_label": "เปิด ROM2THAI Hub",
+      "role": "canonical"
     },
     "1418199034": {
-      "title": "TYPEBEATS",
+      "title": "TYPEBEATS · Game",
       "category": "พัฒนาเกม",
       "status": "active",
       "summary": "เกมเต้นแนวตั้งแบบ QWERTY ขณะนี้มี Godot Alpha M3",
       "next": "ทดสอบบนอุปกรณ์จริงและปรับแอนิเมชัน",
       "homepage": "https://typebeats-mobile-test.rat-creative1.chatgpt.site",
       "visibility": "restricted",
-      "link_label": "เปิดเว็บทดสอบ M3"
+      "link_label": "เปิดเว็บทดสอบ M3",
+      "role": "game"
     },
     "1418448691": {
-      "title": "ROM2THAI Hub Web",
+      "title": "ROM2THAI · Public Status Mirror",
       "category": "เว็บไซต์",
       "status": "live",
-      "summary": "เว็บ Dashboard สถานะงานแปล ROM ที่ซิงค์ข้อมูลคัดกรองจากคลังส่วนตัว",
-      "next": "ตรวจการซิงค์รายเกมและความตรงของหลักฐาน",
+      "summary": "พื้นที่เผยแพร่ข้อมูลสถานะที่คัดกรองจาก ROM2THAI Core (Private) เพื่อแสดงบน GitHub Pages",
+      "next": "ตรวจระบบซิงค์ไม่ให้ส่งข้อมูลส่วนตัว",
       "homepage": "https://rat12-web.github.io/rom2thai-hub-web/",
-      "visibility": "public"
+      "visibility": "public",
+      "role": "deployment_only",
+      "canonical_repo_id": 1416748319
     },
     "1420054663": {
-      "title": "ชาวดินพังงา HR",
+      "title": "Land Office · HR",
       "category": "ระบบหน่วยงาน",
       "status": "active",
       "summary": "ระบบ HR พร้อมฐานข้อมูล D1/R2 และการกำหนดสิทธิ์เข้าถึง",
       "next": "ตรวจขั้นตอน authentication และ deployment ก่อนเปิดใช้งาน",
       "homepage": null,
-      "visibility": "restricted"
+      "visibility": "restricted",
+      "role": "application"
     },
     "1420128168": {
-      "title": "Gecko Offline",
+      "title": "Gecko Offline · App",
       "category": "เครื่องมือ Offline",
       "status": "planning",
       "summary": "ระบบเก็บข้อมูลออฟไลน์และซิงค์หลายอุปกรณ์ (กำลังทำ Milestone M0)",
       "next": "ติดตาม Issue M0-001 ถึง M0-008",
       "homepage": null,
-      "visibility": "no-live"
+      "visibility": "no-live",
+      "role": "application"
     },
     "1420142917": {
-      "title": "แปลไทยบอกด้วย · Content Hub",
+      "title": "ThaiPatch · Content & Agent Workspace",
       "category": "บริหารคอนเทนต์",
       "status": "planning",
-      "summary": "พื้นที่จัดการแผนคอนเทนต์ แหล่งอ้างอิง และขั้นตอนทำงานร่วมกับ AI Agent",
+      "summary": "งานบรรณาธิการและ AI Agent ของแบรนด์ ThaiPatch; ไม่ใช่เว็บไซต์ที่แยกจาก ThaiPatch",
       "next": "ตรวจการนำเข้าเอกสารและระบบสำรองข้อมูล",
-      "homepage": "https://rat12-web.github.io/thaipatch/",
+      "homepage": null,
       "visibility": "public",
-      "link_label": "เปิดเว็บไซต์ ThaiPatch"
+      "link_label": "เปิดเว็บไซต์ ThaiPatch",
+      "role": "editorial",
+      "canonical_repo_id": 1415242573
     },
     "1420150047": {
-      "title": "Project Atlas Control Center",
+      "title": "Project Atlas · Control Center",
       "category": "บริหารโครงการ",
       "status": "active",
       "summary": "ศูนย์ควบคุม GitHub Project และทางเข้าเว็บไซต์จริง",
       "next": "ติดตามสถานะ Pull Requests และใช้งานปุ่มควบคุมผ่าน GitHub API",
       "homepage": "https://rat12-web.github.io/project-portfolio/",
-      "visibility": "public"
+      "visibility": "public",
+      "role": "management"
     }
   }
 }
