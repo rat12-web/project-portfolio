@@ -5,6 +5,7 @@ on:
     paths:
       - 'index.html'
       - 'assets/**'
+      - 'config/workspaces.json'
       - 'config/project-control.json'
       - '.github/workflows/deploy-pages.yml'
   workflow_dispatch:
@@ -32,14 +33,18 @@ jobs:
         run: |
           mkdir -p site/data site/assets
           cp index.html site/index.html
-          cp assets/style.css assets/app.js site/assets/
+          cp assets/style.css assets/app.js assets/hierarchy.js site/assets/
           cp data/public_snapshot.json site/data/public_snapshot.json
           cp config/project-control.json site/data/project-control.json
+          cp config/workspaces.json site/data/workspaces.json
           python - <<'PY'
           import json
           d = json.load(open('site/data/project-control.json', encoding='utf-8'))
-          assert d['schema_version'] == 2
+          assert d['schema_version'] == 3
           assert len(d['projects']) >= 13
+          g=json.load(open('site/data/workspaces.json',encoding='utf-8'))
+          assert len(g['families'])==8
+          assert sum(len(v) for v in g['rom_games'].values())==10
           assert all(not any(key in str(v).lower() for key in ('github_pat_', 'password=', 'api_key=')) for v in d['projects'].values())
           print('Atlas published metadata: validated', len(d['projects']), 'projects')
           PY
