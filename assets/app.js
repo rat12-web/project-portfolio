@@ -6,7 +6,7 @@ let owners=['rat12-web'],token='',username='',repos=[],catalog={},busy=false,sel
 try{let ls=JSON.parse(localStorage.getItem('atlas-owners')||'[]');if(Array.isArray(ls))owners.push(...ls.filter(o=>typeof o==='string'&&/^[a-z0-9-]{1,39}$/i.test(o)))}catch(e){}
 function known([id,name,p]){return {id,name,private:!!p,full_name:'rat12-web/'+name,html_url:'https://github.com/rat12-web/'+name,owner:{login:'rat12-web'},default_branch:'main',archived:false,_stub:true}}
 function data(r){return catalog[String(r.id)]||{}}
-function status(r){return r.archived?'archived':data(r).status||'unverified'}
+function status(r){return r.archived?'archived':(window.AtlasBoard?.statusForRepo?.(r)||data(r).status||'unverified')}
 function fullUrl(u){return /^https:\/\/[^\s]+$/i.test(u||'')?u:''}
 function niceDate(s){return s?new Date(s).toLocaleDateString('th-TH'):'ไม่ทราบ'}
 function notify(s,isError=false){let e=$('toast');e.hidden=false;e.textContent=s;e.style.borderColor=isError?'#9b5262':'#4fc3aa';clearTimeout(notify.timer);notify.timer=setTimeout(()=>e.hidden=true,5500)}
@@ -18,7 +18,7 @@ try{let d=await staticJSON('data/project-control.json');catalog=d.projects||{}}c
 try{let d=await staticJSON('data/public_snapshot.json');for(let r of d.repositories||[])if(!r.private)map.set(r.id,{...map.get(r.id),...r,_stub:false})}catch(e){warning+=' Public snapshot: '+e.message}
 for(const o of [...new Set(owners)]){try{for(const r of await fetchOwner(o))map.set(r.id,{...r,_stub:false})}catch(e){warning+=' '+o+': '+e.message}}
 if(token){const missing=roster.filter(x=>map.get(x[0])?._stub);const checks=await Promise.allSettled(missing.map(x=>github('/repositories/'+x[0])));checks.forEach((x,i)=>{if(x.status==='fulfilled'&&x.value.data?.id===missing[i][0])map.set(missing[i][0],{...x.value.data,_stub:false})})}
-repos=[...map.values()].sort((a,b)=>new Date(b.pushed_at||0)-new Date(a.pushed_at||0));render();
+repos=[...map.values()].sort((a,b)=>new Date(b.pushed_at||0)-new Date(a.pushed_at||0));render();document.dispatchEvent(new Event('atlas:repos-updated'));
 $('syncstamp').textContent='GitHub '+new Date().toLocaleTimeString('th-TH');if(selected!==null)details(selected);
 busy=false;$('refresh').textContent='↻ ซิงค์ข้อมูล'}
 function render(){let visible=repos.filter(r=>status(r)!=='archived'),live=visible.filter(r=>status(r)==='live').length,active=visible.filter(r=>status(r)==='active').length,blocked=visible.filter(r=>['blocked','paused'].includes(status(r))).length,priv=visible.filter(r=>r.private).length;
@@ -43,7 +43,7 @@ $('pause').onclick=()=>statusForm(r);$('link').onclick=()=>linkForm(r);$('archiv
 function mustAuth(){if(token)return true;notify('ต้องเชื่อม GitHub Token ที่มีสิทธิ์ก่อน',true);authDialog();return false}
 function encode64(s){let b=new TextEncoder().encode(s),t='';for(let i=0;i<b.length;i+=4096)t+=String.fromCharCode(...b.slice(i,i+4096));return btoa(t)}
 function decode64(s){return new TextDecoder().decode(Uint8Array.from(atob(s.replace(/\s/g,'')),c=>c.charCodeAt(0)))}
-async function saveProject(id,patch,description){const p='/repos/rat12-web/project-portfolio/contents/config/project-control.json';let old=(await github(p,{},true)).data;if(!old.sha||!old.content)throw Error('ไม่มี metadata สำหรับแก้ไข');let state=JSON.parse(decode64(old.content));if(!state.projects?.[String(id)])throw Error('ไม่พบ Project ID');state.projects[String(id)]={...state.projects[String(id)],...patch};state.updated_at=new Date().toISOString();let body={sha:old.sha,message:description,content:encode64(JSON.stringify(state,null,2)+'\n'),branch:'main'};await github(p,{method:'PUT',body:JSON.stringify(body)},true);catalog=state.projects;render();details(id);notify('GitHub Commit สำเร็จ · หน้าเว็บสาธารณะอัปเดตหลัง Deploy')}
+async function saveProject(id,patch,description){const p='/repos/rat12-web/project-portfolio/contents/config/project-control.json';let old=(await github(p,{},true)).data;if(!old.sha||!old.content)throw Error('ไม่มี metadata สำหรับแก้ไข');let state=JSON.parse(decode64(old.content));if(!state.projects?.[String(id)])throw Error('ไม่พบ Project ID');state.projects[String(id)]={...state.projects[String(id)],...patch};state.updated_at=new Date().toISOString();let body={sha:old.sha,message:description,content:encode64(JSON.stringify(state,null,2)+'\n'),branch:'main'};await github(p,{method:'PUT',body:JSON.stringify(body)},true);catalog=state.projects;render();document.dispatchEvent(new Event('atlas:repos-updated'));details(id);notify('GitHub Commit สำเร็จ · หน้าเว็บสาธารณะอัปเดตหลัง Deploy')}
 function setForm(s){$('form').innerHTML=s}
 function statusForm(r){let s=status(r),next=s==='paused'?(data(r).previous_status||'active'):'paused';setForm('<p class="warn">เปลี่ยนสถานะ Atlas เป็น '+escape(labels[next])+' (ไม่หยุด GitHub Actions หรือเซิร์ฟเวอร์)</p><button class="action-primary" id="execute">ยืนยันและบันทึก Commit</button>');$('execute').onclick=async e=>{if(!mustAuth())return;e.target.disabled=true;try{await saveProject(r.id,next==='paused'?{status:next,previous_status:s}:{status:next,previous_status:null},'chore(atlas): '+next+' '+r.full_name)}catch(x){notify(x.message,true);e.target.disabled=false}}}
 function linkForm(r){let d=data(r);setForm('<div class="form-row"><label>URL เว็บหลัก (HTTPS)</label><input class="field" id="url" value="'+escape(d.homepage||'')+'" placeholder="https://"></div><div class="form-row"><label>ชื่อปุ่ม</label><input class="field" id="label" value="'+escape(d.link_label||'')+'" placeholder="เปิดเว็บจริง"></div><p class="warn">ลิงก์นี้เผยแพร่สาธารณะ ห้ามใส่ URL ที่มี Token หรือข้อมูลลับ</p><button class="action-primary" id="execute">บันทึกบน GitHub</button>');$('execute').onclick=async e=>{if(!mustAuth())return;let url=$('url').value.trim(),label=$('label').value.trim();if(url&&!fullUrl(url))return notify('ต้องเป็น HTTPS URL',true);if(/token=|session=|key=|secret=/i.test(url))return notify('URL มีข้อมูลคล้ายความลับ',true);e.target.disabled=true;try{await saveProject(r.id,{homepage:url||null,link_label:label||null},'chore(atlas): update link '+r.full_name)}catch(x){notify(x.message,true);e.target.disabled=false}}}
@@ -58,7 +58,7 @@ function switchView(v){
   view=v;
   document.querySelectorAll('.nav').forEach(b=>b.classList.toggle('active',b.dataset.view===v));
   const sections={
-    overview:['overviewHero','metrics','scopehint','homeStatusSection','homeChooserSection'],
+    overview:['overviewHero','metrics','scopehint','homeBoardSection','homeStatusSection','homeChooserSection'],
     pages:['pagesSection'],
     development:['familiesSection'],
     repositories:['projectsSection'],
