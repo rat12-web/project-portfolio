@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 3,
   "source": "rat12-web/rom2thai-hub-web/site/status.json",
   "source_commit": "b43c44b451a64a6b6304a68e18a08b6d03ce5877",
   "updated_at": "2026-10-15",
@@ -7,16 +7,14 @@
   "families": [
     {
       "id": "rom2thai",
-      "title": "ROM2THAI",
-      "description": "ศูนย์กลางงานแปล ROM • แยกเครื่องเกมและสถานะจริง",
+      "title": "ROM2THAI · งานสร้างแพตช์ภาษาไทย",
+      "description": "พัฒนาแพตช์ภาษาไทยจริง แยกแพลตฟอร์ม → เกม → หลักฐานทดสอบ",
       "icon": "🎮",
       "category": "งานแปลเกม",
       "root_repo_id": 1416748319,
       "related_repo_ids": [
-        1418448691,
         1413883614,
-        1391725161,
-        1416744545
+        1391725161
       ],
       "site": "https://rat12-web.github.io/rom2thai-hub-web/",
       "subprojects": [
@@ -24,11 +22,6 @@
           "title": "คลังกลาง / Source of Truth",
           "repo_id": 1416748319,
           "role": "พัฒนาหลัก"
-        },
-        {
-          "title": "เว็บสถานะ (Pages Mirror)",
-          "repo_id": 1418448691,
-          "role": "ส่วนแสดงผล Public — ไม่ใช่แหล่งต้นฉบับ"
         },
         {
           "title": "ThaiROM Studio — โค้ดต้นทางเดิม",
@@ -39,18 +32,13 @@
           "title": "RetroThai Workbench — โค้ดต้นทางเดิม",
           "repo_id": 1391725161,
           "role": "Legacy / มี 1 PR ค้าง ต้องตรวจสอบ"
-        },
-        {
-          "title": "Lufia II — Repository เดิม",
-          "repo_id": 1416744545,
-          "role": "Archived แล้ว / งานปัจจุบันอยู่ใน Hub"
         }
       ]
     },
     {
       "id": "thaipatch",
-      "title": "ThaiPatch · แปลไทยบอกด้วย",
-      "description": "สารบัญแพตช์ไทย และระบบบริหารคอนเทนต์/Agent",
+      "title": "ThaiPatch · สารบัญเกมแปลไทย",
+      "description": "ค้นหาแพตช์ที่เผยแพร่โดยชุมชน พร้อมเครดิตทีมแปลและแหล่งต้นทาง — ไม่ใช่ทีมผลิตแพตช์",
       "icon": "📚",
       "category": "เว็บไซต์และคอนเทนต์",
       "root_repo_id": 1415242573,
@@ -175,7 +163,7 @@
     {
       "id": "atlas",
       "title": "Project Atlas",
-      "description": "แผงควบคุมภาพรวมโครงการ, GitHub Actions และสถานะ",
+      "description": "ศูนย์บริหาร Repository, งานค้าง และ GitHub Actions แยกออกจากผลงานที่กำลังพัฒนา",
       "icon": "🗂️",
       "category": "บริหารโครงการ",
       "root_repo_id": 1420150047,
@@ -191,7 +179,8 @@
           "site": "https://github.com/rat12-web/project-portfolio/actions",
           "role": "ซิงค์ข้อมูล Public"
         }
-      ]
+      ],
+      "section": "control_center"
     }
   ],
   "rom_games": {
@@ -295,5 +284,42 @@
         "progress": null
       }
     ]
-  }
+  },
+  "display": {
+    "default_view": "overview",
+    "archived_default_hidden": true,
+    "control_center_family": "atlas",
+    "pages_separate": true,
+    "display_families": 7,
+    "principle": "translation production != translated game catalog != public deployments"
+  },
+  "pages": [
+    {
+      "id": "page-rom2thai",
+      "title": "ROM2THAI Status · GitHub Pages",
+      "owner_family": "rom2thai",
+      "repo_id": 1418448691,
+      "url": "https://rat12-web.github.io/rom2thai-hub-web/",
+      "description": "หน้ารายงานสถานะงานแปล (ข้อมูล Public ที่คัดกรองแล้ว) ไม่ใช่ที่เก็บงานแปลหลัก",
+      "type": "status_mirror"
+    },
+    {
+      "id": "page-thaipatch",
+      "title": "ThaiPatch Catalog · GitHub Pages",
+      "owner_family": "thaipatch",
+      "repo_id": 1415242573,
+      "url": "https://rat12-web.github.io/thaipatch/",
+      "description": "เว็บค้นหาแพตช์แปลไทยและเครดิตผู้แปล",
+      "type": "catalog"
+    },
+    {
+      "id": "page-atlas",
+      "title": "Project Atlas · Dashboard",
+      "owner_family": "atlas",
+      "repo_id": 1420150047,
+      "url": "https://rat12-web.github.io/project-portfolio/",
+      "description": "เว็บจัดการและแสดงงาน ไม่ใช่ Repository ผลิตเกมหรือแพตช์",
+      "type": "control_center"
+    }
+  ]
 }
