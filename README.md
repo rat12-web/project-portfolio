@@ -113,3 +113,10 @@
 GitHub's account billing UI was checked and shows **GitHub Free**. As of this audit, 10 repositories are Private and 3 sites/repositories stay Public: `thaipatch`, `rom2thai-hub-web`, `project-portfolio`. GitHub Free does **not** publish GitHub Pages from private repositories. Making those three private now would unpublish the live sites. They have deliberately **not** been converted yet; do not mark the request “all private” as complete.
 
 To move *every source project* to Private without interrupting the live web experiences, either upgrade to GitHub Pro for private-source Pages (site contents may remain publicly accessible) or set up an authenticated independent host with a private GitHub connection and migrate the sites first. A separate public static deployment-only mirror is an alternative only if the owner accepts a public mirror. Truly restricted Pages site visibility requires eligible GitHub Enterprise arrangements, not just Pro.
+
+## อัปเดต 15 ตุลาคม 2569 — ThaiROM Studio Online / Workbench Archive
+
+- **ThaiROM Studio Online**: GitHub Repository เปลี่ยนชื่อจริงจาก `rat12-web/ThaiROM-Studio-Cloud` เป็น [`rat12-web/ThaiROM-Studio-Online`](https://github.com/rat12-web/ThaiROM-Studio-Online) (Private; repository ID `1413883614` คงเดิม) และยังเปิดให้พัฒนาต่อ ไม่ใช่ Archive
+- **RetroThaiWorkbench**: Archive จริงบน GitHub แล้ว (Private, read-only, ID `1391725161`) โดย README ชี้ไปยัง `thai-rom-cloud` สำหรับการพัฒนางานแปล ROM ใหม่ และ PR #1 ยังไม่ได้ถูกรวม/ปิด
+- Atlas เปลี่ยนชื่อและลิงก์ของทั้งสอง Repository ใน `config/project-control.json`, `config/workspaces.json`, `assets/app.js`, `assets/hierarchy.js` แล้ว
+- ลิงก์หน้าเว็บทดสอบแบบ owner-private ของ Studio ที่เคยใช้อยู่ยังใช้ URL เดิม (`thairom-studio-cloud.rat-creative1.chatgpt.site`) เพราะการ Rename GitHub Repository ไม่ได้เปลี่ยนชื่อโฮสต์อื่นโดยอัตโนมัติ
