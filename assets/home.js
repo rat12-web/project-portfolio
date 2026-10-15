@@ -93,6 +93,7 @@ function render(){
  target.querySelectorAll('[data-b-pin]').forEach(b=>b.onclick=()=>{const id=b.dataset.bPin;const x=all.find(v=>v.id===id);if(!x)return;local[id]={...override(id),pin:!x.pin};store();render();document.dispatchEvent(new Event('atlas:home-local-change'));feedback('อัปเดตปักหมุดในเบราว์เซอร์แล้ว')});
  target.querySelectorAll('[data-b-pause]').forEach(b=>b.onclick=()=>{const id=b.dataset.bPause,x=all.find(v=>v.id===id);if(!x)return;const old=local[id]||{},cloudPaused=meta(id).status==='paused'||meta(id).workflow_status==='paused';const next=x.status.state==='paused'?(cloudPaused?(meta(id).previous_status||'active'):'auto'):'paused';local[id]={...old,workflow_status:next};store();render();document.dispatchEvent(new Event('atlas:home-local-change'));feedback(x.status.state==='paused'?'เริ่มงานต่อแล้ว (เฉพาะเบราว์เซอร์)':'พักงานแล้ว · ย้ายการ์ดลงด้านล่าง (เฉพาะเบราว์เซอร์)')});
  target.querySelectorAll('[data-b-edit]').forEach(b=>b.onclick=()=>edit(b.dataset.bEdit));
+ document.dispatchEvent(new Event('atlas:board-rendered'));
 }
 function feedback(s,error=false){if(typeof notify==='function')notify(s,error);else{const x=$('boardFeedback');if(x)x.textContent=s}}
 function localPatch(id,patch){
