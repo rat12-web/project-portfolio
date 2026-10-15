@@ -6,7 +6,7 @@ const urlOk=v=>typeof v==='string'&&/^https:\/\/[^\s<>"']+$/i.test(v)?v:'';
 const KEY='atlas-board-preferences-v1', UIKEY='atlas-board-ui-v1';
 const names={active:'กำลังพัฒนา',live:'เว็บใช้งาน',planning:'วางแผน',blocked:'ติดปัญหา',paused:'พักงาน',archived:'Archived',unverified:'ยังไม่ยืนยัน'};
 const ranks={active:0,live:1,planning:2,blocked:3,unverified:4,paused:5,archived:6};
-const DEFAULT_UI={filter:'all',sort:'priority',compact:false,showArchived:false,showPaused:true,search:''};
+const DEFAULT_UI={filter:'all',sort:'priority',compact:false,showArchived:false,showPaused:true,autoActivity:true,search:''};
 function read(key,fallback){try{let obj=JSON.parse(localStorage.getItem(key)||'null');return obj&&typeof obj==='object'&&!Array.isArray(obj)?obj:fallback}catch{return fallback}}
 let local=read(KEY,{}),ui={...DEFAULT_UI,...read(UIKEY,{})},control={},workspaces={},loading=false,editing=null;
 function store(){localStorage.setItem(KEY,JSON.stringify(local))}
@@ -21,10 +21,11 @@ function derive(id,r,entry={}){
  const m=meta(id),ov=override(id);
  if(r?.archived||m.status==='archived')return {state:'archived',origin:'GitHub/ทะเบียน',why:'Repository เก็บถาวรแล้ว ไม่ใช่งานที่กำลังพัฒนา'};
  const os=ov.workflow_status||ov.status;if(os&&os!=='auto'&&names[os])return {state:os,origin:'ตั้งเอง · เบราว์เซอร์',why:'สถานะที่คุณเลือกเอง มีผลเฉพาะเบราว์เซอร์นี้'};
- const ms=m.workflow_status||m.status;
+ const ms=(m.workflow_status&&m.workflow_status!=='auto')?m.workflow_status:m.status;
  if(ms==='paused')return {state:'paused',origin:'บันทึกบน GitHub',why:'สถานะพักงานที่บันทึกไว้ใน Atlas'};
  if(ms==='blocked')return {state:'blocked',origin:'ทะเบียนสถานะ',why:'มีงานติดปัญหาที่ระบุไว้ในทะเบียน'};
  if(ms==='live')return {state:'live',origin:'ทะเบียน Web App',why:'มีหน้าเว็บเผยแพร่ ไม่ใช่การรับรอง QA ทุกฟังก์ชัน'};
+ if(ms==='planning'&&ui.autoActivity&&signal(r)!==null&&signal(r)<=14)return {state:'active',origin:'สัญญาณ GitHub ล่าสุด',why:'เดิมวางแผน แต่ตรวจพบ Push ภายใน 14 วัน; ควรยืนยันว่ากำลังพัฒนาจริง'};
  if(ms&&ms!=='auto'&&names[ms])return {state:ms,origin:'ทะเบียนโครงการ',why:'สถานะตามข้อมูลโครงการที่บันทึกและตรวจล่าสุด'};
  const days=signal(r);
  if(!r&&entry.entries?.some(x=>x._type==='web'&&urlOk(x.url)))return {state:'live',origin:'เว็บที่มี URL',why:'เปิดหน้าเว็บได้ แต่ความใหม่และ QA ต้องตรวจแยก'};
@@ -87,10 +88,10 @@ function render(){
  $('boardCount').textContent=show.length+' / '+all.length+' รายการ';
  $('boardStorage').textContent=Object.keys(local).length?'ปรับแต่งในเบราว์เซอร์ '+Object.keys(local).length+' โครงการ':'ใช้สถานะทะเบียน GitHub และกิจกรรมที่ตรวจได้';
  target.innerHTML=show.length?show.map(card).join(''):'<div class="empty">ไม่พบงานตามตัวกรองที่เลือก</div>';
- $('boardSort').value=ui.sort;$('boardFilter').value=ui.filter;$('boardSearch').value=ui.search;$('boardCompact').checked=ui.compact;$('boardShowArchived').checked=ui.showArchived;$('boardShowPaused').checked=ui.showPaused;
+ $('boardSort').value=ui.sort;$('boardFilter').value=ui.filter;$('boardSearch').value=ui.search;$('boardCompact').checked=ui.compact;if($('boardAutoActivity'))$('boardAutoActivity').checked=ui.autoActivity;$('boardShowArchived').checked=ui.showArchived;$('boardShowPaused').checked=ui.showPaused;
  document.querySelectorAll('[data-b-filter]').forEach(b=>b.onclick=()=>{ui.filter=ui.filter===b.dataset.bFilter?'all':b.dataset.bFilter;uiStore();render()});
  target.querySelectorAll('[data-b-pin]').forEach(b=>b.onclick=()=>{const id=b.dataset.bPin;const x=all.find(v=>v.id===id);if(!x)return;local[id]={...override(id),pin:!x.pin};store();render();document.dispatchEvent(new Event('atlas:home-local-change'));feedback('อัปเดตปักหมุดในเบราว์เซอร์แล้ว')});
- target.querySelectorAll('[data-b-pause]').forEach(b=>b.onclick=()=>{const id=b.dataset.bPause,x=all.find(v=>v.id===id);if(!x)return;const old=local[id]||{};local[id]={...old,workflow_status:x.status.state==='paused'?'auto':'paused'};store();render();document.dispatchEvent(new Event('atlas:home-local-change'));feedback(x.status.state==='paused'?'เริ่มงานต่อแล้ว (เฉพาะเบราว์เซอร์)':'พักงานแล้ว · ย้ายการ์ดลงด้านล่าง (เฉพาะเบราว์เซอร์)')});
+ target.querySelectorAll('[data-b-pause]').forEach(b=>b.onclick=()=>{const id=b.dataset.bPause,x=all.find(v=>v.id===id);if(!x)return;const old=local[id]||{},cloudPaused=meta(id).status==='paused'||meta(id).workflow_status==='paused';const next=x.status.state==='paused'?(cloudPaused?(meta(id).previous_status||'active'):'auto'):'paused';local[id]={...old,workflow_status:next};store();render();document.dispatchEvent(new Event('atlas:home-local-change'));feedback(x.status.state==='paused'?'เริ่มงานต่อแล้ว (เฉพาะเบราว์เซอร์)':'พักงานแล้ว · ย้ายการ์ดลงด้านล่าง (เฉพาะเบราว์เซอร์)')});
  target.querySelectorAll('[data-b-edit]').forEach(b=>b.onclick=()=>edit(b.dataset.bEdit));
 }
 function feedback(s,error=false){if(typeof notify==='function')notify(s,error);else{const x=$('boardFeedback');if(x)x.textContent=s}}
@@ -196,6 +197,7 @@ $('boardSearch')?.addEventListener('input',e=>{ui.search=e.target.value;uiStore(
 $('boardFilter')?.addEventListener('change',e=>{ui.filter=e.target.value;uiStore();render()});
 $('boardSort')?.addEventListener('change',e=>{ui.sort=e.target.value;uiStore();render()});
 $('boardCompact')?.addEventListener('change',e=>{ui.compact=e.target.checked;uiStore();render()});
+$('boardAutoActivity')?.addEventListener('change',e=>{ui.autoActivity=e.target.checked;uiStore();render()});
 $('boardShowPaused')?.addEventListener('change',e=>{ui.showPaused=e.target.checked;uiStore();render()});
 $('boardShowArchived')?.addEventListener('change',e=>{ui.showArchived=e.target.checked;uiStore();render()});
 $('boardResetAll')?.addEventListener('click',()=>{if(confirm('ล้างการปรับแต่งเฉพาะเบราว์เซอร์นี้ทั้งหมดหรือไม่?')){local={};ui={...DEFAULT_UI};store();uiStore();render();document.dispatchEvent(new Event('atlas:home-local-change'));feedback('คืนค่าหน้าแรกแล้ว')}});
