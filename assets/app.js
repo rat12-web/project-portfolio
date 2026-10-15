@@ -22,7 +22,7 @@ repos=[...map.values()].sort((a,b)=>new Date(b.pushed_at||0)-new Date(a.pushed_a
 $('syncstamp').textContent='GitHub '+new Date().toLocaleTimeString('th-TH');if(selected!==null)details(selected);
 busy=false;$('refresh').textContent='↻ ซิงค์ข้อมูล'}
 function render(){let visible=repos.filter(r=>status(r)!=='archived'),live=visible.filter(r=>status(r)==='live').length,active=visible.filter(r=>status(r)==='active').length,blocked=visible.filter(r=>['blocked','paused'].includes(status(r))).length,priv=visible.filter(r=>r.private).length;
-$('metrics').innerHTML=[[visible.length,'Repository ที่ยังใช้งาน'],[live,'เว็บพร้อมเปิดใช้'],[active,'กำลังพัฒนา'],[blocked,'ติดปัญหา / พักงาน']].map(([v,t])=>'<div class="metric"><small>'+escape(t)+'</small><strong>'+v+'</strong><div class="mini">GitHub Portfolio</div></div>').join('');
+$('metrics').innerHTML=[[visible.length,'Repository ที่ยังใช้งาน'],[priv,'Private Repositories'],[active,'กำลังพัฒนา'],[blocked,'ติดปัญหา / พักงาน']].map(([v,t])=>'<div class="metric"><small>'+escape(t)+'</small><strong>'+v+'</strong><div class="mini">GitHub Portfolio</div></div>').join('');
 $('scopehint').textContent=(token?'เชื่อมกับ GitHub: '+username:'แสดงทุกโครงการ รวม '+priv+' Private (ไม่เปิดเผยข้อมูลภายใน)')+(warning?' · '+warning:'');
 $('authbutton').textContent=token?'● '+username:'☷ เชื่อม GitHub';
 let q=$('search').value.toLowerCase(),cat=$('category').value,st=$('statusFilter').value,vis=$('visibilityFilter').value,allowArchived=Boolean($('showArchived')?.checked)||st==='archived';
@@ -53,20 +53,27 @@ function transferForm(r){setForm('<p class="warn">การโอน Repository 
 function authDialog(){let d=$('authDrawer');d.hidden=false;d.innerHTML='<div class="drawer" role="dialog" aria-modal="true"><button class="drawer-close" id="authClose">×</button><div class="eyebrow">OWNER-ONLY MODE</div><h2>เชื่อม GitHub</h2><p class="notice">Fine-grained PAT: Private read ต้องใช้ Metadata/Issues read; เปลี่ยนสถานะต้องมี Contents write ใน project-portfolio; Archive/Transfer ต้องมี Administration write บน Repo เป้าหมาย</p><p class="warn">Token อยู่ในหน่วยความจำของแท็บนี้เท่านั้น ไม่เก็บลง GitHub หรือ Browser Storage</p><div class="form-row"><label>Token</label><input type="password" id="authInput" class="field" autocomplete="off" placeholder="github_pat_..."></div><div class="button-row"><button class="action-primary" id="connect">เชื่อมต่อ</button><button class="action-muted" id="disconnect">ล้าง Token</button></div><p id="authError" class="warn"></p></div>';d.querySelector('#authClose').onclick=()=>d.hidden=true;d.querySelector('#connect').onclick=async e=>{let val=$('authInput').value.trim(),old=token;if(!val)return;token=val;e.target.disabled=true;try{let u=(await github('/user',{},true)).data;if(!u?.login)throw Error('GitHub ไม่ยืนยันตัวตน');username=u.login;$('authInput').value='';d.hidden=true;notify('เชื่อมต่อ '+username+' สำเร็จ');sync()}catch(x){token=old;$('authError').textContent=x.message;e.target.disabled=false}};d.querySelector('#disconnect').onclick=()=>{token='';username='';d.hidden=true;sync()}}
 function addOwner(){let d=$('authDrawer');d.hidden=false;d.innerHTML='<div class="drawer"><button class="drawer-close" id="authClose">×</button><h2>เพิ่มบัญชี GitHub</h2><p class="notice">Public จะค้นหาอัตโนมัติ · Private ต้องมีสิทธิ์ GitHub · บันทึกชื่อบัญชีไว้ในเบราว์เซอร์นี้</p><div class="form-row"><label>Username / Organization</label><input class="field" id="newAccount" placeholder="owner"></div><button class="action-primary" id="saveAccount">เพิ่มบัญชี</button></div>';d.querySelector('#authClose').onclick=()=>d.hidden=true;d.querySelector('#saveAccount').onclick=()=>{let x=$('newAccount').value.trim();if(!/^[a-z0-9-]{1,39}$/i.test(x))return notify('ชื่อบัญชีไม่ถูกต้อง',true);if(!owners.includes(x))owners.push(x);localStorage.setItem('atlas-owners',JSON.stringify([...new Set(owners)].filter(o=>o!=='rat12-web')));d.hidden=true;sync()}}
 function switchView(v){
-  const allowed=['overview','pages','repositories','activity','atlas'];
+  const allowed=['overview','pages','development','repositories','activity','atlas'];
   if(!allowed.includes(v))v='overview';
   view=v;
   document.querySelectorAll('.nav').forEach(b=>b.classList.toggle('active',b.dataset.view===v));
-  const sections={overview:['overviewHero','metrics','scopehint','pathwaysSection','familiesSection'],pages:['pagesSection'],repositories:['projectsSection'],activity:['activitySection'],atlas:['atlasSection']};
+  const sections={
+    overview:['overviewHero','metrics','scopehint','homeChooserSection'],
+    pages:['pagesSection'],
+    development:['familiesSection'],
+    repositories:['projectsSection'],
+    activity:['activitySection'],
+    atlas:['atlasSection']
+  };
   const all=new Set(Object.values(sections).flat());
   for(const id of all){const el=$(id);if(el)el.hidden=!sections[v].includes(id)}
-  const crumbs={overview:'PROJECT EXPLORER',pages:'GITHUB PAGES',repositories:'REPOSITORY EXPLORER',activity:'ACTION QUEUE',atlas:'ATLAS CONTROL CENTER'};
+  const crumbs={overview:'HOME',pages:'WEB APPS',development:'DEVELOPMENT',repositories:'REPOSITORY EXPLORER',activity:'ACTION QUEUE',atlas:'ATLAS CONTROL CENTER'};
   if($('viewCrumb'))$('viewCrumb').innerHTML='WORKSPACE / <b>'+crumbs[v]+'</b>';
-  document.title=(v==='atlas'?'Project Atlas · Control Center':crumbs[v]+' · rat12-web');
+  document.title=crumbs[v]+' · rat12-web';
   if(v==='activity')activity();
   if(v==='repositories')render();
   document.querySelector('.content')?.scrollIntoView({behavior:'smooth',block:'start'});
 }
-document.querySelectorAll('.nav').forEach(b=>b.onclick=()=>switchView(b.dataset.view));$('refresh').onclick=sync;$('authbutton').onclick=authDialog;$('addOwner').onclick=addOwner;
+document.querySelectorAll('.nav').forEach(b=>b.onclick=()=>switchView(b.dataset.view));document.querySelectorAll('[data-go-view]').forEach(b=>b.onclick=()=>switchView(b.dataset.goView));$('refresh').onclick=sync;$('authbutton').onclick=authDialog;$('addOwner').onclick=addOwner;
 ['search','category','statusFilter','visibilityFilter','showArchived'].forEach(id=>$(id)?.addEventListener(id==='search'?'input':'change',render));$('detail').onclick=e=>{if(e.target===$('detail'))close()};$('authDrawer').onclick=e=>{if(e.target===$('authDrawer'))$('authDrawer').hidden=true};document.onkeydown=e=>{if(e.key==='Escape'){if(!$('authDrawer').hidden)$('authDrawer').hidden=true;else if(!$('detail').hidden)close()}};
 sync().then(()=>{let id=Number(new URLSearchParams(location.search).get('project'));if(id)open(id)});setInterval(()=>{if(!document.hidden)sync()},300000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)sync()});
