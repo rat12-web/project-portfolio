@@ -1,0 +1,51 @@
+name: Sync public project catalog
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17,47 * * * *'
+  push:
+    paths:
+      - 'config/owners.json'
+      - 'scripts/sync_public.py'
+      - '.github/workflows/sync-public.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: project-atlas-public-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Fetch public GitHub metadata only
+        run: python scripts/sync_public.py
+      - name: Validate privacy and output
+        run: |
+          python - <<'PY'
+          import json
+          d=json.load(open('data/public_snapshot.json', encoding='utf-8'))
+          assert d['sync_scope']=='public_repositories_only'
+          assert all(r['private'] is False and r['visibility']=='public' for r in d['repositories'])
+          assert len({r['id'] for r in d['repositories']})==len(d['repositories'])
+          print('public-only validation PASS')
+          PY
+      - name: Commit refreshed public catalog
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/public_snapshot.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: refresh public portfolio snapshot"
+            git push
+          fi
