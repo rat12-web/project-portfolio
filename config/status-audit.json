@@ -294,6 +294,19 @@
       "evidence_url": "https://github.com/rat12-web/project-portfolio/actions",
       "evidence_label": "Atlas Actions",
       "verification": "github_verified"
+    },
+    {
+      "id": "re2play-actual-rename",
+      "project": "แปลไทยบอกด้วย RE2Play",
+      "repo_id": 1420142917,
+      "state": "done",
+      "kind": "rename",
+      "title": "เปลี่ยน GitHub Repository เป็น RE2play-Content-Agent แล้วจริง",
+      "cause": "เจ้าของสั่งเปลี่ยนชื่อจาก plaethai-bokduay-content-hub; GitHub API ยืนยันชื่อใหม่และ Repository ID 1420142917 คงเดิม, Private คงเดิม",
+      "next": "ใช้ลิงก์ใหม่ใน Atlas และเอกสาร; ตรวจลิงก์ที่ฝังใน Work/Agent อื่นเมื่องานถัดไปเกี่ยวข้อง ไม่ถือว่าชื่อ Facebook เปลี่ยนตาม",
+      "evidence_url": "https://github.com/rat12-web/RE2play-Content-Agent",
+      "evidence_label": "GitHub Repository ชื่อจริง",
+      "verification": "github_verified"
     }
   ],
   "identities": [
@@ -335,12 +348,13 @@
     },
     {
       "repo_id": 1420142917,
-      "display_name": "ThaiPatch Content & Agent Hub",
-      "github_name": "plaethai-bokduay-content-hub",
-      "kind": "display_alias",
-      "state": "pending",
-      "explanation": "ชื่อจัดกลุ่มใน Atlas ไม่ได้ Rename Repository",
-      "url": "https://github.com/rat12-web/plaethai-bokduay-content-hub"
+      "display_name": "แปลไทยบอกด้วย RE2Play",
+      "github_name": "RE2play-Content-Agent",
+      "kind": "real_rename",
+      "state": "done",
+      "explanation": "เปลี่ยน Repository จริงจาก plaethai-bokduay-content-hub เป็น RE2play-Content-Agent เมื่อ 15 ต.ค. 2569 (Private และ Repository ID เดิม); ชื่อแสดงผลใน Atlas เป็น แปลไทยบอกด้วย RE2Play ทั้งนี้ไม่ได้ยืนยันการเปลี่ยนชื่อเพจโซเชียลภายนอก",
+      "url": "https://github.com/rat12-web/RE2play-Content-Agent",
+      "english_name": "RE2play Content Agent"
     },
     {
       "repo_id": 1420150047,
