@@ -10,7 +10,7 @@ const repos={
 1416748319:'thai-rom-cloud',1418199034:'TYPEBEATS',1418448691:'rom2thai-hub-web',
 1420054663:'phangnga-hr',1420128168:'Gecko-Offline',1420142917:'plaethai-bokduay-content-hub',
 1420150047:'project-portfolio',1420200967:'digimon-world-android',1420204360:'exam-path-tracker'};
-const archivedIds=new Set([1416744545]);
+const archivedIds=new Set([1416744545,1391725161]);
 const repoURL=id=>repos[id]?'https://github.com/rat12-web/'+repos[id]:'';
 const link=(url,label,cls='family-link')=>safeURL(url)?'<a class="'+cls+'" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(label)+'</a>':'';
 let state=null,gameData=null,activeFilter='all';
@@ -54,29 +54,40 @@ function family(f){
  (rom?gameTree():'')+subs(f)+'</div></details></article>'
 }
 function renderPages(){
- const el=$('pagesGrid');if(!el||!state)return;
- const icon={catalog:'📚',status_mirror:'📊',control_center:'⌘'};
- el.innerHTML=(state.pages||[]).filter(p=>p.url).map(p=>
- '<article class="page-card"><div class="page-card-icon" aria-hidden="true">'+(icon[p.type]||'↗')+'</div>'+
- '<div class="page-kicker">'+esc(p.type==='catalog'?'PUBLIC CATALOG':p.type==='status_mirror'?'STATUS MIRROR':'MANAGEMENT UI')+'</div>'+
- '<h3>'+esc(p.title)+'</h3><p>'+esc(p.description)+'</p>'+
- '<div class="page-meta">'+esc(repos[p.repo_id]||'Unknown')+' · GitHub Pages · '+esc(p.owner_family)+'</div>'+
- '<div class="page-actions">'+link(p.url,'↗ เปิดเว็บไซต์จริง','action-primary')+link(repoURL(p.repo_id),'ดู Repository','action-muted')+'</div></article>'
- ).join('')||'<div class="notice">ยังไม่มีเว็บไซต์ที่ยืนยันลิงก์</div>';
+ if(!state)return;
+ const live=(state.pages||[]).filter(p=>safeURL(p.url));
+ const previews=(state.web_apps||[]).filter(p=>safeURL(p.url));
+ const icon={catalog:'📚',status_mirror:'📊',control_center:'⌘',application:'▣',restricted_preview:'🔐'};
+ const pageCard=(p,preview=false)=>{
+  const flag=preview?(p.status_label||'ทดสอบ · จำกัดสิทธิ์'):'เว็บเผยแพร่ · Public';
+  const action=preview?'↗ เปิดเว็บทดสอบ':'↗ เปิด Web App';
+  return '<article class="page-card '+(preview?'preview-site':'public-site')+'">'+
+   '<div class="page-card-icon" aria-hidden="true">'+(icon[p.type]||'↗')+'</div>'+
+   '<div class="web-status '+(preview?'preview':'published')+'">'+esc(flag)+'</div>'+
+   '<h3>'+esc(p.title)+'</h3><p>'+esc(p.description||'')+'</p>'+
+   '<div class="page-meta">เชื่อมกับ '+esc(repos[p.repo_id]||'GitHub Project')+' · '+(preview?'Owner-only / Preview':'Public site')+'</div>'+
+   '<div class="page-actions">'+link(p.url,action,'action-primary')+link(repoURL(p.repo_id),'ดู Source GitHub','action-muted')+'</div></article>';
+ };
+ if($('pagesGrid'))$('pagesGrid').innerHTML=live.map(p=>pageCard(p,false)).join('')||'<div class="notice">ยังไม่มี Web App ที่ยืนยันลิงก์</div>';
+ if($('previewGrid'))$('previewGrid').innerHTML=previews.map(p=>pageCard(p,true)).join('')||'<div class="notice">ยังไม่มีเว็บทดลองที่เผยแพร่</div>';
+ if($('publicWebCount'))$('publicWebCount').textContent=live.length+' เว็บ';
+ if($('previewWebCount'))$('previewWebCount').textContent=previews.length+' เว็บทดลอง';
+ if($('webCount'))$('webCount').textContent=live.length+' เว็บ Public · '+previews.length+' เว็บทดลอง';
 }
 function render(){
  const root=$('familyGrid');if(!state||!root)return;
  const prevOpen=[...root.querySelectorAll('.family-root[open]')].map(e=>e.closest('.family-card')?.dataset.familyKey);
  const prevConsole=[...root.querySelectorAll('.console-group[open]')].map(e=>e.dataset.console);
- const families=state.families.filter(f=>f.id!=='atlas'&&f.section!=='control_center');
+ const families=state.development||[];
  const filtered=families.filter(f=>activeFilter==='all'||f.category===activeFilter);
  root.innerHTML=filtered.map(family).join('')||'<div class="empty">ไม่พบโครงการในหมวดนี้</div>';
  root.querySelectorAll('.family-card').forEach(e=>{if(prevOpen.includes(e.dataset.familyKey))e.querySelector('.family-root').open=true});
  root.querySelectorAll('.console-group').forEach(e=>{if(prevConsole.includes(e.dataset.console))e.open=true});
- if($('familyCount'))$('familyCount').textContent=families.length+' กลุ่มโครงการ · '+gameCount()+' เกมที่ติดตาม';
+ if($('familyCount'))$('familyCount').textContent=families.length+' โครงการที่ยังไม่มี Web App · '+gameCount()+' เกมย่อย';
+ if($('devCount'))$('devCount').textContent=families.length+' กลุ่มงาน · กดขยายงานย่อย';
 }
 function openFamily(id){
- document.querySelector('[data-view="overview"]')?.click();
+ document.querySelector('[data-view="development"]')?.click();
  if(activeFilter!=='all'){document.querySelector('[data-family-filter="all"]')?.click()}
  const card=[...document.querySelectorAll('.family-card')].find(e=>e.dataset.familyKey===id);
  if(card){card.querySelector('.family-root').open=true;card.scrollIntoView({behavior:'smooth',block:'start'})}
