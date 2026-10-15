@@ -41,9 +41,9 @@ jobs:
           import json
           d = json.load(open('site/data/project-control.json', encoding='utf-8'))
           assert d['schema_version'] == 3
-          assert len(d['projects']) >= 13
+          assert len(d['projects']) >= 15
           g=json.load(open('site/data/workspaces.json',encoding='utf-8'))
-          assert len(g['families'])==8
+          assert len(g['families'])>=9
           assert sum(len(v) for v in g['rom_games'].values())==10
           assert all(not any(key in str(v).lower() for key in ('github_pat_', 'password=', 'api_key=')) for v in d['projects'].values())
           print('Atlas published metadata: validated', len(d['projects']), 'projects')
