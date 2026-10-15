@@ -27,6 +27,7 @@ function derive(id,r,entry={}){
  if(ms==='live')return {state:'live',origin:'ทะเบียน Web App',why:'มีหน้าเว็บเผยแพร่ ไม่ใช่การรับรอง QA ทุกฟังก์ชัน'};
  if(ms&&ms!=='auto'&&names[ms])return {state:ms,origin:'ทะเบียนโครงการ',why:'สถานะตามข้อมูลโครงการที่บันทึกและตรวจล่าสุด'};
  const days=signal(r);
+ if(!r&&entry.entries?.some(x=>x._type==='web'&&urlOk(x.url)))return {state:'live',origin:'เว็บที่มี URL',why:'เปิดหน้าเว็บได้ แต่ความใหม่และ QA ต้องตรวจแยก'};
  if(days!==null&&days<=14)return {state:'active',origin:'ประเมินจาก GitHub',why:'มี Push จริงภายใน 14 วัน (ไม่ได้หมายความว่างานเสร็จ)'};
  return {state:'planning',origin:'ระบบประเมิน',why:days===null?'ยังไม่มีข้อมูลกิจกรรม GitHub ที่ตรวจยืนยันได้':'ไม่พบ Push ใน 14 วัน จัดเป็นรอตรวจ ไม่ใช่พักงานอัตโนมัติ'};
 }
@@ -88,8 +89,8 @@ function render(){
  target.innerHTML=show.length?show.map(card).join(''):'<div class="empty">ไม่พบงานตามตัวกรองที่เลือก</div>';
  $('boardSort').value=ui.sort;$('boardFilter').value=ui.filter;$('boardSearch').value=ui.search;$('boardCompact').checked=ui.compact;$('boardShowArchived').checked=ui.showArchived;$('boardShowPaused').checked=ui.showPaused;
  document.querySelectorAll('[data-b-filter]').forEach(b=>b.onclick=()=>{ui.filter=ui.filter===b.dataset.bFilter?'all':b.dataset.bFilter;uiStore();render()});
- target.querySelectorAll('[data-b-pin]').forEach(b=>b.onclick=()=>{const id=b.dataset.bPin;const x=all.find(v=>v.id===id);if(!x)return;local[id]={...override(id),pin:!x.pin};store();render();feedback('อัปเดตปักหมุดในเบราว์เซอร์แล้ว')});
- target.querySelectorAll('[data-b-pause]').forEach(b=>b.onclick=()=>{const id=b.dataset.bPause,x=all.find(v=>v.id===id);if(!x)return;const old=local[id]||{};local[id]={...old,workflow_status:x.status.state==='paused'?'auto':'paused'};store();render();feedback(x.status.state==='paused'?'เริ่มงานต่อแล้ว (เฉพาะเบราว์เซอร์)':'พักงานแล้ว · ย้ายการ์ดลงด้านล่าง (เฉพาะเบราว์เซอร์)')});
+ target.querySelectorAll('[data-b-pin]').forEach(b=>b.onclick=()=>{const id=b.dataset.bPin;const x=all.find(v=>v.id===id);if(!x)return;local[id]={...override(id),pin:!x.pin};store();render();document.dispatchEvent(new Event('atlas:home-local-change'));feedback('อัปเดตปักหมุดในเบราว์เซอร์แล้ว')});
+ target.querySelectorAll('[data-b-pause]').forEach(b=>b.onclick=()=>{const id=b.dataset.bPause,x=all.find(v=>v.id===id);if(!x)return;const old=local[id]||{};local[id]={...old,workflow_status:x.status.state==='paused'?'auto':'paused'};store();render();document.dispatchEvent(new Event('atlas:home-local-change'));feedback(x.status.state==='paused'?'เริ่มงานต่อแล้ว (เฉพาะเบราว์เซอร์)':'พักงานแล้ว · ย้ายการ์ดลงด้านล่าง (เฉพาะเบราว์เซอร์)')});
  target.querySelectorAll('[data-b-edit]').forEach(b=>b.onclick=()=>edit(b.dataset.bEdit));
 }
 function feedback(s,error=false){if(typeof notify==='function')notify(s,error);else{const x=$('boardFeedback');if(x)x.textContent=s}}
@@ -98,12 +99,12 @@ function localPatch(id,patch){
  for(const [k,v]of Object.entries(patch)){if(v===null||v===''||v==='auto')delete clean[k];else clean[k]=v}
  if(Object.keys(clean).length)local[id]=clean;else delete local[id];store();
  render();
- if(typeof render==='function'){} // board is self-contained
+ document.dispatchEvent(new Event('atlas:home-local-change'));
 }
 function edit(id){
  const item=makeItems().find(x=>x.id===id);if(!item)return;editing=id;const modal=$('boardModal');
  modal.hidden=false;
- const s=item.o.workflow_status||item.o.status||item.m.workflow_status||'auto';
+ const s=item.o.workflow_status||item.o.status||item.m.workflow_status||(item.m.status==='paused'?'paused':'auto');
  modal.innerHTML='<div class="board-dialog" role="dialog" aria-modal="true" aria-labelledby="boardEditTitle">'+
  '<div class="board-dialog-head"><div><small>EDIT PROJECT · '+esc(item.id)+'</small><h2 id="boardEditTitle">ปรับแต่ง '+esc(item.title)+'</h2></div><button type="button" id="boardClose" aria-label="ปิด">×</button></div>'+
  '<p class="board-caution">แก้ไขบนเบราว์เซอร์นี้ได้ทันที หรือเลือกบันทึกบน GitHub เพื่อใช้ร่วมกันหลายเครื่อง (ข้อมูลที่บันทึกจะอยู่ใน Repository Public)</p>'+
@@ -119,7 +120,7 @@ function edit(id){
  '<small class="board-warning">พักงานใน Atlas ไม่ได้หยุดเซิร์ฟเวอร์, Live, Agent หรือ GitHub Actions · การแก้ชื่อใน Atlas ไม่ใช่การ Rename Repository จริง</small><p class="board-dialog-result" id="boardSaveResult" role="status"></p></div>';
  $('boardClose').onclick=hideModal;
  modal.onclick=e=>{if(e.target===modal)hideModal()};
- $('boardResetItem').onclick=()=>{delete local[id];store();hideModal();render();feedback('คืนค่าตามข้อมูล Atlas แล้ว')};
+ $('boardResetItem').onclick=()=>{delete local[id];store();hideModal();render();document.dispatchEvent(new Event('atlas:home-local-change'));feedback('คืนค่าตามข้อมูล Atlas แล้ว')};
  $('boardSaveLocal').onclick=()=>{const patch=formData(item);if(!patch)return;localPatch(id,patch);hideModal();feedback('บันทึกแล้วในเบราว์เซอร์นี้ · เปิดเว็บครั้งถัดไปยังคงค่าไว้')};
  $('boardSaveCloud').onclick=()=>saveCloud(item);
 }
@@ -179,7 +180,7 @@ function restoreSettings(file){
  if(Number.isInteger(Number(v.priority))&&Number(v.priority)>=1&&Number(v.priority)<=5)item.priority=Number(v.priority);
  if(names[v.workflow_status]||v.workflow_status==='auto')item.workflow_status=v.workflow_status;
  safe[id]=item}
- local=safe;store();render();feedback('นำเข้าการตั้งค่าเบราว์เซอร์สำเร็จ');
+ local=safe;store();render();document.dispatchEvent(new Event('atlas:home-local-change'));feedback('นำเข้าการตั้งค่าเบราว์เซอร์สำเร็จ');
  }catch(e){feedback('นำเข้าการตั้งค่าไม่ได้: '+e.message,true)}};reader.readAsText(file)
 }
 async function load(){
@@ -197,7 +198,7 @@ $('boardSort')?.addEventListener('change',e=>{ui.sort=e.target.value;uiStore();r
 $('boardCompact')?.addEventListener('change',e=>{ui.compact=e.target.checked;uiStore();render()});
 $('boardShowPaused')?.addEventListener('change',e=>{ui.showPaused=e.target.checked;uiStore();render()});
 $('boardShowArchived')?.addEventListener('change',e=>{ui.showArchived=e.target.checked;uiStore();render()});
-$('boardResetAll')?.addEventListener('click',()=>{if(confirm('ล้างการปรับแต่งเฉพาะเบราว์เซอร์นี้ทั้งหมดหรือไม่?')){local={};ui={...DEFAULT_UI};store();uiStore();render();feedback('คืนค่าหน้าแรกแล้ว')}});
+$('boardResetAll')?.addEventListener('click',()=>{if(confirm('ล้างการปรับแต่งเฉพาะเบราว์เซอร์นี้ทั้งหมดหรือไม่?')){local={};ui={...DEFAULT_UI};store();uiStore();render();document.dispatchEvent(new Event('atlas:home-local-change'));feedback('คืนค่าหน้าแรกแล้ว')}});
 $('boardExport')?.addEventListener('click',downloadSettings);
 $('boardImport')?.addEventListener('change',e=>{restoreSettings(e.target.files?.[0]);e.target.value=''});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('boardModal')?.hidden)hideModal()});
