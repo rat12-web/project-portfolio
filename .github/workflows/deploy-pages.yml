@@ -1,0 +1,40 @@
+name: Deploy Project Atlas Pages
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'index.html'
+      - '.github/workflows/deploy-pages.yml'
+  workflow_dispatch:
+  schedule:
+    - cron: '23,53 * * * *'
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: project-atlas-pages-deploy
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Prepare sanitized static Pages artifact
+        run: |
+          mkdir -p site/data
+          cp index.html site/index.html
+          cp data/public_snapshot.json site/data/public_snapshot.json
+          touch site/.nojekyll
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4
