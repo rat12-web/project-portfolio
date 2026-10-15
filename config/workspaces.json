@@ -404,25 +404,12 @@
       "description": "ลงมือพัฒนาแพตช์แปลเกม แยกเครื่องเกม → เกม → ขั้นตอนต่อไป",
       "root_repo_id": 1416748319,
       "icon": "🎮",
-      "related_repo_ids": [
-        1413883614,
-        1391725161
-      ],
+      "related_repo_ids": [],
       "subprojects": [
         {
-          "title": "คลังกลาง / Source of Truth",
+          "title": "คลังพัฒนาแพตช์หลัก",
           "repo_id": 1416748319,
-          "role": "พัฒนาหลัก"
-        },
-        {
-          "title": "ThaiROM Studio Online",
-          "repo_id": 1413883614,
-          "role": "เครื่องมือออนไลน์ที่พัฒนาต่อ · โปรเจกต์ Private; PR เดิม 7 รายการต้องตรวจ"
-        },
-        {
-          "title": "RetroThai Workbench · Archived",
-          "repo_id": 1391725161,
-          "role": "หยุดพัฒนาในต้นทาง · อ่านได้อย่างเดียว; PR #1 ค้างตรวจ"
+          "role": "Source of truth · แตกงานย่อยเป็นเครื่องเกมและเกมด้านบน"
         }
       ],
       "console_tree": true
