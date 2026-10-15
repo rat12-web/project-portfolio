@@ -46,10 +46,10 @@
       "canonical_repo_id": 1416748319
     },
     "1415242573": {
-      "title": "ThaiPatch · เว็บไซต์แปลไทยบอกด้วย",
+      "title": "ThaiPatch · สารบัญเกมแปลไทย",
       "category": "เว็บไซต์",
       "status": "live",
-      "summary": "เว็บไซต์ Public และฐานข้อมูลแพตช์ไทยพร้อมเครดิตต้นทาง",
+      "summary": "เว็บไซต์ Catalog รวมแพตช์จากทีมแปลหลายกลุ่ม พร้อมเครดิตและลิงก์ไปต้นฉบับ ไม่ใช่โปรเจกต์พัฒนาแพตช์เอง",
       "next": "ตรวจสอบแหล่งข้อมูลและรายการแพตช์ใหม่",
       "homepage": "https://rat12-web.github.io/thaipatch/",
       "visibility": "public",
@@ -65,13 +65,14 @@
       "visibility": "public",
       "link_label": "เปิดสถานะใน ROM2THAI Hub",
       "role": "archived_source",
-      "canonical_repo_id": 1416748319
+      "canonical_repo_id": 1416748319,
+      "default_hidden": true
     },
     "1416748319": {
-      "title": "ROM2THAI · Core Project",
+      "title": "ROM2THAI · พัฒนาแพตช์ภาษาไทย",
       "category": "งานแปล ROM",
       "status": "active",
-      "summary": "คลังหลักของงานแปล ROM ทุกเครื่อง แยกเกม/แพลตฟอร์มและหลักฐานการทดสอบ",
+      "summary": "Repository หลักสำหรับสร้างแพตช์เกมไทย แยกตามเครื่องเกม/เกม พร้อมชุดทดสอบ และหลักฐานจาก Emulator",
       "next": "ตรวจงานรายเกมใน PROJECT_STATUS.md และแก้ปัญหาค้าง",
       "homepage": "https://rat12-web.github.io/rom2thai-hub-web/",
       "visibility": "public",
@@ -90,7 +91,7 @@
       "role": "game"
     },
     "1418448691": {
-      "title": "ROM2THAI · Public Status Mirror",
+      "title": "GitHub Pages · ROM2THAI Status",
       "category": "เว็บไซต์",
       "status": "live",
       "summary": "พื้นที่เผยแพร่ข้อมูลสถานะที่คัดกรองจาก ROM2THAI Core (Private) เพื่อแสดงบน GitHub Pages",
@@ -140,7 +141,7 @@
       "next": "ติดตามสถานะ Pull Requests และใช้งานปุ่มควบคุมผ่าน GitHub API",
       "homepage": "https://rat12-web.github.io/project-portfolio/",
       "visibility": "public",
-      "role": "management"
+      "role": "control_center"
     }
   }
 }
