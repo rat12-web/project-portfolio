@@ -159,3 +159,12 @@ Web App records are in `config/workspaces.json`. Their `hosting`, `source_status
 - Never include personal employee data, secrets, private code, access tokens or private ROMs in this Public Pages audit.
 
 Read-only live browser QA verified navigation, all ChatGPT Sites card labels, missing HR link, audited Web App notes and status/alias identity views on 2026-10-15. No GitHub repository mutations were performed during QA.
+
+## Rename verified — RE2play Content Agent (15 Oct 2026)
+
+- **Project display name:** แปลไทยบอกด้วย RE2Play
+- **English project name:** RE2play Content Agent
+- **Actual GitHub repository:** [rat12-web/RE2play-Content-Agent](https://github.com/rat12-web/RE2play-Content-Agent), changed from `rat12-web/plaethai-bokduay-content-hub` on 2026-10-15.
+- **Verified** `repository_id = 1420142917`, `visibility = private`, `archived = false`, so this is a real GitHub rename, not merely an Atlas display alias.
+- Updated `config/project-control.json`, `config/workspaces.json`, `config/status-audit.json`, `assets/app.js`, `assets/hierarchy.js`, and the source README.
+- The separate ThaiPatch catalog (`rat12-web/thaipatch`) has **not** been renamed; no change to any Facebook/social page is implied or claimed.
