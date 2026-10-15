@@ -9,7 +9,7 @@ const repos={
 1413883614:'ThaiROM-Studio-Cloud',1415242573:'thaipatch',1416744545:'lufia2-thai',
 1416748319:'thai-rom-cloud',1418199034:'TYPEBEATS',1418448691:'rom2thai-hub-web',
 1420054663:'phangnga-hr',1420128168:'Gecko-Offline',1420142917:'plaethai-bokduay-content-hub',
-1420150047:'project-portfolio'};
+1420150047:'project-portfolio',1420200967:'digimon-world-android',1420204360:'exam-path-tracker'};
 const archivedIds=new Set([1416744545]);
 const repoURL=id=>repos[id]?'https://github.com/rat12-web/'+repos[id]:'';
 const link=(url,label,cls='family-link')=>safeURL(url)?'<a class="'+cls+'" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(label)+'</a>':'';
@@ -26,7 +26,7 @@ function gameTree(){
  return '<div class="branch-head"><strong>เลือกแพลตฟอร์ม → เกมที่กำลังทำแพตช์</strong><span>'+gameCount()+' งาน · ไม่แสดง % ที่ไม่มีหลักฐาน</span></div><div class="console-stack">'+platforms.map(([p,icon])=>{
  const list=gameData?.[p]||[];
  return '<details class="console-group" data-console="'+esc(p)+'"><summary><span>'+icon+' '+esc(p)+'</span><span>'+list.length+' เกม <span class="chevron">⌄</span></span></summary><div class="console-games">'+(list.length?gamesFor(p):'<div class="source-note">ยังไม่มีรายการที่ยืนยัน</div>')+'</div></details>';
- }).join('')+'</div><div class="source-note">อ้างอิงข้อมูลรายเกมจาก ROM2THAI Status Mirror; ผลการแปลจริงต้องยืนยันจากหลักฐานและทดสอบใน Emulator</div>';
+ }).join('')+'</div><div class="source-note">อ้างอิงข้อมูลรายเกมจาก RetroThaiCraft Status Mirror; ผลการแปลจริงต้องยืนยันจากหลักฐานและทดสอบใน Emulator</div>';
 }
 function subs(f){
  const children=(f.subprojects||[]).filter(s=>!archivedIds.has(s.repo_id)&&s.role!=='ส่วนแสดงผล Public — ไม่ใช่แหล่งต้นฉบับ');
@@ -94,7 +94,7 @@ async function live(){
  grouped[p].push({id:g.id,title:g.name,status:g.status_th,next:g.next_action_th});
  }
  gameData=grouped;render();
- if($('sourceHealth'))$('sourceHealth').textContent='สถานะเกม: ซิงค์จาก ROM2THAI Hub · '+new Date().toLocaleTimeString('th-TH');
+ if($('sourceHealth'))$('sourceHealth').textContent='สถานะเกม: ซิงค์จาก RetroThaiCraft Hub · '+new Date().toLocaleTimeString('th-TH');
  }catch(e){if($('sourceHealth'))$('sourceHealth').textContent='สถานะเกม: ใช้ Snapshot สำรอง · '+esc(e.message)}
 }
 async function load(){
