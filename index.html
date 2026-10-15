@@ -13,13 +13,14 @@
   <aside class="side" aria-label="เมนูหลัก">
     <a class="brand" href="./"><span class="brand-mark">◈</span><span>PROJECT<span class="brand-accent">SPACE</span><small>rat12-web / workspace</small></span></a>
     <div class="side-label">สำรวจผลงาน</div>
-    <button class="nav active" data-view="overview"><span class="nav-icon">▦</span> ภาพรวมโครงการ</button>
-    <button class="nav" data-view="pages"><span class="nav-icon">↗</span> เว็บไซต์ GitHub Pages</button>
+    <button class="nav active" data-view="overview"><span class="nav-icon">▦</span> หน้าแรก</button>
+    <button class="nav" data-view="pages"><span class="nav-icon">↗</span> Web Apps · เปิดใช้งาน</button>
+    <button class="nav" data-view="development"><span class="nav-icon">⌘</span> Development · ยังไม่มีเว็บ</button>
     <button class="nav" data-view="repositories"><span class="nav-icon">⌘</span> Repository ทั้งหมด</button>
     <div class="side-label">การจัดการ</div>
     <button class="nav" data-view="activity"><span class="nav-icon">◷</span> งานค้าง / Action Queue</button>
     <button class="nav atlas-nav" data-view="atlas"><span class="nav-icon">⚙</span> Project Atlas <span class="nav-pill">Control</span></button>
-    <div class="side-note"><span class="online"><span class="dot"></span> GITHUB PROJECTS</span><div>แยกโค้ดจริง เว็บไซต์ และงานเก็บถาวรอย่างชัดเจน</div></div>
+    <div class="side-note"><span class="online"><span class="dot"></span> GITHUB PROJECTS</span><div>Web Apps · Development · งาน Archived แยกจากกัน</div></div>
   </aside>
   <main class="content">
     <div class="topbar">
@@ -38,29 +39,17 @@
     <section class="metrics" id="metrics" aria-label="ภาพรวมสถานะ"></section>
     <div class="notice" id="scopehint" role="status">กำลังโหลดข้อมูล GitHub...</div>
 
-    <section id="pathwaysSection" class="pathway-section" aria-labelledby="pathwaysTitle">
-      <div class="section-head"><div><div class="overline">TWO DISTINCT WORKFLOWS</div><h2 id="pathwaysTitle">งานแปลเกม ≠ สารบัญเกมแปลไทย</h2></div><small>เลือกปลายทางให้ถูกต้อง</small></div>
-      <div class="pathway-grid">
-        <article class="pathway pathway-production">
-          <div class="pathway-kicker">01 · PRODUCTION / PRIVATE SOURCE</div><div class="pathway-symbol">🎮</div>
-          <h3>RetroThaiCraft</h3><strong class="pathway-thai">พัฒนาแพตช์ภาษาไทย</strong>
-          <p>งานลงมือแปลเกมจริง แกะระบบอักษร สร้าง Patch แยกตามเครื่องเกม และตรวจผลใน Emulator</p>
-          <div class="pathway-tags"><span>เครื่องเกม → เกม</span><span>ไฟล์แพตช์</span><span>QA จริง</span></div>
-          <div class="pathway-actions"><button data-jump-family="rom2thai" class="action-primary">ดูงานแปลรายเกม →</button><a class="action-muted" href="https://github.com/rat12-web/thai-rom-cloud" target="_blank" rel="noopener noreferrer">Source GitHub ↗</a></div>
-        </article>
-        <article class="pathway pathway-catalog">
-          <div class="pathway-kicker">02 · DISCOVERY / PUBLIC CATALOG</div><div class="pathway-symbol">📚</div>
-          <h3>ThaiPatch Catalog</h3><strong class="pathway-thai">สารบัญเกมแปลไทย</strong>
-          <p>ค้นหาแพตช์จากทีมแปลต่าง ๆ รวบรวมข้อมูลเครดิต ลิงก์ต้นทาง และข่าวสารจากเพจ “แปลไทยบอกด้วย”</p>
-          <div class="pathway-tags"><span>ค้นหา</span><span>เครดิตต้นทาง</span><span>ข่าว Retro</span></div>
-          <div class="pathway-actions"><a class="action-primary" href="https://rat12-web.github.io/thaipatch/" target="_blank" rel="noopener noreferrer">เปิด Catalog ↗</a><button class="action-muted" data-jump-family="thaipatch">ดูงานย่อย →</button></div>
-        </article>
+    <section id="homeChooserSection" class="switcher" aria-label="เลือกประเภทงาน">
+      <div class="section-head"><div><div class="overline">เลือกพื้นที่ทำงาน</div><h2>เปิดเว็บใช้งาน หรือดูงานที่กำลังพัฒนา</h2></div></div>
+      <div class="switcher-grid">
+        <button class="switcher-card web-choice" data-go-view="pages"><span class="switch-icon">↗</span><span class="switch-label">WEB APPS</span><strong>เว็บที่เปิดใช้งานได้</strong><span>เว็บออนไลน์พร้อมลิงก์เข้าใช้งาน และเว็บทดลองที่จำกัดสิทธิ์</span><b id="webCount">กำลังโหลด…</b></button>
+        <button class="switcher-card dev-choice" data-go-view="development"><span class="switch-icon">⌘</span><span class="switch-label">DEVELOPMENT</span><strong>โครงการที่ยังไม่มีหน้าเว็บ</strong><span>คลิกเปิดงานย่อย แยกโปรเจกต์ เครื่องเกม และรายการที่ต้องทำ</span><b id="devCount">กำลังโหลด…</b></button>
       </div>
     </section>
 
-    <section id="familiesSection" aria-labelledby="familiesTitle">
-      <div class="section-head"><div><div class="overline">ACTIVE WORKSPACES</div><h2 id="familiesTitle">โครงการหลักและงานย่อย</h2></div><small id="familyCount">กำลังโหลด...</small></div>
-      <p class="section-intro">กดที่โครงการเพื่อเปิดงานย่อย งานแปล ROM สามารถเจาะลงไปถึงเครื่องเกมและรายชื่อเกมได้ ส่วนงานที่ Archive แล้วจะถูกซ่อนไว้</p>
+    <section id="familiesSection" aria-labelledby="familiesTitle" hidden>
+      <div class="section-head"><div><div class="overline">ACTIVE WORKSPACES</div><h2 id="familiesTitle">Development Projects · งานที่ยังไม่มีเว็บใช้งาน</h2></div><small id="familyCount">กำลังโหลด...</small></div>
+      <p class="section-intro">รายการนี้เป็นงานพัฒนาที่ไม่มี Web App สำหรับเปิดใช้งาน หากเป็น RetroThaiCraft สามารถขยายเป็นเครื่องเกม → เกม → งานค้างได้ งาน Archived ไม่ปะปน</p>
       <div class="family-filters" aria-label="ตัวกรองกลุ่มงาน">
         <button data-family-filter="all" class="selected">ทั้งหมด</button>
         <button data-family-filter="งานแปลเกม">งานสร้างแพตช์</button>
@@ -76,10 +65,14 @@
     </section>
 
     <section id="pagesSection" hidden>
-      <div class="section-head"><div><div class="overline">PUBLISHED EXPERIENCES</div><h2>เว็บไซต์ GitHub Pages</h2></div><small>เว็บไซต์ที่เปิดใช้งานจริง แยกจาก Source Repository</small></div>
-      <p class="section-intro">หน้านี้รวบรวมเฉพาะเว็บไซต์ที่มีลิงก์เผยแพร่จริง ไม่ใช่รายการโครงการใหม่ และไม่เผยแพร่เนื้อหาภายในของ Private Repo</p>
+      <div class="section-head"><div><div class="overline">WEB APPS · LIVE & PREVIEW</div><h2>Web Apps · เข้าใช้งานผ่านเว็บ</h2></div><small>เว็บ Public และเว็บทดสอบจำกัดสิทธิ์</small></div>
+      <p class="section-intro">ลิงก์เปิดหน้าเว็บที่เผยแพร่จริงแยกจาก Source Code โดยเว็บทดสอบ (Preview) จะติดป้ายชัดเจนว่าไม่ใช่เวอร์ชันพร้อมใช้งานสมบูรณ์</p>
+      <div class="section-head"><h3>เว็บออนไลน์ที่เผยแพร่แล้ว</h3><small id="publicWebCount">—</small></div>
       <div id="pagesGrid" class="page-grid"></div>
-      <div class="notice subtle-notice">GitHub Pages ที่เป็น Public อาจมีแหล่งโค้ดเผยแพร่แยกจาก Repository หลักที่เป็น Private; ลิงก์ “Source” ระบุบทบาทของแต่ละ Repository ให้ชัดเจน</div>
+      <div class="section-head"><h3>เว็บทดลอง / จำกัดสิทธิ์</h3><small id="previewWebCount">—</small></div>
+      <p class="section-intro">เปิดได้เฉพาะผู้ที่มีสิทธิ์ และบางฟังก์ชันอาจยังอยู่ระหว่างทดสอบ</p>
+      <div id="previewGrid" class="page-grid"></div>
+      <div class="notice subtle-notice">ประเภทเว็บขึ้นอยู่กับลิงก์ที่โครงการประกาศไว้ ไม่ได้แปลว่าทุกเว็บผ่าน QA ครบถ้วน; ระบบงานภายในที่ยังไม่มีลิงก์ยืนยันจะแสดงใน Development</div>
     </section>
 
     <section id="projectsSection" hidden>
