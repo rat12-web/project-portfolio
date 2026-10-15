@@ -40,6 +40,31 @@
     <section class="metrics" id="metrics" aria-label="ภาพรวมสถานะ"></section>
     <div class="notice" id="scopehint" role="status">กำลังโหลดข้อมูล GitHub...</div>
 
+    <section id="homeBoardSection" class="home-board" aria-labelledby="boardHeading">
+      <div class="section-head board-heading">
+        <div><div class="overline">LIVE PORTFOLIO / YOUR PRIORITIES</div><h2 id="boardHeading">งานที่กำลังทำและลำดับความสำคัญ</h2>
+        <p class="section-intro">จัดลำดับจากสถานะโครงการและข้อมูล GitHub ที่ตรวจได้ · งานพักและ Archived จะอยู่ล่างสุดโดยอัตโนมัติ</p></div>
+        <div class="board-head-actions"><button class="pill-btn" id="boardExport" title="สำรองการปรับแต่งในเครื่อง">↓ สำรองค่า</button>
+        <label class="pill-btn board-import">↑ นำเข้าค่า <input id="boardImport" type="file" accept="application/json,.json" aria-label="นำเข้าไฟล์ตั้งค่าบอร์ด"></label></div>
+      </div>
+      <div class="board-stats" id="boardStats" aria-label="กรองงานตามสถานะ"></div>
+      <div class="board-controls">
+        <input class="field" id="boardSearch" placeholder="ค้นหาชื่อและงานถัดไป" aria-label="ค้นหาในบอร์ด">
+        <select class="field" id="boardFilter" aria-label="กรองสถานะบอร์ด"><option value="all">ทุกสถานะ</option>
+          <option value="active">กำลังพัฒนา</option><option value="live">เว็บใช้งาน</option><option value="planning">วางแผน</option><option value="blocked">ติดปัญหา</option><option value="paused">พักงาน</option><option value="archived">Archived</option><option value="unverified">ยังไม่ยืนยัน</option></select>
+        <select class="field" id="boardSort" aria-label="เรียงลำดับงาน"><option value="priority">ความสำคัญ + ล่าสุด</option><option value="recent">Push ล่าสุด</option><option value="status">สถานะงาน</option><option value="name">ชื่อ A–Z</option></select>
+      </div>
+      <div class="board-settings">
+        <label><input type="checkbox" id="boardCompact"> แบบกระชับ</label>
+        <label><input type="checkbox" id="boardShowPaused" checked> แสดงงานพักไว้ล่างสุด</label>
+        <label><input type="checkbox" id="boardShowArchived"> แสดง Archived</label>
+        <button type="button" class="board-reset" id="boardResetAll">↺ คืนค่าการปรับแต่งในเครื่อง</button>
+      </div>
+      <div class="board-hints"><span id="boardCount">กำลังโหลดรายการ…</span><span id="boardStorage">ข้อมูล GitHub + สถานะโครงการ</span></div>
+      <div class="board-grid" id="boardCards" aria-live="polite"><div class="notice">กำลังประมวลผลสถานะโครงการ…</div></div>
+      <p class="board-footnote">Ⅱ พักงานเป็นการเปลี่ยนสถานะใน Atlas ไม่ได้หยุด Actions/เซิร์ฟเวอร์จริง · กด ⚙ เพื่อแก้ชื่อ สถานะ ความสำคัญ หมวด และงานถัดไป จากนั้นเลือกบันทึกเฉพาะเบราว์เซอร์หรือบน GitHub</p>
+    </section>
+
     <section id="homeStatusSection" class="audit-home">
  <div><span class="overline">BLOCKERS / VERIFIED CHANGE LOG</span><h2>ติดตรงไหน? เปลี่ยนชื่อจริงหรือแค่ใน Atlas?</h2>
  <p>รวมสิ่งที่ติดข้อจำกัด งานที่ต้องทำต่อ และสถานะ GitHub จริง พร้อมหลักฐานและวันที่ตรวจสอบ</p></div>
@@ -133,10 +158,12 @@
     <footer class="footer">Project Explorer by rat12-web · Atlas คือเครื่องมือจัดการ · ข้อมูล Private ที่เห็นในโหมด Public เป็น Metadata ที่เผยแพร่โดยตั้งใจ</footer>
   </main>
 </div>
+<div class="board-modal" id="boardModal" hidden></div>
 <div class="detail-panel" id="detail" hidden></div>
 <div class="detail-panel" id="authDrawer" hidden></div>
 <div class="toast" id="toast" role="status" hidden></div>
 <script src="./assets/app.js" defer></script>
 <script src="./assets/hierarchy.js" defer></script>
 <script src="./assets/audit.js" defer></script>
+<script src="./assets/home.js" defer></script>
 </body></html>
