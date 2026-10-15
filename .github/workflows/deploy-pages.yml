@@ -33,7 +33,7 @@ jobs:
         run: |
           mkdir -p site/data site/assets
           cp index.html site/index.html
-          cp assets/style.css assets/app.js assets/hierarchy.js site/assets/
+          cp assets/style.css assets/atlas-v2.css assets/app.js assets/hierarchy.js site/assets/
           cp data/public_snapshot.json site/data/public_snapshot.json
           cp config/project-control.json site/data/project-control.json
           cp config/workspaces.json site/data/workspaces.json
