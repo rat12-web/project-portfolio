@@ -63,3 +63,30 @@
 - [Workflow: Sync public project catalog](https://github.com/rat12-web/project-portfolio/actions/workflows/sync-public.yml)
 - [GitHub Actions Runs](https://github.com/rat12-web/project-portfolio/actions)
 
+
+## Project-family hierarchy (2026-10-15)
+
+**Verified in the deployed browser:** 8 expandable project families / 13 GitHub repositories. The ROM2THAI family expands into console → game with 10 public-safe game status records: GBA 5, SNES 2, GB/GBC 1, PS1 1, and Homebrew 1. Project status loads from the [public sanitized ROM2THAI status mirror](https://github.com/rat12-web/rom2thai-hub-web/blob/main/site/status.json), with a dated static fallback in `config/workspaces.json`. Repo/project labels are friendly display aliases, **not physical GitHub repository renames**.
+
+### Project families and role separation
+
+| Main family | Canonical source | Related repositories / role |
+| --- | --- | --- |
+| ROM2THAI | `thai-rom-cloud` (private) | `rom2thai-hub-web` = public display-only mirror; `ThaiROM-Studio-Cloud` and `RetroThaiWorkbench` = legacy upstream requiring PR reconciliation; `lufia2-thai` = archived legacy |
+| ThaiPatch · แปลไทยบอกด้วย | `thaipatch` (currently public app/source) | `plaethai-bokduay-content-hub` = private editorial and agent workspace |
+| TYPEBEATS | `TYPEBEATS` (private) | Godot M3 game and owner-restricted demo |
+| Gecko Offline | `Gecko-Offline` (private) | M0 / Android / offline sync work |
+| Government Exam Monitor | `gov-exam-monitor` (private) | Announcement checking and alerting |
+| Land Office Queue | `phangnga-live-queue` (private) | Queue/Admin, planned Live |
+| Land Office HR | `phangnga-hr` (private) | HR app and protected data |
+| Project Atlas | `project-portfolio` (currently public) | Control UI and synced public metadata |
+
+### Archive completed
+
+`rat12-web/lufia2-thai` was archived through GitHub Settings and independently verified as `archived=true`, `visibility=private` on 2026-10-15. Its README now redirects to `thai-rom-cloud/games/sfc/lufia2`. No game files were removed.
+
+### Private-only migration limitation (not yet done)
+
+GitHub's account billing UI was checked and shows **GitHub Free**. As of this audit, 10 repositories are Private and 3 sites/repositories stay Public: `thaipatch`, `rom2thai-hub-web`, `project-portfolio`. GitHub Free does **not** publish GitHub Pages from private repositories. Making those three private now would unpublish the live sites. They have deliberately **not** been converted yet; do not mark the request “all private” as complete.
+
+To move *every source project* to Private without interrupting the live web experiences, either upgrade to GitHub Pro for private-source Pages (site contents may remain publicly accessible) or set up an authenticated independent host with a private GitHub connection and migrate the sites first. A separate public static deployment-only mirror is an alternative only if the owner accepts a public mirror. Truly restricted Pages site visibility requires eligible GitHub Enterprise arrangements, not just Pro.
