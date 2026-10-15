@@ -38,7 +38,7 @@
     {
       "id": "thaipatch",
       "title": "ThaiPatch Catalog · สารบัญเกมแปลไทย",
-      "description": "สารบัญแพตช์ภาษาไทยจากชุมชน พร้อมเครดิตทีมแปล ลิงก์ต้นฉบับ และข่าวเกม Retro",
+      "description": "สารบัญแพตช์ภาษาไทย และงานบรรณาธิการของแบรนด์แปลไทยบอกด้วย RE2Play ซึ่งเป็น Repository คนละตัว",
       "icon": "📚",
       "category": "เว็บไซต์และคอนเทนต์",
       "root_repo_id": 1415242573,
@@ -53,9 +53,9 @@
           "role": "เว็บไซต์หลักที่เผยแพร่อยู่"
         },
         {
-          "title": "Content & Agent Hub",
+          "title": "แปลไทยบอกด้วย RE2Play · Content Agents",
           "repo_id": 1420142917,
-          "role": "งานบรรณาธิการ/Agent แยกจากเว็บ"
+          "role": "งานบรรณาธิการ / AI Agent แยกจากเว็บไซต์สารบัญ · GitHub Repo RE2play-Content-Agent"
         }
       ]
     },
@@ -591,12 +591,14 @@
     {
       "id": "thaipatch-content",
       "family_id": "thaipatch",
-      "title": "ThaiPatch · Content & Agent Hub",
+      "title": "แปลไทยบอกด้วย RE2Play",
       "category": "บริหารคอนเทนต์",
-      "description": "เบื้องหลังการจัดทำสารบัญ แหล่งข้อมูล และงาน AI Agent; แยกจากเว็บไซต์ ThaiPatch",
+      "description": "งานคอนเทนต์/AI Agent ของแบรนด์แปลไทยบอกด้วย RE2Play; Repository จริง RE2play-Content-Agent (Private) และยังไม่มีเว็บโครงการเฉพาะ",
       "root_repo_id": 1420142917,
       "icon": "📝",
-      "subprojects": []
+      "subprojects": [],
+      "english_name": "RE2play Content Agent",
+      "github_repo_name": "RE2play-Content-Agent"
     }
   ]
 }
