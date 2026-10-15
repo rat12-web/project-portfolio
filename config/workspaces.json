@@ -1,0 +1,299 @@
+{
+  "schema_version": 1,
+  "source": "rat12-web/rom2thai-hub-web/site/status.json",
+  "source_commit": "b43c44b451a64a6b6304a68e18a08b6d03ce5877",
+  "updated_at": "2026-10-15",
+  "note": "Public-safe structured project/workstream hierarchy. The ROM game list is from the existing published public status file. No private personal data.",
+  "families": [
+    {
+      "id": "rom2thai",
+      "title": "ROM2THAI",
+      "description": "ศูนย์กลางงานแปล ROM • แยกเครื่องเกมและสถานะจริง",
+      "icon": "🎮",
+      "category": "งานแปลเกม",
+      "root_repo_id": 1416748319,
+      "related_repo_ids": [
+        1418448691,
+        1413883614,
+        1391725161,
+        1416744545
+      ],
+      "site": "https://rat12-web.github.io/rom2thai-hub-web/",
+      "subprojects": [
+        {
+          "title": "คลังกลาง / Source of Truth",
+          "repo_id": 1416748319,
+          "role": "พัฒนาหลัก"
+        },
+        {
+          "title": "เว็บสถานะ (Pages Mirror)",
+          "repo_id": 1418448691,
+          "role": "ส่วนแสดงผล Public — ไม่ใช่แหล่งต้นฉบับ"
+        },
+        {
+          "title": "ThaiROM Studio — โค้ดต้นทางเดิม",
+          "repo_id": 1413883614,
+          "role": "Legacy / มี 7 PR ค้าง ต้องตรวจสอบ"
+        },
+        {
+          "title": "RetroThai Workbench — โค้ดต้นทางเดิม",
+          "repo_id": 1391725161,
+          "role": "Legacy / มี 1 PR ค้าง ต้องตรวจสอบ"
+        },
+        {
+          "title": "Lufia II — Repository เดิม",
+          "repo_id": 1416744545,
+          "role": "Archived แล้ว / งานปัจจุบันอยู่ใน Hub"
+        }
+      ]
+    },
+    {
+      "id": "thaipatch",
+      "title": "ThaiPatch · แปลไทยบอกด้วย",
+      "description": "สารบัญแพตช์ไทย และระบบบริหารคอนเทนต์/Agent",
+      "icon": "📚",
+      "category": "เว็บไซต์และคอนเทนต์",
+      "root_repo_id": 1415242573,
+      "related_repo_ids": [
+        1420142917
+      ],
+      "site": "https://rat12-web.github.io/thaipatch/",
+      "subprojects": [
+        {
+          "title": "เว็บไซต์และฐานข้อมูลแพตช์",
+          "repo_id": 1415242573,
+          "role": "เว็บไซต์หลักที่เผยแพร่อยู่"
+        },
+        {
+          "title": "Content & Agent Hub",
+          "repo_id": 1420142917,
+          "role": "งานบรรณาธิการ/Agent แยกจากเว็บ"
+        }
+      ]
+    },
+    {
+      "id": "typebeats",
+      "title": "TYPEBEATS",
+      "description": "เกมเต้น QWERTY • Godot M3 และเว็บทดสอบ",
+      "icon": "🎵",
+      "category": "พัฒนาเกม",
+      "root_repo_id": 1418199034,
+      "related_repo_ids": [],
+      "site": "https://typebeats-mobile-test.rat-creative1.chatgpt.site",
+      "restricted": true,
+      "subprojects": [
+        {
+          "title": "Godot · เกมหลัก",
+          "path": "docs/PROJECT_STATE.json",
+          "role": "Alpha M3"
+        },
+        {
+          "title": "Web Demo · M3",
+          "site": "https://typebeats-mobile-test.rat-creative1.chatgpt.site",
+          "role": "Owner-only demo"
+        }
+      ]
+    },
+    {
+      "id": "gecko",
+      "title": "Gecko Offline",
+      "description": "เครื่องมือออฟไลน์ • Android share / ซิงค์หลายอุปกรณ์",
+      "icon": "🦎",
+      "category": "เครื่องมือ",
+      "root_repo_id": 1420128168,
+      "related_repo_ids": [],
+      "subprojects": [
+        {
+          "title": "M0 · พื้นฐานและเตรียมงาน",
+          "site": "https://github.com/rat12-web/Gecko-Offline/issues",
+          "role": "ตรวจ issue M0-001 ถึง M0-008"
+        },
+        {
+          "title": "Android / Offline Sync",
+          "path": "",
+          "role": "M0 ยังอยู่ระหว่างการพัฒนา"
+        }
+      ]
+    },
+    {
+      "id": "exam",
+      "title": "Gov Exam Monitor",
+      "description": "ตรวจติดตามประกาศสอบและ LINE OA",
+      "icon": "🔔",
+      "category": "ระบบติดตาม",
+      "root_repo_id": 1411532824,
+      "related_repo_ids": [],
+      "subprojects": [
+        {
+          "title": "Monitor & Scheduler",
+          "role": "เฝ้าติดตามประกาศ"
+        },
+        {
+          "title": "LINE OA",
+          "role": "แจ้งเตือนตามข้อมูลต้นทาง"
+        }
+      ]
+    },
+    {
+      "id": "land-queue",
+      "title": "Phangnga Live Queue",
+      "description": "ระบบคิวสำนักงานที่ดินและแผนถ่ายทอดสด",
+      "icon": "📺",
+      "category": "ระบบหน่วยงาน",
+      "root_repo_id": 1396825920,
+      "related_repo_ids": [],
+      "subprojects": [
+        {
+          "title": "Queue Viewer / Admin",
+          "role": "บริการภายใน LAN"
+        },
+        {
+          "title": "Facebook Live",
+          "role": "ยังไม่ได้เปิดสตรีมจริง"
+        }
+      ]
+    },
+    {
+      "id": "land-hr",
+      "title": "ชาวดินพังงา HR",
+      "description": "ฐานข้อมูลบุคลากรและสิทธิ์ผู้ใช้",
+      "icon": "👥",
+      "category": "ระบบหน่วยงาน",
+      "root_repo_id": 1420054663,
+      "related_repo_ids": [],
+      "subprojects": [
+        {
+          "title": "เว็บ HR",
+          "role": "เข้าถึงเฉพาะผู้มีสิทธิ์"
+        },
+        {
+          "title": "D1/R2 · ฐานข้อมูล",
+          "role": "ห้ามเผยแพร่ข้อมูลบุคลากรสู่ Pages"
+        }
+      ]
+    },
+    {
+      "id": "atlas",
+      "title": "Project Atlas",
+      "description": "แผงควบคุมภาพรวมโครงการ, GitHub Actions และสถานะ",
+      "icon": "🗂️",
+      "category": "บริหารโครงการ",
+      "root_repo_id": 1420150047,
+      "related_repo_ids": [],
+      "site": "https://rat12-web.github.io/project-portfolio/",
+      "subprojects": [
+        {
+          "title": "Project Dashboard",
+          "role": "รวมโครงการทั้งหมด"
+        },
+        {
+          "title": "GitHub Actions Sync",
+          "site": "https://github.com/rat12-web/project-portfolio/actions",
+          "role": "ซิงค์ข้อมูล Public"
+        }
+      ]
+    }
+  ],
+  "rom_games": {
+    "GBA": [
+      {
+        "id": "gba/advance-wars",
+        "title": "Advance Wars",
+        "status": "ติดขัด: ขาดตารางแปลส่วนตัวและต้องซ่อมแถว",
+        "next": "กู้ตารางแปลจากเครื่องเจ้าของและตรวจ ID/แฮชก่อนสร้างแพตช์",
+        "evidence_path": "games/gba/advance-wars/imported/TRANSLATION_SUMMARY.md",
+        "problems": "ตารางแปลส่วนตัวไม่อยู่ใน Git; แถวคลาดเคลื่อน; ฟอนต์ hook และ relocation ยังไม่ครบ",
+        "progress": null
+      },
+      {
+        "id": "gba/pokemon-radical-red",
+        "title": "Pokémon Radical Red 4.1",
+        "status": "แพตช์ทดลองบางส่วน",
+        "next": "ตรวจคลังข้อความและเพิ่มการใส่กลับพร้อมฟอนต์ในเกมจริง",
+        "evidence_path": "games/gba/pokemon-radical-red/docs/RADICAL_RED_HANDOFF.md",
+        "problems": "คลังยังไม่ใช่จำนวนทั้งเกม; ฟอนต์ทุกทางแยกและเซฟ/โหลดยังไม่ตรวจ; เมนูบางส่วนยังเป็นอังกฤษ",
+        "progress": null
+      },
+      {
+        "id": "gba/pokemon-emerald",
+        "title": "Pokémon Emerald",
+        "status": "ทดลอง 15 ข้อความ ยังไม่ครบเกม",
+        "next": "ขยายข้อความและตรวจสระวรรณยุกต์ในอีมูเลเตอร์",
+        "evidence_path": "games/gba/pokemon-emerald/docs/EMERALD_PREVIEW.md",
+        "problems": "มีหลักฐานเฉพาะ 15 ข้อความต้นเกม; ยังไม่ตรวจสระวรรณยุกต์ทุกชุดและทุกฉาก",
+        "progress": null
+      },
+      {
+        "id": "gba/pokemon-firered-reference",
+        "title": "Pokémon FireRed reference",
+        "status": "ยืนยันแพตช์อ้างอิง ยังไม่ใช่งานแปลใหม่ทั้งเกม",
+        "next": "ทำตัวอย่างแปลใหม่พร้อมหลักฐานฟอนต์และใส่กลับ",
+        "evidence_path": "tools/retrothai-workbench/prototypes/pixeltrans-v0.2/rom-audit/README_FOR_CODEX.md",
+        "problems": "เป็นการสร้างแพตช์อ้างอิงซ้ำ ไม่ใช่งานแปลใหม่; ยังไม่มีคลังแปลใหม่ที่ตรวจแล้ว",
+        "progress": null
+      },
+      {
+        "id": "gba/fire-emblem-sacred-stones",
+        "title": "Fire Emblem: The Sacred Stones",
+        "status": "ติดขัด: ใส่กลับผิด 71 รายการ และไทยกลายเป็น ?",
+        "next": "แก้ control codes และพิสูจน์ renderer ไทยก่อนแปลต่อ",
+        "evidence_path": "tools/retrothai-workbench/docs/FE8_PILOT.md",
+        "problems": "ใส่กลับต้นฉบับผิด 71 รายการ; ไทยกลายเป็นเครื่องหมาย ?; renderer ไทยยังไม่ยืนยัน",
+        "progress": null
+      }
+    ],
+    "SNES": [
+      {
+        "id": "sfc/lufia2",
+        "title": "Lufia II",
+        "status": "ยังไม่เสร็จ: ต้นเกมข้อความเพี้ยน",
+        "next": "แก้สคริปต์แผนที่ต้นเกมและตรวจคำแปลที่เสีย",
+        "evidence_path": "games/sfc/lufia2/docs/PLAYTEST_REPORT.md",
+        "problems": "ต้นเกมและแผนที่ 2–18 อ่านไม่รู้เรื่อง; อย่างน้อย 295 ร่างต้องตรวจใหม่; เมนูยังเป็นอังกฤษ",
+        "progress": null
+      },
+      {
+        "id": "sfc/ultimate-mortal-kombat-3",
+        "title": "Ultimate Mortal Kombat 3",
+        "status": "ยืนยันบูตต้นฉบับ ยังไม่ยืนยันแพตช์ไทย M4",
+        "next": "ใช้แพตช์ส่วนตัวที่ตรงรุ่นแล้วจับภาพภาษาไทยจริง",
+        "evidence_path": "games/sfc/ultimate-mortal-kombat-3/docs/SNES9X_BOOT_QA.md",
+        "problems": "หลักฐานบูตเป็นเกมต้นฉบับ; ยังไม่ยืนยันหน้าจอไทยของแพตช์ M4",
+        "progress": null
+      }
+    ],
+    "GB / GBC": [
+      {
+        "id": "gb/pokemon-yellow",
+        "title": "Pokémon Yellow",
+        "status": "แปลและทดสอบบางฉาก เฉพาะ CGB",
+        "next": "ตรวจบทสนทนาและการต่อสู้ถัดไปจากการเล่นจริง",
+        "evidence_path": "games/gb/pokemon-yellow/docs/POKEYELLOW_V075_REAL_EMULATOR_QA.md",
+        "problems": "ยังไม่ยืนยันการต่อสู้กับคู่แข่งและการเล่นครบ; DMG/SGB ยังไม่ตรวจ",
+        "progress": null
+      }
+    ],
+    "PS1": [
+      {
+        "id": "ps1/jackie-chan-stuntmaster",
+        "title": "Jackie Chan: Stuntmaster",
+        "status": "v12: UI 137 + ซับ 103 + โหลดไทย; เซฟ/โหลดช่องแรกผ่าน",
+        "next": "ตรวจและแปลเสียงพูดที่แยกไว้ ทำซับในเกม และตรวจเส้นเรื่อง/เซฟหลังเล่นต่อ",
+        "evidence_path": "games/ps1/jackie-chan-stuntmaster/CHECKPOINT.md",
+        "problems": "เสียง 3,051 ชิ้นยังไม่ใช่จำนวนประโยค; ซับเสียงพูดในเกมยังไม่ทำ; MAKING_047 คาดเดา; ยังไม่ตรวจครบทุกด่านและเซฟหลังเล่นต่อ",
+        "progress": null
+      }
+    ],
+    "Homebrew": [
+      {
+        "id": "homebrew/garden-fixture",
+        "title": "Garden synthetic fixture",
+        "status": "เกมทดสอบสังเคราะห์สำหรับ pipeline",
+        "next": "ใช้ตรวจการเปลี่ยนเครื่องมือ ไม่ใช่หลักฐานเกมเชิงพาณิชย์",
+        "evidence_path": "engines/thairom-studio/fixtures/garden/text.json",
+        "problems": "เป็น fixture สังเคราะห์ ไม่ใช่ความคืบหน้าการแปลเกมเชิงพาณิชย์",
+        "progress": null
+      }
+    ]
+  }
+}
