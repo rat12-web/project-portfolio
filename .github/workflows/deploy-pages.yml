@@ -6,6 +6,7 @@ on:
       - 'index.html'
       - 'assets/**'
       - 'config/workspaces.json'
+      - 'config/status-audit.json'
       - 'config/project-control.json'
       - '.github/workflows/deploy-pages.yml'
   workflow_dispatch:
@@ -33,10 +34,11 @@ jobs:
         run: |
           mkdir -p site/data site/assets
           cp index.html site/index.html
-          cp assets/style.css assets/atlas-v2.css assets/app.js assets/hierarchy.js site/assets/
+          cp assets/style.css assets/atlas-v2.css assets/app.js assets/hierarchy.js assets/audit.js site/assets/
           cp data/public_snapshot.json site/data/public_snapshot.json
           cp config/project-control.json site/data/project-control.json
           cp config/workspaces.json site/data/workspaces.json
+          cp config/status-audit.json site/data/status-audit.json
           python - <<'PY'
           import json
           d = json.load(open('site/data/project-control.json', encoding='utf-8'))
@@ -45,6 +47,12 @@ jobs:
           g=json.load(open('site/data/workspaces.json',encoding='utf-8'))
           assert len(g['families'])>=9
           assert sum(len(v) for v in g['rom_games'].values())==10
+          assert len(g.get('pages', [])) >= 5 and len(g.get('web_apps', [])) >= 3
+          audit=json.load(open('site/data/status-audit.json',encoding='utf-8'))
+          assert audit['schema_version']==1
+          assert len(audit['records'])>=20 and len(audit['identities'])>=8
+          assert all(x.get('cause') and x.get('next') and x.get('title') for x in audit['records'])
+          assert all(not any(k in json.dumps(x, ensure_ascii=False).lower() for k in ('github_pat_', 'password=', 'api_key=')) for x in audit['records'])
           assert all(not any(key in str(v).lower() for key in ('github_pat_', 'password=', 'api_key=')) for v in d['projects'].values())
           print('Atlas published metadata: validated', len(d['projects']), 'projects')
           PY
