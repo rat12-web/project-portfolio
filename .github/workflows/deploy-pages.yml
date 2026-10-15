@@ -6,6 +6,7 @@ on:
       - 'index.html'
       - 'assets/**'
       - 'config/workspaces.json'
+      - 'config/next-prompts.json'
       - 'config/status-audit.json'
       - 'config/project-control.json'
       - '.github/workflows/deploy-pages.yml'
@@ -34,7 +35,8 @@ jobs:
         run: |
           mkdir -p site/data site/assets
           cp index.html site/index.html
-          cp assets/style.css assets/atlas-v2.css assets/app.js assets/hierarchy.js assets/audit.js assets/home.js site/assets/
+          cp assets/style.css assets/atlas-v2.css assets/app.js assets/hierarchy.js assets/audit.js assets/home.js assets/prompts.js site/assets/
+          node --check site/assets/prompts.js
           node --check site/assets/home.js
           node --check site/assets/app.js
           node --check site/assets/hierarchy.js
@@ -42,13 +44,14 @@ jobs:
           python - <<'PY'
           from pathlib import Path
           html=Path('site/index.html').read_text(encoding='utf-8')
-          for marker in ('id="homeBoardSection"','id="boardCards"','id="boardModal"','id="boardAutoActivity"','assets/home.js'):
+          for marker in ('id="homeBoardSection"','id="boardCards"','id="boardModal"','id="boardAutoActivity"','assets/home.js','id="promptModal"','assets/prompts.js'):
               assert marker in html, f'Missing board marker: {marker}'
           print('Atlas homepage board verification PASS')
           PY
           cp data/public_snapshot.json site/data/public_snapshot.json
           cp config/project-control.json site/data/project-control.json
           cp config/workspaces.json site/data/workspaces.json
+          cp config/next-prompts.json site/data/next-prompts.json
           cp config/status-audit.json site/data/status-audit.json
           python - <<'PY'
           import json
@@ -56,6 +59,10 @@ jobs:
           assert d['schema_version'] == 3
           assert len(d['projects']) >= 15
           g=json.load(open('site/data/workspaces.json',encoding='utf-8'))
+          prompts=json.load(open('site/data/next-prompts.json', encoding='utf-8'))
+          assert prompts['schema_version']==1 and len(prompts['entries'])>=17
+          assert all(v.get('step_id') and v.get('next_step') and v.get('status_snapshot') for v in prompts['entries'].values())
+          assert all(not any(x in json.dumps(v, ensure_ascii=False).lower() for x in ('github_pat_', 'api_key=', 'password=')) for v in prompts['entries'].values())
           assert len(g['families'])>=9
           assert sum(len(v) for v in g['rom_games'].values())==10
           assert len(g.get('pages', [])) >= 5 and len(g.get('web_apps', [])) >= 3
