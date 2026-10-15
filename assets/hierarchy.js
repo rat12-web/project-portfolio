@@ -6,7 +6,7 @@ const safeURL=v=>typeof v==='string'&&/^https:\/\/[^\s]+$/i.test(v)?v:'';
 const platforms=[['GBA','🟦'],['SNES','🟪'],['GB / GBC','🟩'],['PS1','🟧'],['Homebrew','⬡']];
 const repos={
 1391725161:'RetroThaiWorkbench',1396825920:'phangnga-live-queue',1411532824:'gov-exam-monitor',
-1413883614:'ThaiROM-Studio-Cloud',1415242573:'thaipatch',1416744545:'lufia2-thai',
+1413883614:'ThaiROM-Studio-Online',1415242573:'thaipatch',1416744545:'lufia2-thai',
 1416748319:'thai-rom-cloud',1418199034:'TYPEBEATS',1418448691:'rom2thai-hub-web',
 1420054663:'phangnga-hr',1420128168:'Gecko-Offline',1420142917:'plaethai-bokduay-content-hub',
 1420150047:'project-portfolio',1420200967:'digimon-world-android',1420204360:'exam-path-tracker'};
