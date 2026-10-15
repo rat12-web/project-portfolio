@@ -121,16 +121,19 @@
       "role": "application"
     },
     "1420142917": {
-      "title": "ThaiPatch Catalog · Content & Agent Hub",
+      "title": "แปลไทยบอกด้วย RE2Play",
       "category": "บริหารคอนเทนต์",
       "status": "planning",
-      "summary": "งานบรรณาธิการและ AI Agent ของแบรนด์ ThaiPatch; ไม่ใช่เว็บไซต์ที่แยกจาก ThaiPatch",
-      "next": "ตรวจการนำเข้าเอกสารและระบบสำรองข้อมูล",
+      "summary": "พื้นที่บริหารข่าว แหล่งข้อมูล โพสต์ และ AI Content Agents ของแบรนด์แปลไทยบอกด้วย RE2Play; GitHub repo เปลี่ยนชื่อจริงแล้ว เป็นงานแยกจากเว็บไซต์สารบัญ ThaiPatch",
+      "next": "ตรวจไฟล์นำเข้า/Agent handoff และยืนยันว่าเอกสารอ้างอิงชี้ไปยัง Repository RE2play-Content-Agent",
       "homepage": null,
-      "visibility": "public",
+      "visibility": "no-live",
       "link_label": "เปิดเว็บไซต์ ThaiPatch",
       "role": "editorial",
-      "canonical_repo_id": 1415242573
+      "canonical_repo_id": 1415242573,
+      "english_name": "RE2play Content Agent",
+      "github_repo_name": "RE2play-Content-Agent",
+      "last_verified_change": "2026-10-15 GitHub repository renamed"
     },
     "1420150047": {
       "title": "Project Atlas · Control Center",
