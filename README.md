@@ -134,3 +134,28 @@ Project Atlas now separates visible work by **delivery surface**, not by the typ
 The previous dedicated comparison banner `งานแปลเกม ≠ สารบัญเกมแปลไทย` has been removed from the user interface. The two projects and their legitimate code/status data remain unchanged.
 
 Counts come from `config/workspaces.json`: `pages`, `web_apps` and `development`. New web app links should be added there with correct accessibility/preview labels; a URL is not proof that all features have completed QA. Changes were verified by an actual read-only browser test and GitHub Pages workflow [run 38694985243](https://github.com/rat12-web/project-portfolio/actions/runs/38694985243) succeeded.
+
+## Status & ChatGPT Sites audit — 15 October 2026
+
+The published Project Atlas now includes **ChatGPT Sites** in its Web Apps tab and a separate **สถานะงานค้าง** section.
+
+### Web App sources and readiness
+
+- **4 GitHub Pages URLs** remain published: ROM2THAI status mirror, ThaiPatch, Atlas, Exam Path Tracker.
+- **1 additional ChatGPT Sites public URL** is verified: [Phangnga Job Profiles](https://phangnga-job-profiles.rat-creative1.chatgpt.site). Its public data was last updated August 2026 on the site: **marked as needing freshness review**. No linked GitHub repository has been verified.
+- **2 restricted ChatGPT Sites preview URLs** remain: ThaiROM Studio Online and TYPEBEATS M3. Unauthenticated URL checks returned HTTP 401, **not** proof of a service outage or production readiness.
+- **1 HR ChatGPT Sites owner-private record** has evidence in `phangnga-hr/README.md`, but **no currently verified URL**. The card deliberately has no invented opening link.
+
+Web App records are in `config/workspaces.json`. Their `hosting`, `source_status`, `operational_status`, `access`, `audit_ref` and URLs are distinct; a Public URL is not the same as a production-complete product.
+
+### Work status audit and evidence
+
+- Source: `config/status-audit.json`. Published on Pages as `data/status-audit.json`; UI: `assets/audit.js`.
+- Latest manual audit: **2026-10-15**, **22 records**: **5 blocked**, **7 pending**, **6 need evidence review**, **4 confirmed completed**. The unresolved total is **18**, not 22.
+- Every record provides project, cause, next action, verification source/evidence URL, and date. Filters allow blockers, pending, review and verified-complete independently.
+- A separate **actual GitHub name vs Atlas-only display name** view explicitly states that `ThaiROM-Studio-Online` was a **real repo rename**, `RetroThaiCraft` is a **display alias** over `thai-rom-cloud`, while `RetroThaiWorkbench` and `lufia2-thai` were **actually archived**.
+- Examples of remaining blockers: GitHub Free private-source Pages; owner-private background sync needs secured authentication; Atlas destructive REST controls not yet owner-token E2E tested; old ChatGPT Sites subdomain remains; seven open ThaiROM Studio Draft PRs; six Gecko M0 open issues; game patch errors.
+- The audit is a **curated evidence snapshot, not automatically confirmed fresh status**. GitHub REST Public repository sync and live game status are separate mechanisms; a successful GitHub Actions run does not automatically mean app/game QA passed.
+- Never include personal employee data, secrets, private code, access tokens or private ROMs in this Public Pages audit.
+
+Read-only live browser QA verified navigation, all ChatGPT Sites card labels, missing HR link, audited Web App notes and status/alias identity views on 2026-10-15. No GitHub repository mutations were performed during QA.
