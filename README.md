@@ -168,3 +168,19 @@ Read-only live browser QA verified navigation, all ChatGPT Sites card labels, mi
 - **Verified** `repository_id = 1420142917`, `visibility = private`, `archived = false`, so this is a real GitHub rename, not merely an Atlas display alias.
 - Updated `config/project-control.json`, `config/workspaces.json`, `config/status-audit.json`, `assets/app.js`, `assets/hierarchy.js`, and the source README.
 - The separate ThaiPatch catalog (`rat12-web/thaipatch`) has **not** been renamed; no change to any Facebook/social page is implied or claimed.
+
+## Homepage Auto Priority Board — 15 October 2026
+
+The homepage contains an editable project board implemented in `assets/home.js`. It collects the project catalog from `config/project-control.json`, Web Apps and development groupings from `config/workspaces.json`, and GitHub repository metadata already retrieved by the existing authenticated/public API flow.
+
+**Sorting:** pinned first within its status tier; high priority (1→5); optionally latest Push, status or alphabetical. **Paused always moves below other active work**, and Archived is hidden by default. Users can search, filter, view compact cards and reveal archived/paused items. The board does **not** claim recent GitHub commits mean a project is complete or code has passed QA.
+
+**Automatic status precedence:** GitHub Archived / confirmed archived → browser manual override → saved workflow status → curated project status (live/blocked/paused/active/planning) → recent verified GitHub Push when project was only "planning" and "use activity signal" is turned on (14-day threshold). Inaccessible Private repository metadata never becomes guessed Push activity; missing recent commits never auto-pauses a project. Each card describes the source and reason for its status.
+
+**Quick actions:** `Ⅱ พักงาน` / `▶ เริ่มต่อ`, pin/unpin. These default to **browser-local** state via localStorage and do NOT stop GitHub Actions, agents, Live, deployments or remote services. Users can edit display title, workflow status, priority (1-5), category, next task and pin. The inline modal gives two separate save options:
+- **บันทึกในเบราว์เซอร์** — persists in this browser only, no login, no server mutation.
+- **บันทึกบน GitHub** — an explicit owner-authorized REST PUT to `config/project-control.json` on `rat12-web/project-portfolio` after connecting a Fine-grained GitHub PAT with `Contents: write` for the Atlas repository. It updates data shared across devices after Pages Deploy, but **the edited fields are public**. Cloud-write success still requires a proper owner PAT and has not been end-to-end tested in the browser with owner's token.
+
+There are also **Export settings** / **Import settings** buttons for browser-local preferences and a reset button. The import parser only accepts whitelisted project fields. No access token is stored in an exported JSON or localStorage. If a project is a ChatGPT Site not linked to a GitHub Repository, it can be customized locally but cannot be cloud-saved via this particular GitHub config.
+
+**Verification:** JavaScript syntax checks passed. A read-only live browser test confirmed the homepage project board, searching/sorting controls, navigation isolation from Web Apps, and private/local controls. Pure status logic regression checks confirmed planning → local pause → resume, resume over a cloud pause, and archived precedence. The workflow also validates JavaScript syntax and expected UI markers before future deploys. Backend GitHub write commands remain opt-in and are not triggered by local actions.
