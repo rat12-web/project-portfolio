@@ -7,8 +7,8 @@
   "families": [
     {
       "id": "rom2thai",
-      "title": "ROM2THAI · งานสร้างแพตช์ภาษาไทย",
-      "description": "พัฒนาแพตช์ภาษาไทยจริง แยกแพลตฟอร์ม → เกม → หลักฐานทดสอบ",
+      "title": "RetroThaiCraft · สร้างแพตช์เกมภาษาไทย",
+      "description": "พัฒนาแพตช์ภาษาไทยจริง แยกเครื่องเกม → เกม → ผลทดสอบ Emulator; GitHub ต้นทางยังเป็น thai-rom-cloud",
       "icon": "🎮",
       "category": "งานแปลเกม",
       "root_repo_id": 1416748319,
@@ -37,8 +37,8 @@
     },
     {
       "id": "thaipatch",
-      "title": "ThaiPatch · สารบัญเกมแปลไทย",
-      "description": "ค้นหาแพตช์ที่เผยแพร่โดยชุมชน พร้อมเครดิตทีมแปลและแหล่งต้นทาง — ไม่ใช่ทีมผลิตแพตช์",
+      "title": "ThaiPatch Catalog · สารบัญเกมแปลไทย",
+      "description": "สารบัญแพตช์ภาษาไทยจากชุมชน พร้อมเครดิตทีมแปล ลิงก์ต้นฉบับ และข่าวเกม Retro",
       "icon": "📚",
       "category": "เว็บไซต์และคอนเทนต์",
       "root_repo_id": 1415242573,
@@ -83,6 +83,32 @@
       ]
     },
     {
+      "id": "digimon-android",
+      "title": "Digimon World · Android Port",
+      "category": "พัฒนาเกม",
+      "icon": "🦖",
+      "description": "พอร์ต Digimon World Recompiled สำหรับ Android ARM64 — Alpha 5, ยังต้อง QA เกมบนเครื่องจริง",
+      "root_repo_id": 1420200967,
+      "related_repo_ids": [],
+      "subprojects": [
+        {
+          "title": "Android Alpha 5 · Handoff",
+          "path": "docs/HANDOFF.md",
+          "role": "สร้าง APK ได้แล้ว / ยังไม่ยืนยันเล่นครบเกม"
+        },
+        {
+          "title": "Touch Control · Digivice UI",
+          "path": "android-app",
+          "role": "จอยสัมผัสและส่วนควบคุมบนมือถือ"
+        },
+        {
+          "title": "Build / Test Toolchain",
+          "path": "tools",
+          "role": "เตรียมเครื่องมือและแพ็กเกจ ไม่รวมเกมต้นฉบับ"
+        }
+      ]
+    },
+    {
       "id": "gecko",
       "title": "Gecko Offline",
       "description": "เครื่องมือออฟไลน์ • Android share / ซิงค์หลายอุปกรณ์",
@@ -105,13 +131,21 @@
     },
     {
       "id": "exam",
-      "title": "Gov Exam Monitor",
-      "description": "ตรวจติดตามประกาศสอบและ LINE OA",
+      "title": "Gov Exam · Monitor & Path Tracker",
+      "description": "ตรวจประกาศราชการและติดตามบัญชีสอบ แยกงานตรวจข่าวจากหน้าเส้นทางบรรจุ",
       "icon": "🔔",
       "category": "ระบบติดตาม",
       "root_repo_id": 1411532824,
-      "related_repo_ids": [],
+      "related_repo_ids": [
+        1420204360
+      ],
       "subprojects": [
+        {
+          "title": "เส้นทางบรรจุ · Exam Path Tracker",
+          "repo_id": 1420204360,
+          "site": "https://rat12-web.github.io/exam-path-tracker/",
+          "role": "GitHub Pages · บัญชีสอบและลำดับเรียกส่วนตัวเก็บในเบราว์เซอร์"
+        },
         {
           "title": "Monitor & Scheduler",
           "role": "เฝ้าติดตามประกาศ"
@@ -290,13 +324,19 @@
     "archived_default_hidden": true,
     "control_center_family": "atlas",
     "pages_separate": true,
-    "display_families": 7,
-    "principle": "translation production != translated game catalog != public deployments"
+    "display_families": 8,
+    "principle": "translation production != translated game catalog != public deployments",
+    "brand_names": {
+      "patch_production": "RetroThaiCraft",
+      "community_catalog": "ThaiPatch Catalog"
+    },
+    "known_repositories": 15,
+    "notes": "Project names shown in UI are aliases; canonical GitHub repository URLs remain unchanged."
   },
   "pages": [
     {
       "id": "page-rom2thai",
-      "title": "ROM2THAI Status · GitHub Pages",
+      "title": "RetroThaiCraft Status · GitHub Pages",
       "owner_family": "rom2thai",
       "repo_id": 1418448691,
       "url": "https://rat12-web.github.io/rom2thai-hub-web/",
@@ -320,6 +360,15 @@
       "url": "https://rat12-web.github.io/project-portfolio/",
       "description": "เว็บจัดการและแสดงงาน ไม่ใช่ Repository ผลิตเกมหรือแพตช์",
       "type": "control_center"
+    },
+    {
+      "id": "page-exam-path",
+      "title": "เส้นทางบรรจุ · GitHub Pages",
+      "owner_family": "exam",
+      "repo_id": 1420204360,
+      "url": "https://rat12-web.github.io/exam-path-tracker/",
+      "description": "เว็บติดตามบัญชีสอบและประกาศที่ตรวจสอบได้ เก็บข้อมูลลำดับส่วนตัวไว้ในเบราว์เซอร์",
+      "type": "application"
     }
   ]
 }
