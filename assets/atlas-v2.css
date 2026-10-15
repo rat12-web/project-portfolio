@@ -270,3 +270,30 @@ body [hidden]{display:none!important}
 @media(max-width:1210px){.board-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:850px){.board-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.board-stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:650px){.board-grid{grid-template-columns:1fr}.board-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.board-fields{grid-template-columns:1fr}.board-hints{flex-wrap:wrap}.board-reset{margin-left:0}.board-controls .field{width:100%}}
+
+/* Per-project README-aware agent prompt viewer */
+.board-prompt-btn{background:#29475c!important;border-color:#578b91!important;color:#a5f5db!important}
+.prompt-modal{position:fixed;inset:0;z-index:110;background:#050b17de;display:flex;align-items:center;justify-content:center;padding:15px}
+.prompt-modal[hidden]{display:none!important}
+.prompt-panel{width:min(790px,100%);max-height:94vh;overflow-y:auto;background:#13263b;border:1px solid #466c82;border-radius:18px;box-shadow:0 28px 90px #000b;padding:24px}
+.prompt-title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:15px}
+.prompt-title-row small{font-size:10px;color:#6fdcc8;letter-spacing:.12em;font-weight:850}
+.prompt-title-row h2{font-size:23px;line-height:1.4;margin:8px 0}
+.prompt-title-row p{font-size:12px;color:#b0c6d9;line-height:1.6}
+.prompt-title-row button{background:#253b53;border:1px solid #4a657c;color:white;border-radius:9px;font-size:22px;padding:5px 11px}
+.prompt-tip{background:#163c43;border-left:3px solid #76edce;color:#dceef6;padding:14px;border-radius:11px;font-size:12px;line-height:1.85;margin:15px 0}
+.prompt-tip div{color:#a4bdc9;font-size:11px;margin-top:5px}
+.prompt-links{display:flex;flex-wrap:wrap;gap:9px;margin:13px 0}
+.prompt-links a,.prompt-links button,.prompt-buttons button{border:1px solid #4c7187;background:#1d384c;color:#dbf1fa;border-radius:9px;padding:10px 13px;font-weight:850;font-size:11px;cursor:pointer}
+.prompt-links a:hover,.prompt-links button:hover{border-color:#81dccb}
+.prompt-source{color:#9ab2c4;font-size:11px;line-height:1.7}
+.prompt-panel label{display:block;font-size:12px;color:#dcecf9;font-weight:750;margin:12px 0 8px}
+.prompt-panel textarea{display:block;width:100%;min-height:330px;resize:vertical;border:1px solid #3f5d78;background:#0b1b2b;color:#e2f3fa;padding:15px;border-radius:11px;font-size:12px;line-height:1.7;white-space:pre-wrap}
+.prompt-panel textarea:focus{outline:2px solid #73e6ce}
+.prompt-buttons{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0}
+.prompt-buttons button.prompt-primary{background:#6ce4c7;color:#10332c;border-color:#6ce4c7;font-size:12px}
+.prompt-buttons button:hover{filter:brightness(1.1)}
+.game-actions{display:flex;flex-wrap:wrap;gap:5px}
+.game-actions .family-link{font-size:10px}
+.page-actions{flex-wrap:wrap}
+@media(max-width:670px){.prompt-panel{padding:15px}.prompt-panel textarea{min-height:280px}.prompt-title-row h2{font-size:19px}}
