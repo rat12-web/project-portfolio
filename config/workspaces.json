@@ -325,13 +325,13 @@
     "control_center_family": "atlas",
     "pages_separate": true,
     "display_families": 8,
-    "principle": "translation production != translated game catalog != public deployments",
     "brand_names": {
       "patch_production": "RetroThaiCraft",
       "community_catalog": "ThaiPatch Catalog"
     },
     "known_repositories": 15,
-    "notes": "Project names shown in UI are aliases; canonical GitHub repository URLs remain unchanged."
+    "notes": "Project names shown in UI are aliases; canonical GitHub repository URLs remain unchanged.",
+    "navigation_model": "web apps / development without live web / repository management"
   },
   "pages": [
     {
@@ -369,6 +369,177 @@
       "url": "https://rat12-web.github.io/exam-path-tracker/",
       "description": "เว็บติดตามบัญชีสอบและประกาศที่ตรวจสอบได้ เก็บข้อมูลลำดับส่วนตัวไว้ในเบราว์เซอร์",
       "type": "application"
+    }
+  ],
+  "web_apps": [
+    {
+      "id": "studio-online-preview",
+      "title": "ThaiROM Studio Online",
+      "owner_family": "rom2thai",
+      "repo_id": 1413883614,
+      "url": "https://thairom-studio-cloud.rat-creative1.chatgpt.site",
+      "type": "restricted_preview",
+      "access": "restricted",
+      "description": "เว็บเครื่องมือแพตช์ BPS แบบทดลอง · Owner-private · ยังไม่ยืนยันความพร้อมใช้งานจริงทั้งหมด",
+      "status_label": "ทดสอบ · จำกัดสิทธิ์"
+    },
+    {
+      "id": "typebeats-preview",
+      "title": "TYPEBEATS · M3 Demo",
+      "owner_family": "typebeats",
+      "repo_id": 1418199034,
+      "url": "https://typebeats-mobile-test.rat-creative1.chatgpt.site",
+      "type": "restricted_preview",
+      "access": "restricted",
+      "description": "Godot Alpha M3 · เว็บทดลองเฉพาะผู้มีสิทธิ์ ไม่ใช่เกมเวอร์ชันสมบูรณ์",
+      "status_label": "Alpha · จำกัดสิทธิ์"
+    }
+  ],
+  "development": [
+    {
+      "id": "rom2thai",
+      "family_id": "rom2thai",
+      "title": "RetroThaiCraft · งานพัฒนาแพตช์",
+      "category": "งานแปลเกม",
+      "description": "ลงมือพัฒนาแพตช์แปลเกม แยกเครื่องเกม → เกม → ขั้นตอนต่อไป",
+      "root_repo_id": 1416748319,
+      "icon": "🎮",
+      "related_repo_ids": [
+        1413883614,
+        1391725161
+      ],
+      "subprojects": [
+        {
+          "title": "คลังกลาง / Source of Truth",
+          "repo_id": 1416748319,
+          "role": "พัฒนาหลัก"
+        },
+        {
+          "title": "ThaiROM Studio Online",
+          "repo_id": 1413883614,
+          "role": "เครื่องมือออนไลน์ที่พัฒนาต่อ · โปรเจกต์ Private; PR เดิม 7 รายการต้องตรวจ"
+        },
+        {
+          "title": "RetroThai Workbench · Archived",
+          "repo_id": 1391725161,
+          "role": "หยุดพัฒนาในต้นทาง · อ่านได้อย่างเดียว; PR #1 ค้างตรวจ"
+        }
+      ],
+      "console_tree": true
+    },
+    {
+      "id": "digimon-android",
+      "family_id": "digimon-android",
+      "title": "Digimon World · Android Port",
+      "category": "พัฒนาเกม",
+      "description": "พอร์ตเกมลง Android ARM64; ยังไม่มี Web App ที่เปิดใช้งาน",
+      "root_repo_id": 1420200967,
+      "icon": "🦖",
+      "subprojects": [
+        {
+          "title": "Android Alpha 5 · Handoff",
+          "path": "docs/HANDOFF.md",
+          "role": "สร้าง APK ได้แล้ว / ยังไม่ยืนยันเล่นครบเกม"
+        },
+        {
+          "title": "Touch Control · Digivice UI",
+          "path": "android-app",
+          "role": "จอยสัมผัสและส่วนควบคุมบนมือถือ"
+        },
+        {
+          "title": "Build / Test Toolchain",
+          "path": "tools",
+          "role": "เตรียมเครื่องมือและแพ็กเกจ ไม่รวมเกมต้นฉบับ"
+        }
+      ]
+    },
+    {
+      "id": "gecko",
+      "family_id": "gecko",
+      "title": "Gecko Offline",
+      "category": "เครื่องมือ",
+      "description": "เครื่องมือออฟไลน์และซิงค์ข้ามอุปกรณ์ ยังไม่มีเว็บที่เปิดใช้งาน",
+      "root_repo_id": 1420128168,
+      "icon": "🦎",
+      "subprojects": [
+        {
+          "title": "M0 · พื้นฐานและเตรียมงาน",
+          "site": "https://github.com/rat12-web/Gecko-Offline/issues",
+          "role": "ตรวจ issue M0-001 ถึง M0-008"
+        },
+        {
+          "title": "Android / Offline Sync",
+          "path": "",
+          "role": "M0 ยังอยู่ระหว่างการพัฒนา"
+        }
+      ]
+    },
+    {
+      "id": "exam-monitor",
+      "family_id": "exam",
+      "title": "Gov Exam Monitor · ระบบตรวจประกาศ",
+      "category": "ระบบติดตาม",
+      "description": "ระบบตรวจประกาศและแจ้งเตือน; เว็บเส้นทางบรรจุที่เผยแพร่แล้วอยู่แท็บ Web Apps",
+      "root_repo_id": 1411532824,
+      "icon": "🔔",
+      "subprojects": [
+        {
+          "title": "Monitor & Scheduler",
+          "role": "เฝ้าติดตามประกาศ"
+        },
+        {
+          "title": "LINE OA",
+          "role": "แจ้งเตือนตามข้อมูลต้นทาง"
+        }
+      ]
+    },
+    {
+      "id": "land-queue",
+      "family_id": "land-queue",
+      "title": "Phangnga Live Queue",
+      "category": "ระบบหน่วยงาน",
+      "description": "ซอฟต์แวร์แสดงคิวภายใน LAN และงานเตรียม Facebook Live; ไม่มี Web App สาธารณะที่ตรวจยืนยัน",
+      "root_repo_id": 1396825920,
+      "icon": "📺",
+      "subprojects": [
+        {
+          "title": "Queue Viewer / Admin",
+          "role": "บริการภายใน LAN"
+        },
+        {
+          "title": "Facebook Live",
+          "role": "ยังไม่ได้เปิดสตรีมจริง"
+        }
+      ]
+    },
+    {
+      "id": "land-hr",
+      "family_id": "land-hr",
+      "title": "ชาวดินพังงา HR",
+      "category": "ระบบหน่วยงาน",
+      "description": "ระบบ HR มีการจัดการสิทธิ์และฐานข้อมูล; ยังไม่มี URL เว็บที่ยืนยันสำหรับแสดงใน Web Apps",
+      "root_repo_id": 1420054663,
+      "icon": "👥",
+      "subprojects": [
+        {
+          "title": "เว็บ HR",
+          "role": "เข้าถึงเฉพาะผู้มีสิทธิ์"
+        },
+        {
+          "title": "D1/R2 · ฐานข้อมูล",
+          "role": "ห้ามเผยแพร่ข้อมูลบุคลากรสู่ Pages"
+        }
+      ]
+    },
+    {
+      "id": "thaipatch-content",
+      "family_id": "thaipatch",
+      "title": "ThaiPatch · Content & Agent Hub",
+      "category": "บริหารคอนเทนต์",
+      "description": "เบื้องหลังการจัดทำสารบัญ แหล่งข้อมูล และงาน AI Agent; แยกจากเว็บไซต์ ThaiPatch",
+      "root_repo_id": 1420142917,
+      "icon": "📝",
+      "subprojects": []
     }
   ]
 }
