@@ -55,24 +55,33 @@ function family(f){
 }
 function renderPages(){
  if(!state)return;
- const live=(state.pages||[]).filter(p=>safeURL(p.url));
- const previews=(state.web_apps||[]).filter(p=>safeURL(p.url));
- const icon={catalog:'📚',status_mirror:'📊',control_center:'⌘',application:'▣',restricted_preview:'🔐'};
- const pageCard=(p,preview=false)=>{
-  const flag=preview?(p.status_label||'ทดสอบ · จำกัดสิทธิ์'):'เว็บเผยแพร่ · Public';
-  const action=preview?'↗ เปิดเว็บทดสอบ':'↗ เปิด Web App';
-  return '<article class="page-card '+(preview?'preview-site':'public-site')+'">'+
-   '<div class="page-card-icon" aria-hidden="true">'+(icon[p.type]||'↗')+'</div>'+
+ const published=(state.pages||[]).filter(p=>safeURL(p.url));
+ const previews=state.web_apps||[];
+ const withLinks=previews.filter(p=>safeURL(p.url));
+ const withoutLinks=previews.filter(p=>!safeURL(p.url));
+ const icons={catalog:'📚',status_mirror:'📊',control_center:'⌘',application:'▣',restricted_preview:'🔐'};
+ const card=(p,preview=false)=>{
+  const url=safeURL(p.url),isChatGPT=p.hosting==='chatgpt_sites';
+  const flag=p.status_label||(preview?'ทดสอบ · จำกัดสิทธิ์':'เว็บเผยแพร่ · Public');
+  const hosting=isChatGPT?'ChatGPT Sites':'GitHub Pages';
+  const source=p.repo_id&&repoURL(p.repo_id)?link(repoURL(p.repo_id),'ดู Source GitHub','action-muted'):'<span class="app-no-source">ไม่มี GitHub Repository ที่เชื่อม</span>';
+  const primary=url?link(url,preview?'↗ เปิดเว็บผ่าน ChatGPT':'↗ เปิด Web App','action-primary'):'<span class="app-url-missing">ยังไม่มี URL ที่ยืนยันได้</span>';
+  const sourceDesc=p.repo_id?esc(repos[p.repo_id]||'GitHub Repository'):'ChatGPT Sites · ไม่มี Repository ที่เชื่อม';
+  const mark=p.audit_ref?' data-app-audit-ref="'+esc(p.audit_ref)+'"':'';
+  return '<article class="page-card '+(preview?'preview-site':'public-site')+'"'+mark+'>'+
+   '<div class="page-card-icon" aria-hidden="true">'+(icons[p.type]||'↗')+'</div>'+
    '<div class="web-status '+(preview?'preview':'published')+'">'+esc(flag)+'</div>'+
+   '<div class="app-origin '+(isChatGPT?'chatgpt':'github')+'">'+(isChatGPT?'✦ ':'⌘ ')+esc(hosting)+'</div>'+
    '<h3>'+esc(p.title)+'</h3><p>'+esc(p.description||'')+'</p>'+
-   '<div class="page-meta">เชื่อมกับ '+esc(repos[p.repo_id]||'GitHub Project')+' · '+(preview?'Owner-only / Preview':'Public site')+'</div>'+
-   '<div class="page-actions">'+link(p.url,action,'action-primary')+link(repoURL(p.repo_id),'ดู Source GitHub','action-muted')+'</div></article>';
+   '<div class="page-meta">'+sourceDesc+' · '+(preview?'จำกัดสิทธิ์ / Preview':url?'มีลิงก์เปิดเว็บ':'ยังไม่พบลิงก์')+'</div>'+
+   '<div class="page-actions">'+primary+source+'</div></article>';
  };
- if($('pagesGrid'))$('pagesGrid').innerHTML=live.map(p=>pageCard(p,false)).join('')||'<div class="notice">ยังไม่มี Web App ที่ยืนยันลิงก์</div>';
- if($('previewGrid'))$('previewGrid').innerHTML=previews.map(p=>pageCard(p,true)).join('')||'<div class="notice">ยังไม่มีเว็บทดลองที่เผยแพร่</div>';
- if($('publicWebCount'))$('publicWebCount').textContent=live.length+' เว็บ';
- if($('previewWebCount'))$('previewWebCount').textContent=previews.length+' เว็บทดลอง';
- if($('webCount'))$('webCount').textContent=live.length+' เว็บ Public · '+previews.length+' เว็บทดลอง';
+ if($('pagesGrid'))$('pagesGrid').innerHTML=published.map(p=>card(p)).join('')||'<div class="notice">ยังไม่มี Web App ที่ยืนยันลิงก์</div>';
+ if($('previewGrid'))$('previewGrid').innerHTML=previews.map(p=>card(p,true)).join('')||'<div class="notice">ยังไม่มีเว็บทดลองที่เผยแพร่</div>';
+ if($('publicWebCount'))$('publicWebCount').textContent=published.length+' เว็บ · รวม ChatGPT Sites';
+ if($('previewWebCount'))$('previewWebCount').textContent=withLinks.length+' จำกัดสิทธิ์ · '+withoutLinks.length+' รอลิงก์';
+ if($('webCount'))$('webCount').textContent=published.length+' เว็บเปิดได้ · '+withLinks.length+' จำกัดสิทธิ์ · '+withoutLinks.length+' รอลิงก์';
+ document.dispatchEvent(new Event('atlas:pages-rendered'));
 }
 function render(){
  const root=$('familyGrid');if(!state||!root)return;
