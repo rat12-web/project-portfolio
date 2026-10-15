@@ -1,0 +1,32 @@
+
+'use strict';
+(()=>{
+const $=id=>document.getElementById(id);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const https=u=>typeof u==='string'&&/^https:\/\/[^\s]+$/i.test(u)?u:'';
+const platforms=[['GBA','🟦'],['SNES','🟪'],['GB / GBC','🟩'],['PS1','🟧'],['Homebrew','⬡']];
+let state=null,gameData=null,activeFilter='all';
+const repoBase=id=>{const known={1391725161:'RetroThaiWorkbench',1396825920:'phangnga-live-queue',1411532824:'gov-exam-monitor',1413883614:'ThaiROM-Studio-Cloud',1415242573:'thaipatch',1416744545:'lufia2-thai',1416748319:'thai-rom-cloud',1418199034:'TYPEBEATS',1418448691:'rom2thai-hub-web',1420054663:'phangnga-hr',1420128168:'Gecko-Offline',1420142917:'plaethai-bokduay-content-hub',1420150047:'project-portfolio'};return known[id]?'https://github.com/rat12-web/'+known[id]:''};
+const safeA=(url,label,cls='family-link')=>https(url)?'<a class="'+cls+'" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(label)+'</a>':'';
+function statusKind(game){const s=String(game.status||'').toUpperCase();if(s.includes('BLOCK')||s.includes('DEFECT')||String(game.status_th||'').includes('ติดขัด'))return'blocked';if(s.includes('REFERENCE')||s.includes('SYNTHETIC'))return'planning';return'active'}
+function gamesFor(platform){const list=gameData?.[platform]||[];return list.map(g=>{const url='https://github.com/rat12-web/thai-rom-cloud/tree/main/games/'+g.id;
+ return '<div class="game-item"><div class="game-primary"><span class="game-icon">🎮</span><div><strong>'+esc(g.title||g.name)+'</strong><div class="game-status '+statusKind(g)+'">'+esc(g.status||g.status_th||'ยังไม่ยืนยัน')+'</div></div></div><div class="game-actions">'+safeA(url,'ดูไฟล์เกม ↗')+'</div><div class="game-next"><span>งานถัดไป:</span> '+esc(g.next||g.next_action_th||'ตรวจสถานะจากต้นทาง')+'</div></div>'}).join('')}
+function gameTree(){const count=Object.values(gameData||{}).reduce((n,list)=>n+list.length,0);
+ return '<div class="branch-head"><strong>เครื่องเกม → เกม</strong><span>ข้อมูล '+count+' รายการ · ไม่แสดงเปอร์เซ็นต์ที่ไม่มีหลักฐาน</span></div><div class="console-stack">'+platforms.map(([platform,icon])=>{const games=gameData?.[platform]||[];return '<details class="console-group" data-console="'+esc(platform)+'"><summary><span>'+icon+' '+esc(platform)+'</span><span>'+games.length+' เกม <span class="chevron">⌄</span></span></summary><div class="console-games">'+gamesFor(platform)+'</div></details>'}).join('')+'</div><div class="source-note">ข้อมูลเกมมาจาก ROM2THAI Hub · งานแปลบางส่วนไม่ใช่ทั้งเกม · เมื่อ Live ใช้ไม่ได้จะแสดง Snapshot ที่ยืนยันล่าสุด</div>'}
+function subs(f){let arr=f.subprojects||[];return arr.length?'<div class="branch-head"><strong>หน่วยงาน / โมดูล / Repository ย่อย</strong><span>'+arr.length+' รายการ</span></div><div class="subs">'+arr.map(s=>{const url=s.site||repoBase(s.repo_id)||(s.path?'https://github.com/rat12-web/TYPEBEATS/blob/main/'+s.path:'');return '<div class="subrow"><div><strong>'+esc(s.title)+'</strong><small>'+esc(s.role||'')+'</small></div>'+safeA(url,'เปิด ↗')+'</div>'}).join('')+'</div>':''}
+function family(f){const familyCount=(f.related_repo_ids||[]).length+1,rom=f.id==='rom2thai',nGame=rom?Object.values(gameData||{}).reduce((n,arr)=>n+arr.length,0):null;const groupNote=rom?(nGame+' เกม · '+platforms.length+' เครื่องเกม · '+familyCount+' Repositories'):(familyCount+' Repositories · '+f.category);
+ return '<article class="family-card" data-family="'+esc(f.category)+'" data-family-key="'+esc(f.id)+'"><details class="family-root"><summary><span class="family-emoji">'+esc(f.icon||'▣')+'</span><span class="family-identity"><strong>'+esc(f.title)+'</strong><small>'+esc(f.description)+'</small><span class="family-meta">'+esc(groupNote)+'</span></span><span class="family-chevron" aria-hidden="true">⌄</span></summary><div class="family-expanded"><div class="family-actions">'+safeA(f.site,'↗ เปิดเว็บหลัก','family-primary')+safeA(repoBase(f.root_repo_id),'⌘ เปิด Source Repository')+'</div>'+(rom?gameTree():'')+subs(f)+'</div></details></article>'}
+function render(){const root=$('familyGrid');if(!root||!state)return;const arr=state.families.filter(f=>activeFilter==='all'||f.category===activeFilter);
+ let opened=[...document.querySelectorAll('.family-root[open]')].map(e=>e.closest('.family-card')?.dataset.familyKey).filter(Boolean);
+ let consoles=[...document.querySelectorAll('.console-group[open]')].map(e=>e.dataset.console);
+ root.innerHTML=arr.map(f=>family(f)).join('');
+ document.querySelectorAll('.family-card').forEach(e=>{if(opened.includes(e.dataset.familyKey))e.querySelector('.family-root').open=true});
+ document.querySelectorAll('.console-group').forEach(e=>{if(consoles.includes(e.dataset.console))e.open=true});
+ $('familyCount').textContent=state.families.length+' กลุ่มงาน · 13 Repository · '+Object.values(gameData||{}).reduce((n,x)=>n+x.length,0)+' เกม';
+}
+async function load(){try{let r=await fetch('data/workspaces.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('cannot load project hierarchy');state=await r.json();gameData=state.rom_games;render();await live()}catch(e){$('familyGrid').innerHTML='<div class="notice">ไม่สามารถโหลดโครงสร้างงานได้: '+esc(e.message)+'</div>'}}
+async function live(){try{const url='https://raw.githubusercontent.com/rat12-web/rom2thai-hub-web/main/site/status.json?v='+Date.now();let r=await fetch(url,{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);let json=await r.json();if(!Array.isArray(json.projects)||json.projects.length<8)throw Error('invalid game status');let grouped=Object.fromEntries(platforms.map(([p])=>[p,[]]));for(const x of json.projects){const p=x.platform==='SNES'?'SNES':x.platform==='GB / GBC'?'GB / GBC':x.platform==='PS1'?'PS1':x.platform==='Homebrew'?'Homebrew':'GBA';grouped[p].push({id:x.id,title:x.name,status:x.status_th,next:x.next_action_th})}gameData=grouped;render();$('sourceHealth').textContent='เกม: ซิงค์จาก ROM2THAI Status · '+new Date().toLocaleTimeString('th-TH')}catch(e){$('sourceHealth').textContent='เกม: ใช้รายการสำรอง · '+esc(e.message)}}
+document.querySelectorAll('[data-family-filter]').forEach(b=>b.addEventListener('click',()=>{activeFilter=b.dataset.familyFilter;document.querySelectorAll('[data-family-filter]').forEach(c=>c.classList.toggle('selected',c===b));render()}));
+$('showAllRepos')?.addEventListener('click',()=>{$('projectsSection')?.scrollIntoView({behavior:'smooth'})});
+load();setInterval(()=>{if(!document.hidden)live()},300000);
+})();
