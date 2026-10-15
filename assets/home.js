@@ -74,7 +74,7 @@ function card(x){
  '<div class="board-card-top"><span class="board-state '+esc(st)+'">'+esc(statusLabel)+'</span>'+
  '<div class="board-quick"><button type="button" title="'+(x.pin?'เลิกปักหมุด':'ปักหมุด')+'" data-b-pin="'+esc(x.id)+'" class="'+(x.pin?'pinned':'')+'">'+(x.pin?'★':'☆')+'</button>'+
  (st!=='archived'?'<button type="button" data-b-pause="'+esc(x.id)+'">'+(st==='paused'?'▶ เริ่มต่อ':'Ⅱ พักงาน')+'</button>':'')+
- '<button type="button" data-b-edit="'+esc(x.id)+'">⚙ แก้ไข</button></div></div>'+
+ '<button type="button" data-b-edit="'+esc(x.id)+'">⚙ แก้ไข</button><button type="button" class="board-prompt-btn" data-prompt-id="'+esc(x.id)+'">⧉ Prompt ทำต่อ</button></div></div>'+
  '<div class="board-name"><strong>'+esc(x.title)+'</strong><span>'+esc(x.category)+' · '+esc(x.origin)+'</span></div>'+
  '<div class="board-next">ถัดไป: '+esc(x.next)+'</div>'+
  '<div class="board-evidence"><span title="'+esc(x.status.why)+'">'+esc(x.status.origin)+' · '+esc(x.status.why)+'</span><small>'+esc(recency(x))+'</small></div>'+
@@ -205,6 +205,6 @@ $('boardExport')?.addEventListener('click',downloadSettings);
 $('boardImport')?.addEventListener('change',e=>{restoreSettings(e.target.files?.[0]);e.target.value=''});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('boardModal')?.hidden)hideModal()});
 document.addEventListener('atlas:repos-updated',render);
-window.AtlasBoard={render,statusForRepo:r=>{if(r?.archived)return'archived';const v=override(r.id).workflow_status||meta(r.id).workflow_status;if(v&&v!=='auto'&&names[v])return v;return null}};
+window.AtlasBoard={render,getItem:id=>makeItems().find(x=>String(x.id)===String(id))||null,statusForRepo:r=>{if(r?.archived)return'archived';const v=override(r.id).workflow_status||meta(r.id).workflow_status;if(v&&v!=='auto'&&names[v])return v;return null}};
 load();
 })();
