@@ -4,7 +4,7 @@
   "note": "Public-safe project catalog: do not add secrets, private data, credentials or internal asset URLs.",
   "projects": {
     "1391725161": {
-      "title": "ROM2THAI · Workbench (Legacy)",
+      "title": "RetroThaiCraft · Workbench (Legacy)",
       "category": "เครื่องมือแปลเกม",
       "status": "blocked",
       "summary": "โค้ด Workbench ต้นทางเดิม: นำส่วนที่ตรวจแล้วเข้า ROM2THAI Hub; ยังมี PR #1 ต้องตรวจ",
@@ -35,7 +35,7 @@
       "role": "application"
     },
     "1413883614": {
-      "title": "ROM2THAI · Studio (Legacy)",
+      "title": "RetroThaiCraft · Studio (Legacy)",
       "category": "เครื่องมือแปลเกม",
       "status": "active",
       "summary": "โค้ด Studio ต้นทางเดิม: รวมเข้า Hub แล้วบางส่วน; ยังมี PR ค้าง 7 รายการ",
@@ -46,7 +46,7 @@
       "canonical_repo_id": 1416748319
     },
     "1415242573": {
-      "title": "ThaiPatch · สารบัญเกมแปลไทย",
+      "title": "ThaiPatch Catalog · สารบัญเกมแปลไทย",
       "category": "เว็บไซต์",
       "status": "live",
       "summary": "เว็บไซต์ Catalog รวมแพตช์จากทีมแปลหลายกลุ่ม พร้อมเครดิตและลิงก์ไปต้นฉบับ ไม่ใช่โปรเจกต์พัฒนาแพตช์เอง",
@@ -56,7 +56,7 @@
       "role": "website_and_catalog"
     },
     "1416744545": {
-      "title": "ROM2THAI · Lufia II (Archived Legacy)",
+      "title": "RetroThaiCraft · Lufia II (Archived Legacy)",
       "category": "งานแปล ROM",
       "status": "archived",
       "summary": "Repository เดิม Archive 15 ต.ค. 2569 งาน Lufia II อยู่ใน thai-rom-cloud/games/sfc/lufia2",
@@ -69,7 +69,7 @@
       "default_hidden": true
     },
     "1416748319": {
-      "title": "ROM2THAI · พัฒนาแพตช์ภาษาไทย",
+      "title": "RetroThaiCraft · Patch Production",
       "category": "งานแปล ROM",
       "status": "active",
       "summary": "Repository หลักสำหรับสร้างแพตช์เกมไทย แยกตามเครื่องเกม/เกม พร้อมชุดทดสอบ และหลักฐานจาก Emulator",
@@ -91,7 +91,7 @@
       "role": "game"
     },
     "1418448691": {
-      "title": "GitHub Pages · ROM2THAI Status",
+      "title": "GitHub Pages · RetroThaiCraft Status",
       "category": "เว็บไซต์",
       "status": "live",
       "summary": "พื้นที่เผยแพร่ข้อมูลสถานะที่คัดกรองจาก ROM2THAI Core (Private) เพื่อแสดงบน GitHub Pages",
@@ -122,7 +122,7 @@
       "role": "application"
     },
     "1420142917": {
-      "title": "ThaiPatch · Content & Agent Workspace",
+      "title": "ThaiPatch Catalog · Content & Agent Hub",
       "category": "บริหารคอนเทนต์",
       "status": "planning",
       "summary": "งานบรรณาธิการและ AI Agent ของแบรนด์ ThaiPatch; ไม่ใช่เว็บไซต์ที่แยกจาก ThaiPatch",
@@ -142,6 +142,27 @@
       "homepage": "https://rat12-web.github.io/project-portfolio/",
       "visibility": "public",
       "role": "control_center"
+    },
+    "1420200967": {
+      "title": "Digimon World · Android Port (Alpha 5)",
+      "category": "พัฒนาเกม",
+      "status": "active",
+      "summary": "พอร์ต Digimon World Recompiled ไป Android ARM64 พร้อม UI Digivice; สร้าง APK ได้ แต่ยังต้องทดสอบเกมบนเครื่องจริง",
+      "next": "ตรวจเกมบนอุปกรณ์จริงและแก้ปัญหาที่พบ ไม่อ้างว่าเล่นจบได้",
+      "homepage": null,
+      "visibility": "no-live",
+      "role": "game_port"
+    },
+    "1420204360": {
+      "title": "เส้นทางบรรจุ · Exam Path Tracker",
+      "category": "ระบบติดตาม",
+      "status": "live",
+      "summary": "เว็บบัญชีสอบและประกาศราชการ มี GitHub Pages ใช้งานจริง แต่ประกาศบางแหล่งอ่านไม่ได้และต้องตรวจยืนยันต้นฉบับ",
+      "next": "ตรวจความน่าเชื่อถือของตัวดึงประกาศ 8 แหล่ง และติดตามสถานะ Actions",
+      "homepage": "https://rat12-web.github.io/exam-path-tracker/",
+      "visibility": "public",
+      "link_label": "เปิดเส้นทางบรรจุ",
+      "role": "application"
     }
   }
 }
