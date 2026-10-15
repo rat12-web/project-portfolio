@@ -1,0 +1,311 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-10-15",
+  "note": "Public-safe next-agent prompts from verified README and status snapshots. Not automatically current for Private repos. Never include private content, credentials, ROM bytes or personal records.",
+  "entries": {
+    "1391725161": {
+      "title": "RetroThai Workbench · Archived",
+      "repository": "rat12-web/RetroThaiWorkbench",
+      "checked_at": "2026-10-15",
+      "step_id": "RETRO-WORKBENCH-LEGACY",
+      "status_snapshot": "Archived / Legacy",
+      "next_step": "ตรวจ PR #1 และหลักฐานการนำเข้า thai-rom-cloud ไม่พัฒนาต่อในคลังเก่า",
+      "start_files": [
+        "README.md",
+        "docs/STATUS.md",
+        "docs/PLAN.md"
+      ],
+      "scope": "ใช้คลังหลัก rat12-web/thai-rom-cloud; ตรวจความต่างของ PR #1 กับโค้ดที่ย้ายแล้วก่อนปิดงาน",
+      "acceptance": [
+        "ห้ามแก้ไฟล์บน Repository ที่ Archive",
+        "รายงาน SHA/PR และส่วนที่ยังไม่รวม"
+      ]
+    },
+    "1396825920": {
+      "title": "Phangnga Live Queue",
+      "repository": "rat12-web/phangnga-live-queue",
+      "checked_at": "2026-10-15",
+      "step_id": "LIVE-QA",
+      "status_snapshot": "ระบบ LAN; Live ยังไม่เปิดจริง",
+      "next_step": "ทดสอบ node --test และหน้า /live /admin จากเครื่องทดสอบ ก่อนทดสอบ Facebook Live",
+      "start_files": [
+        "README.md",
+        "FACEBOOK_AUTOMATION.md"
+      ],
+      "scope": "พิสูจน์ Queue Viewer จาก Office 312 / LAN และทดสอบสตรีมแบบไม่เผยข้อมูลภายใน",
+      "acceptance": [
+        "บันทึกผล browser/Node tests จริง",
+        "ห้ามอ้างว่า Facebook Live เปิดแล้วถ้ายังไม่ทดสอบ"
+      ]
+    },
+    "1411532824": {
+      "title": "Gov Exam Monitor",
+      "repository": "rat12-web/gov-exam-monitor",
+      "checked_at": "2026-10-15",
+      "step_id": "SOURCE-QA",
+      "status_snapshot": "ระบบเฝ้าประกาศและ LINE OA; README ระบุขอบเขตเพียงสั้น ๆ",
+      "next_step": "ตรวจ Actions ล่าสุด เทียบประกาศจริง และทดสอบ LINE OA ด้วย fixture ไม่ส่งจริงจนได้รับอนุญาต",
+      "start_files": [
+        "README.md",
+        ".github/workflows/"
+      ],
+      "scope": "หา entrypoint/ผล diagnostic ของ Thaijobjob และแยก HTTP success จากเนื้อหาที่ดึงได้จริง",
+      "acceptance": [
+        "ระบุหน่วยงานและ URL ประกาศที่ตรวจได้",
+        "รายงาน timeout/bot block ตามจริง"
+      ]
+    },
+    "1413883614": {
+      "title": "ThaiROM Studio Online",
+      "repository": "rat12-web/ThaiROM-Studio-Online",
+      "checked_at": "2026-10-15",
+      "step_id": "BROWSER-QA",
+      "status_snapshot": "Private browser patcher; Browser UI/Download QA ยังไม่ครบ",
+      "next_step": "ตรวจ 7 Draft PR และทำ Browser QA การดาวน์โหลด BPS ด้วยไฟล์สังเคราะห์",
+      "start_files": [
+        "README.md",
+        "docs/STATUS.md",
+        "docs/LOCALIZATION_SLICE.md"
+      ],
+      "scope": "ทดสอบบนเว็บ Owner-private แบบไม่ใช้ ROM ที่มีลิขสิทธิ์และบันทึกผลจริง",
+      "acceptance": [
+        "ตรวจ BPS CRC และดาวน์โหลดจาก Browser",
+        "ไม่อ้างว่าแปลครบเกม"
+      ]
+    },
+    "1415242573": {
+      "title": "ThaiPatch Catalog",
+      "repository": "rat12-web/thaipatch",
+      "checked_at": "2026-10-15",
+      "step_id": "TASKS-P1",
+      "status_snapshot": "เว็บ Public ใช้งาน; การตรวจ source/rights ยังไม่ครบ",
+      "next_step": "เปิด TASKS.md ลำดับ Priority 1 ตรวจ source candidate ใน .sync/report.json และลิงก์แพตช์จริง",
+      "start_files": [
+        "README.md",
+        "AGENT_START.md",
+        "TASKS.md",
+        "WORK_TO_AGENT.md"
+      ],
+      "scope": "เลือกงานย่อยเดียว ไม่เดาเส้นทางดาวน์โหลด และตรวจผู้สร้าง/เวอร์ชัน/เครดิตครบ",
+      "acceptance": [
+        "เก็บ URL ต้นทางหลักฐาน",
+        "ทดสอบเช็กลิงก์และหน้าเว็บจริง"
+      ]
+    },
+    "1416744545": {
+      "title": "Lufia II · Archived",
+      "repository": "rat12-web/lufia2-thai",
+      "checked_at": "2026-10-15",
+      "step_id": "LUFIA-HUB-REDIRECT",
+      "status_snapshot": "Repository ต้นทาง Archive; เกมยังติดปัญหาที่ ROM2THAI",
+      "next_step": "ทำต่อที่ rat12-web/thai-rom-cloud/games/sfc/lufia2 เท่านั้น",
+      "start_files": [
+        "README.md"
+      ],
+      "scope": "อ่าน docs/PROJECT_STATUS.md ใน Hub, แก้ loader ฉากต้นเกมและหลักฐาน Emulator โดยไม่แก้ repo ที่ Archive",
+      "acceptance": [
+        "รายงานผลทดสอบต้นเกม",
+        "ไม่อ้างว่าแปลเสร็จ"
+      ]
+    },
+    "1416748319": {
+      "title": "RetroThaiCraft · Patch Production",
+      "repository": "rat12-web/thai-rom-cloud",
+      "checked_at": "2026-10-15",
+      "step_id": "GAME-NEXT",
+      "status_snapshot": "9 เกมจริง + 1 synthetic fixture; ยังไม่มีเกมที่ผ่าน end-to-end ทั้งเกม",
+      "next_step": "เลือกเกมหนึ่งจาก docs/PROJECT_STATUS.json แล้วดำเนินงานค้างที่มีหลักฐานใน repo นั้น",
+      "start_files": [
+        "README.md",
+        "AGENTS.md",
+        "docs/PROJECT_STATUS.md",
+        "docs/PROJECT_STATUS.json",
+        "shared/knowledge/AGENT_WORKFLOW.md"
+      ],
+      "scope": "ห้ามเริ่มงานแปลใหม่ทั้งเกมโดยไม่เทียบสถานะเดิม; บันทึก SHA/Emulator screenshot และขอบเขตที่ผ่านจริง",
+      "acceptance": [
+        "เก็บ ROM ต้นฉบับ/แพตช์ส่วนตัวนอก Git",
+        "อัปเดต status เฉพาะขอบเขตที่พิสูจน์ได้"
+      ]
+    },
+    "1418199034": {
+      "title": "TYPEBEATS",
+      "repository": "rat12-web/TYPEBEATS",
+      "checked_at": "2026-10-15",
+      "step_id": "PHONE-QA-001",
+      "status_snapshot": "Godot M3 / alpha; โทรศัพท์ Android จริงยัง NOT RUN",
+      "next_step": "ดำเนินงาน PHONE-QA-001 โดยอ่าน docs/AGENT_TASKS.md และ docs/PROJECT_STATE.json ก่อนแก้โค้ด",
+      "start_files": [
+        "README.md",
+        "AGENTS.md",
+        "AGENT_BOOTSTRAP_PROMPT.md",
+        "docs/AGENT_START.md",
+        "docs/PROJECT_STATE.json",
+        "docs/AGENT_TASKS.md",
+        "docs/HANDOFF.md"
+      ],
+      "scope": "ทดสอบ Android Chrome จริง 3 เพลง, สองนิ้ว, full screen, latency และเสียง; เลือก 1 writer และ scope ก่อนแก้",
+      "acceptance": [
+        "บันทึก docs/PHONE_QA_RESULTS.md",
+        "แยก NOT RUN และผลทดสอบจริง; ไม่เผยเพลงที่เป็น Private"
+      ]
+    },
+    "1418448691": {
+      "title": "ROM2THAI Status Mirror",
+      "repository": "rat12-web/rom2thai-hub-web",
+      "checked_at": "2026-10-15",
+      "step_id": "MIRROR-SYNC-QA",
+      "status_snapshot": "Public Pages mirror จาก private Hub ผ่าน allowlist",
+      "next_step": "ตรวจ Actions/QA_REPORT ว่าสถานะการส่งออกข้อมูลตรงกับต้นทางที่คัดกรองแล้ว",
+      "start_files": [
+        "README.md",
+        "docs/QA_REPORT.json"
+      ],
+      "scope": "ทดสอบ public allowlist และเวลา last sync พร้อมแยกสถานะเกมจากความสำเร็จของ Workflow",
+      "acceptance": [
+        "ห้ามเผยข้อมูล Private/ROM",
+        "บันทึก hash/เวลาของ snapshot"
+      ]
+    },
+    "1420054663": {
+      "title": "ชาวดินพังงา HR",
+      "repository": "rat12-web/phangnga-hr",
+      "checked_at": "2026-10-15",
+      "step_id": "HR-RESTORE-QA",
+      "status_snapshot": "Web App Private + D1/R2; ต้องตรวจสิทธิ์และการกู้คืน",
+      "next_step": "อ่าน HANDOFF.md แล้วตรวจ restore --verify-only ด้วยข้อมูลที่มีสิทธิ์ก่อนเปิด dev/admin",
+      "start_files": [
+        "README.md",
+        "HANDOFF.md"
+      ],
+      "scope": "ใช้ Private Release handoff และตรวจ Node.js version; ห้ามนำข้อมูลบุคลากร/ข้อมูลจริงขึ้น Pages",
+      "acceptance": [
+        "บันทึกผล restore verify-only",
+        "ไม่เผย PII หรือบัญชีผู้ดูแล"
+      ]
+    },
+    "1420128168": {
+      "title": "Gecko Offline",
+      "repository": "rat12-web/Gecko-Offline",
+      "checked_at": "2026-10-15",
+      "step_id": "M0-003",
+      "status_snapshot": "M0-001 merged; M0-002 PR #11 ต้องตรวจ main; M0-003 ยังไม่เริ่มตาม handoff",
+      "next_step": "เริ่มจาก docs/HANDOFF_CURRENT.md: ตรวจ merge PR #10/#11, fast-forward main แบบไม่ลบไฟล์ แล้วเลือก M0-003",
+      "start_files": [
+        "AGENTS.md",
+        "docs/HANDOFF_CURRENT.md",
+        "docs/ROADMAP_TH.md",
+        "docs/TEAM_WORKFLOW_TH.md",
+        "docs/CROSS_DEVICE_TH.md"
+      ],
+      "scope": "เริ่ม workspace D:\\JNP_Project\\Gecko-Offline; ห้ามแก้ schema คู่ขนานและห้าม reset --hard",
+      "acceptance": [
+        "ยืนยัน SHA/PR สถานะใหม่",
+        "ทดสอบ synthetic fixture ก่อน live capture"
+      ]
+    },
+    "1420142917": {
+      "title": "แปลไทยบอกด้วย RE2Play",
+      "repository": "rat12-web/RE2play-Content-Agent",
+      "checked_at": "2026-10-15",
+      "step_id": "CONTENT-001",
+      "status_snapshot": "Content/Agent workspace; GitHub rename จริง; Facebook เพจชื่อเดิม",
+      "next_step": "อ่าน AGENTS.md และ Master Plan + brand guide แล้วเลือก 1 เนื้อหาพร้อมตรวจต้นทางก่อนสร้างโพสต์",
+      "start_files": [
+        "README.md",
+        "AGENTS.md",
+        "PlaeThaiBokDuay_Master_Plan_v1.0.md",
+        "docs/brand/RE2Play_Brand_Guideline_Agent_Handoff.md"
+      ],
+      "scope": "จัดทำ caption.md / first_comment.md / source & credit ตามขอบเขตและสิทธิ์จริง",
+      "acceptance": [
+        "ใช้ #แปลไทยบอกด้วย #RE2Play",
+        "ไม่อ้างว่าโพสต์ Facebook แล้วหากไม่ได้ส่งจริง"
+      ]
+    },
+    "1420150047": {
+      "title": "Project Atlas",
+      "repository": "rat12-web/project-portfolio",
+      "checked_at": "2026-10-15",
+      "step_id": "ATLAS-PROMPTS-001",
+      "status_snapshot": "หน้า Dashboard ทำงาน; Cloud edit ด้วย Token ยังไม่ได้ทดสอบ E2E",
+      "next_step": "ทดสอบปุ่ม Prompt/Copy บนหน้า Home และการบันทึก Local/GitHub แบบไม่กระทบ repo จริง",
+      "start_files": [
+        "README.md",
+        "config/project-control.json",
+        "config/workspaces.json",
+        "config/status-audit.json",
+        ".github/workflows/deploy-pages.yml"
+      ],
+      "scope": "ยืนยันหน้าเว็บจริง, ไม่มี JS error, และไม่เปิดเผยข้อมูล Private/Token ใน Public Pages",
+      "acceptance": [
+        "ตรวจ GitHub Pages Deploy ล่าสุด",
+        "ไม่ถือว่าปุ่ม write ผ่านจนทดสอบกับ Token ที่ได้รับอนุญาต"
+      ]
+    },
+    "1420200967": {
+      "title": "Digimon World Android",
+      "repository": "rat12-web/digimon-world-android",
+      "checked_at": "2026-10-15",
+      "step_id": "ALPHA5-DEVICE-QA",
+      "status_snapshot": "Alpha 5 สร้าง APK ได้; Android gameplay ยังไม่ยืนยัน",
+      "next_step": "อ่าน docs/HANDOFF.md แล้วทดสอบ signed APK alpha5 บนเครื่อง Android จริง",
+      "start_files": [
+        "README.md",
+        "docs/HANDOFF.md"
+      ],
+      "scope": "ตรวจเปิดเกม/input/save-load/CD speed/Crash logs และ Android version; ห้ามนำไฟล์เกมที่มีลิขสิทธิ์ขึ้น Git",
+      "acceptance": [
+        "แยก build PASS จาก gameplay NOT RUN",
+        "แนบ device logs ที่ไม่เปิดเผยข้อมูลส่วนตัว"
+      ]
+    },
+    "1420204360": {
+      "title": "เส้นทางบรรจุ",
+      "repository": "rat12-web/exam-path-tracker",
+      "checked_at": "2026-10-15",
+      "step_id": "NOTICE-SOURCE-QA",
+      "status_snapshot": "Public Pages ใช้งาน; 8 ThaiJobJob sources มี timeout ที่เคยตรวจ",
+      "next_step": "เปิด Actions/README แล้วตรวจต้นทางประกาศ 9 หน่วยงาน โดยแยกสำเร็จจาก HTTP timeout",
+      "start_files": [
+        "README.md",
+        ".github/workflows/"
+      ],
+      "scope": "ตรวจประกาศด้วยวันที่และหน่วยงาน อย่าอนุมานลำดับเรียกจาก PDF/ภาพอัตโนมัติ",
+      "acceptance": [
+        "ไม่เผยข้อมูลบัญชีสอบส่วนบุคคล",
+        "บันทึก URL/เวลาและอาการเว็บที่ปิดกั้น"
+      ]
+    },
+    "1420313793": {
+      "title": "ตารางเวรสำนักงานที่ดินพังงา",
+      "repository": "rat12-web/phangnga-duty-roster",
+      "checked_at": "2026-10-15",
+      "step_id": "ROSTER-EXPORT-QA",
+      "status_snapshot": "Owner-private ChatGPT Sites; มี sync frontend จาก GitHub",
+      "next_step": "ตรวจ Workflow deploy ล่าสุดและทดสอบส่งออก Word/Excel ด้วย fixture ไม่ใช้รายชื่อจริง",
+      "start_files": [
+        "README.md",
+        ".github/workflows/"
+      ],
+      "scope": "ยืนยันวันหยุด/ผู้ลงนาม/ฟอนต์ TH Sarabun และ A4 export; ตรวจว่า source commit ตรง Site version",
+      "acceptance": [
+        "ไม่เผยรายชื่อเวรจริงสู่ GitHub Pages",
+        "รายงานการ deploy จริงหรือยังค้าง"
+      ]
+    },
+    "site:phangnga-jobs-chatgpt": {
+      "title": "ศูนย์ข้อมูลตำแหน่งงานจังหวัดพังงา",
+      "repository": null,
+      "checked_at": "2026-10-15",
+      "step_id": "JOBS-DATA-VERIFY",
+      "status_snapshot": "ChatGPT Sites public; ตรวจข้อมูลล่าสุด สิงหาคม 2569",
+      "next_step": "ตรวจแหล่งข้อมูลตำแหน่งงานปัจจุบันก่อนแชร์ต่อ",
+      "start_files": [],
+      "scope": "แสดงรายการที่มีหลักฐานแหล่งที่มา/วันที่ พร้อมบอกว่าเว็บไซต์ยังไม่มี GitHub repo ที่จับคู่ได้",
+      "acceptance": [
+        "ห้ามอ้างว่าตำแหน่งเก่ายังเปิดรับสมัคร"
+      ]
+    }
+  }
+}
