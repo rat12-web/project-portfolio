@@ -463,6 +463,19 @@
       "status_label": "Owner-private · รอ URL",
       "audit_ref": "hr-private-url",
       "service_label": "ChatGPT Sites"
+    },
+    {
+      "id": "phangnga-duty-chatgpt",
+      "title": "ตารางเวรสำนักงานที่ดินพังงา",
+      "owner_family": "land-office",
+      "repo_id": 1420313793,
+      "url": "https://phangnga-duty-roster.rat-creative1.chatgpt.site",
+      "description": "Web App จัดตารางเวรผ่าน ChatGPT Sites แบบจำกัดสิทธิ์; ซิงค์ frontend จาก GitHub Actions; ไม่ใช่เว็บ Public",
+      "type": "restricted_preview",
+      "access": "restricted",
+      "hosting": "chatgpt_sites",
+      "operational_status": "restricted_owner",
+      "status_label": "ChatGPT Sites · จำกัดสิทธิ์"
     }
   ],
   "development": [
