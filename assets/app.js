@@ -75,6 +75,7 @@ function switchView(v){
   if(v==='repositories')render();
   document.querySelector('.content')?.scrollIntoView({behavior:'smooth',block:'start'});
 }
+document.addEventListener('atlas:home-local-change',()=>{render();if(view==='activity')activity()});
 document.querySelectorAll('.nav').forEach(b=>b.onclick=()=>switchView(b.dataset.view));document.querySelectorAll('[data-go-view]').forEach(b=>b.onclick=()=>switchView(b.dataset.goView));$('refresh').onclick=sync;$('authbutton').onclick=authDialog;$('addOwner').onclick=addOwner;
 ['search','category','statusFilter','visibilityFilter','showArchived'].forEach(id=>$(id)?.addEventListener(id==='search'?'input':'change',render));$('detail').onclick=e=>{if(e.target===$('detail'))close()};$('authDrawer').onclick=e=>{if(e.target===$('authDrawer'))$('authDrawer').hidden=true};document.onkeydown=e=>{if(e.key==='Escape'){if(!$('authDrawer').hidden)$('authDrawer').hidden=true;else if(!$('detail').hidden)close()}};
 sync().then(()=>{let id=Number(new URLSearchParams(location.search).get('project'));if(id)open(id)});setInterval(()=>{if(!document.hidden)sync()},300000);document.addEventListener('visibilitychange',()=>{if(!document.hidden)sync()});
