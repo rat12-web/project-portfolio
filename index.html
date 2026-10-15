@@ -18,6 +18,7 @@
     <button class="nav" data-view="development"><span class="nav-icon">⌘</span> Development · ยังไม่มีเว็บ</button>
     <button class="nav" data-view="repositories"><span class="nav-icon">⌘</span> Repository ทั้งหมด</button>
     <div class="side-label">การจัดการ</div>
+    <button class="nav" data-view="status"><span class="nav-icon">◉</span> สถานะงานค้าง <span class="nav-pill" id="statusNavCount">…</span></button>
     <button class="nav" data-view="activity"><span class="nav-icon">◷</span> งานค้าง / Action Queue</button>
     <button class="nav atlas-nav" data-view="atlas"><span class="nav-icon">⚙</span> Project Atlas <span class="nav-pill">Control</span></button>
     <div class="side-note"><span class="online"><span class="dot"></span> GITHUB PROJECTS</span><div>Web Apps · Development · งาน Archived แยกจากกัน</div></div>
@@ -39,7 +40,12 @@
     <section class="metrics" id="metrics" aria-label="ภาพรวมสถานะ"></section>
     <div class="notice" id="scopehint" role="status">กำลังโหลดข้อมูล GitHub...</div>
 
-    <section id="homeChooserSection" class="switcher" aria-label="เลือกประเภทงาน">
+    <section id="homeStatusSection" class="audit-home">
+ <div><span class="overline">BLOCKERS / VERIFIED CHANGE LOG</span><h2>ติดตรงไหน? เปลี่ยนชื่อจริงหรือแค่ใน Atlas?</h2>
+ <p>รวมสิ่งที่ติดข้อจำกัด งานที่ต้องทำต่อ และสถานะ GitHub จริง พร้อมหลักฐานและวันที่ตรวจสอบ</p></div>
+ <button type="button" class="action-primary" data-go-view="status"><span id="homeAuditCount">กำลังโหลดรายการ…</span> · เปิดงานค้าง ↗</button>
+ </section>
+<section id="homeChooserSection" class="switcher" aria-label="เลือกประเภทงาน">
       <div class="section-head"><div><div class="overline">เลือกพื้นที่ทำงาน</div><h2>เปิดเว็บใช้งาน หรือดูงานที่กำลังพัฒนา</h2></div></div>
       <div class="switcher-grid">
         <button class="switcher-card web-choice" data-go-view="pages"><span class="switch-icon">↗</span><span class="switch-label">WEB APPS</span><strong>เว็บที่เปิดใช้งานได้</strong><span>เว็บออนไลน์พร้อมลิงก์เข้าใช้งาน และเว็บทดลองที่จำกัดสิทธิ์</span><b id="webCount">กำลังโหลด…</b></button>
@@ -89,6 +95,25 @@
       <div class="grid" id="cards"></div>
     </section>
 
+    <section id="statusSection" class="audit-section" hidden>
+      <div class="section-head"><div><div class="overline">EVIDENCE-BASED WORK STATUS</div><h2>งานค้าง · ติดข้อจำกัด · ต้องตรวจสอบ</h2></div><small id="auditFreshness">กำลังโหลดข้อมูล…</small></div>
+      <p class="section-intro">สถานะนี้อ้างอิงจากหลักฐาน GitHub, เอกสารและการตรวจเว็บ ไม่ได้ตีความว่า Workflow Success = แอปใช้งานสมบูรณ์ และไม่ได้อ้างว่าเปลี่ยนชื่อ GitHub จริงถ้าเปลี่ยนเพียงชื่อที่แสดง</p>
+      <div class="audit-metrics" id="auditMetrics"></div>
+      <div class="section-head"><h3>รายการที่ยังต้องจัดการ</h3><small id="auditCount">—</small></div>
+      <div id="auditFilters" class="audit-filters" aria-label="กรองสถานะงาน"></div>
+      <div class="audit-search"><select id="auditProject" class="field" aria-label="เลือกโครงการ"><option value="all">ทุกโครงการ</option></select><input id="auditSearch" class="field" placeholder="ค้นหาสาเหตุหรืองานค้าง" aria-label="ค้นหางานค้าง"></div>
+      <div id="auditList" class="audit-list"><div class="notice">กำลังโหลดหลักฐาน…</div></div>
+      <div class="section-head audit-names-head"><div><div class="overline">ACTUAL GITHUB VS DISPLAY ALIAS</div><h2>ตรวจชื่อจริงบน GitHub</h2></div><small>แยกชื่อแสดงผลจากการ Rename/Archive จริง</small></div>
+      <p class="section-intro">ชื่อที่ตั้งบน Atlas เป็นชื่อจัดหมวดหมู่ ไม่ใช่การ Rename บน GitHub ให้ดูคอลัมน์ชื่อจริงและสถานะก่อนสั่งย้ายหรือเปลี่ยนลิงก์</p>
+      <div class="audit-filters identity-filters">
+        <button type="button" data-identity-filter="all" class="selected">ทุกชื่อ</button>
+        <button type="button" data-identity-filter="actual">เปลี่ยน GitHub จริง</button>
+        <button type="button" data-identity-filter="alias">เปลี่ยนเฉพาะ Atlas</button>
+      </div>
+      <div class="identity-grid" id="identityList"></div>
+      <div class="notice audit-disclaimer">บันทึกตรวจครั้งนี้ไม่ใช่การซิงค์อัตโนมัติของ PR/Issue/Deployment ทุกโครงการ หากมีการเปลี่ยนแปลงหลังวันที่ระบุ ให้ยึดข้อมูลบน GitHub เป็นหลักและปรับสถานะ audit ใหม่</div>
+    </section>
+
     <section id="activitySection" hidden>
       <div class="section-head"><div><div class="overline">NEXT ACTIONS</div><h2>Action Queue</h2></div><small>งานติดขัด / พักไว้ โดยไม่ปะปนกับ Archive</small></div>
       <div id="activity"></div>
@@ -113,4 +138,5 @@
 <div class="toast" id="toast" role="status" hidden></div>
 <script src="./assets/app.js" defer></script>
 <script src="./assets/hierarchy.js" defer></script>
+<script src="./assets/audit.js" defer></script>
 </body></html>
