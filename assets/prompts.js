@@ -67,7 +67,7 @@ async function checkReadme(){
  }catch(err){liveReadme=null;msg.textContent='ยังอ่าน README สดไม่ได้: '+String(err.message||err)+' · ถ้า Private ให้เชื่อม GitHub Read-only หรือเปิดผ่าน Agent ที่มีสิทธิ์'}
 }
 function open(id,options={}){
- if(!registry||!registry.entries)return;
+ if(!registry||!registry.entries){if(typeof notify==='function')notify('ยังโหลดทะเบียน Prompt ไม่สำเร็จ กรุณาลองรีเฟรชหน้าเว็บ',true);return;}
  const key=String(id||''),e=registry.entries[key];if(!e){if(typeof notify==='function')notify('ไม่พบทะเบียน Prompt สำหรับรายการนี้',true);return}
  active={id:key,entry:e};activeGame=options.gameId?{id:options.gameId,name:options.gameName||options.gameId,next:options.next||e.next_step,platform:options.platform||'ไม่ทราบ',status:options.status||'ไม่ยืนยัน'}:null;liveReadme=null;
  const url=repoUrl(e.repository),docs=(e.start_files||[]).filter(f=>/^[a-z0-9/_\-.]+$/i.test(f)),first=docs.length&&url?url+'/blob/main/'+docs[0]:null;
@@ -101,9 +101,25 @@ $('promptModal')?.addEventListener('click',e=>{if(e.target===$('promptModal'))cl
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('promptModal')?.hidden)close()});
 async function load(){
  try{const r=await fetch('data/next-prompts.json?v='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);
- registry=await r.json();if(registry.schema_version!==1||!registry.entries)throw Error('bad schema')}
+ registry=await r.json();if(registry.schema_version!==1||!registry.entries)throw Error('bad schema');decorate()}
  catch(err){if(typeof notify==='function')notify('โหลดทะเบียน Prompt ไม่สำเร็จ: '+err.message,true)}
 }
+
+function decorate(){
+ if(!registry?.entries)return;
+ document.querySelectorAll('.board-card').forEach(card=>{
+  const btn=card.querySelector('[data-prompt-id]'),e=registry.entries[String(btn?.dataset.promptId)];
+  if(!e)return;
+  let note=card.querySelector('.prompt-start-line');
+  if(!note){note=document.createElement('div');note.className='prompt-start-line';const target=card.querySelector('.board-name');target?.insertAdjacentElement('afterend',note)}
+  if(note){note.textContent='เริ่มจาก: '+e.step_id+' · '+((e.start_files||[])[0]||'ตรวจลิงก์ต้นทาง');note.title=stepLabel(e)}
+ });
+ document.querySelectorAll('[data-prompt-id]').forEach(btn=>{
+  const e=registry.entries[String(btn.dataset.promptId)];if(e)btn.title='เริ่มจาก '+e.step_id+' → '+(e.start_files?.[0]||'เอกสารต้นทาง')+' · กดดูและคัดลอก Prompt';
+ });
+}
+document.addEventListener('atlas:board-rendered',decorate);
+document.addEventListener('atlas:repos-updated',decorate);
 window.AtlasPrompts={open,ready:()=>Boolean(registry),compose:id=>registry?.entries?.[String(id)]?build(registry.entries[String(id)]):''};
 load();
 })();
