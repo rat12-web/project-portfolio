@@ -1,32 +1,122 @@
 <!doctype html>
-<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#090e1a"><title>PROJECT ATLAS | Control Center</title>
-<link rel="stylesheet" href="./assets/style.css"></head>
-<body><div class="shell"><aside class="side">
-<a class="brand" href="./"><span class="brand-mark">A</span> ATLAS</a>
-<div class="side-label">WORKSPACE</div>
-<button class="nav active" data-view="overview"><span class="nav-icon">▦</span> Project Explorer</button>
-<button class="nav" data-view="activity"><span class="nav-icon">◷</span> Action Queue</button>
-<div class="side-note"><span class="online"><span class="dot"></span> PROJECTS CONNECTED</span><div>Github-backed project workspaces</div></div>
-</aside><main class="content"><div class="topbar"><div class="crumb">HOME / WORKSPACE / <b>CONTROL CENTER</b></div>
-<div class="top-actions"><button class="pill-btn" id="addOwner">＋ เพิ่มบัญชี</button>
-<button class="pill-btn" id="authbutton">☷ เชื่อม GitHub</button>
-<button class="pill-btn" id="refresh">↻ ซิงค์ข้อมูล</button></div></div>
-<section class="hero"><div><div class="eyebrow">● Unified GitHub Command Center</div>
-<h1 id="heroHeading">ทุกโปรเจกต์ ในที่เดียว.</h1>
-<p>เปิดเว็บที่ใช้งานจริงเป็นลำดับแรก ดูงานค้าง เปิด GitHub และจัดการ Repository จาก Workspace เดียว</p>
-</div><div class="hero-art" aria-hidden="true">⌘</div></section>
-<section class="metrics" id="metrics"></section>
-<div class="notice" id="scopehint">กำลังอ่าน GitHub...</div>
-<section id="familiesSection"><h2>โครงการหลักและงานย่อย</h2><div id="familyCount">8 กลุ่ม</div><div id="familyGrid"></div><small id="sourceHealth"></small><button id="showAllRepos">ดู Repository ทั้งหมด</button><div class="family-filters"><button data-family-filter="all">ทั้งหมด</button><button data-family-filter="งานแปลเกม">แปลเกม</button><button data-family-filter="เว็บไซต์และคอนเทนต์">เว็บไซต์</button><button data-family-filter="พัฒนาเกม">เกม</button><button data-family-filter="ระบบหน่วยงาน">สำนักงาน</button><button data-family-filter="เครื่องมือ">เครื่องมือ</button><button data-family-filter="ระบบติดตาม">ติดตาม</button><button data-family-filter="บริหารโครงการ">บริหาร</button></div></section><section id="projectsSection">
-<div class="section-head"><h2>Project Explorer</h2><small id="syncstamp">—</small></div>
-<div class="controls"><input class="field search" id="search" placeholder="⌕ ค้นหาทุกโครงการ">
-<select class="field" id="category"><option value="all">ทุกหมวดหมู่</option><option>งานแปล ROM</option><option>พัฒนาเกม</option><option>เว็บไซต์</option><option>เครื่องมือแปลเกม</option><option>เครื่องมือ Offline</option><option>ระบบหน่วยงาน</option><option>ระบบติดตาม</option><option>บริหารคอนเทนต์</option><option>บริหารโครงการ</option></select>
-<select class="field" id="statusFilter"><option value="all">ทุกสถานะ</option><option value="live">เว็บใช้งานได้</option><option value="active">กำลังพัฒนา</option><option value="planning">วางแผน</option><option value="blocked">ติดปัญหา</option><option value="paused">พักงาน</option><option value="archived">Archive</option></select>
-<select class="field" id="visibilityFilter"><option value="all">Public + Private</option><option value="public">Public</option><option value="private">Private</option></select></div>
-<div class="section-head"><small id="resultcount">— โครงการ</small><small>คลิก จัดการ เพื่อเปิด Workspace</small></div>
-<div class="grid" id="cards"></div>
-</section><section id="activitySection" hidden><div class="section-head"><h2>Action Queue</h2><small>โครงการติดปัญหา / พักงาน</small></div><div id="activity"></div></section>
-<footer class="footer">PROJECT ATLAS · การจัดการจริงต้องยืนยันผ่าน GitHub · ข้อมูล Private ไม่ถูกดึงโดยโหมด Public</footer>
-</main></div><div class="detail-panel" id="detail" hidden></div><div class="detail-panel" id="authDrawer" hidden></div>
-<div class="toast" id="toast" role="status" hidden></div><script src="./assets/app.js" defer></script><script src="./assets/hierarchy.js" defer></script></body></html>
+<html lang="th">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080e18">
+<meta name="description" content="Project Explorer สำหรับผลงานเกม งานแปลแพตช์ภาษาไทย เว็บไซต์ GitHub Pages และศูนย์บริหาร Repository">
+<title>Project Explorer · rat12-web</title>
+<link rel="stylesheet" href="./assets/style.css">
+<link rel="stylesheet" href="./assets/atlas-v2.css">
+</head>
+<body>
+<div class="shell">
+  <aside class="side" aria-label="เมนูหลัก">
+    <a class="brand" href="./"><span class="brand-mark">◈</span><span>PROJECT<span class="brand-accent">SPACE</span><small>rat12-web / workspace</small></span></a>
+    <div class="side-label">สำรวจผลงาน</div>
+    <button class="nav active" data-view="overview"><span class="nav-icon">▦</span> ภาพรวมโครงการ</button>
+    <button class="nav" data-view="pages"><span class="nav-icon">↗</span> เว็บไซต์ GitHub Pages</button>
+    <button class="nav" data-view="repositories"><span class="nav-icon">⌘</span> Repository ทั้งหมด</button>
+    <div class="side-label">การจัดการ</div>
+    <button class="nav" data-view="activity"><span class="nav-icon">◷</span> งานค้าง / Action Queue</button>
+    <button class="nav atlas-nav" data-view="atlas"><span class="nav-icon">⚙</span> Project Atlas <span class="nav-pill">Control</span></button>
+    <div class="side-note"><span class="online"><span class="dot"></span> GITHUB PROJECTS</span><div>แยกโค้ดจริง เว็บไซต์ และงานเก็บถาวรอย่างชัดเจน</div></div>
+  </aside>
+  <main class="content">
+    <div class="topbar">
+      <div class="crumb" id="viewCrumb">WORKSPACE / <b>PROJECT EXPLORER</b></div>
+      <div class="top-actions"><button class="pill-btn" id="addOwner">＋ บัญชี</button><button class="pill-btn" id="authbutton">☷ GitHub</button><button class="pill-btn" id="refresh">↻ ซิงค์</button></div>
+    </div>
+
+    <section class="hero" id="overviewHero">
+      <div>
+        <div class="eyebrow">THE PROJECT ECOSYSTEM / 2026</div>
+        <h1 id="heroHeading">โครงการชัดเจน.<br><em>ต่อยอดได้จริง.</em></h1>
+        <p>เลือกดูงานที่กำลังทำ แยกโครงการหลักจากงานย่อยอย่างเป็นระบบ และเปิดเว็บไซต์ที่เผยแพร่แล้วโดยไม่สับสนกับ Source Code</p>
+      </div>
+      <div class="hero-art" aria-hidden="true">⌘</div>
+    </section>
+    <section class="metrics" id="metrics" aria-label="ภาพรวมสถานะ"></section>
+    <div class="notice" id="scopehint" role="status">กำลังโหลดข้อมูล GitHub...</div>
+
+    <section id="pathwaysSection" class="pathway-section" aria-labelledby="pathwaysTitle">
+      <div class="section-head"><div><div class="overline">TWO DISTINCT WORKFLOWS</div><h2 id="pathwaysTitle">งานแปลเกม ≠ สารบัญเกมแปลไทย</h2></div><small>เลือกปลายทางให้ถูกต้อง</small></div>
+      <div class="pathway-grid">
+        <article class="pathway pathway-production">
+          <div class="pathway-kicker">01 · PRODUCTION / PRIVATE SOURCE</div><div class="pathway-symbol">🎮</div>
+          <h3>ROM2THAI</h3><strong class="pathway-thai">พัฒนาแพตช์ภาษาไทย</strong>
+          <p>งานลงมือแปลเกมจริง แกะระบบอักษร สร้าง Patch แยกตามเครื่องเกม และตรวจผลใน Emulator</p>
+          <div class="pathway-tags"><span>เครื่องเกม → เกม</span><span>ไฟล์แพตช์</span><span>QA จริง</span></div>
+          <div class="pathway-actions"><button data-jump-family="rom2thai" class="action-primary">ดูงานแปลรายเกม →</button><a class="action-muted" href="https://github.com/rat12-web/thai-rom-cloud" target="_blank" rel="noopener noreferrer">Source GitHub ↗</a></div>
+        </article>
+        <article class="pathway pathway-catalog">
+          <div class="pathway-kicker">02 · DISCOVERY / PUBLIC CATALOG</div><div class="pathway-symbol">📚</div>
+          <h3>ThaiPatch</h3><strong class="pathway-thai">สารบัญเกมแปลไทย</strong>
+          <p>ค้นหาแพตช์จากทีมแปลต่าง ๆ รวบรวมข้อมูลเครดิต ลิงก์ต้นทาง และข่าวสารจากเพจ “แปลไทยบอกด้วย”</p>
+          <div class="pathway-tags"><span>ค้นหา</span><span>เครดิตต้นทาง</span><span>ข่าว Retro</span></div>
+          <div class="pathway-actions"><a class="action-primary" href="https://rat12-web.github.io/thaipatch/" target="_blank" rel="noopener noreferrer">เปิด Catalog ↗</a><button class="action-muted" data-jump-family="thaipatch">ดูงานย่อย →</button></div>
+        </article>
+      </div>
+    </section>
+
+    <section id="familiesSection" aria-labelledby="familiesTitle">
+      <div class="section-head"><div><div class="overline">ACTIVE WORKSPACES</div><h2 id="familiesTitle">โครงการหลักและงานย่อย</h2></div><small id="familyCount">กำลังโหลด...</small></div>
+      <p class="section-intro">กดที่โครงการเพื่อเปิดงานย่อย งานแปล ROM สามารถเจาะลงไปถึงเครื่องเกมและรายชื่อเกมได้ ส่วนงานที่ Archive แล้วจะถูกซ่อนไว้</p>
+      <div class="family-filters" aria-label="ตัวกรองกลุ่มงาน">
+        <button data-family-filter="all" class="selected">ทั้งหมด</button>
+        <button data-family-filter="งานแปลเกม">งานสร้างแพตช์</button>
+        <button data-family-filter="เว็บไซต์และคอนเทนต์">Catalog &amp; Content</button>
+        <button data-family-filter="พัฒนาเกม">พัฒนาเกม</button>
+        <button data-family-filter="ระบบหน่วยงาน">ระบบสำนักงาน</button>
+        <button data-family-filter="เครื่องมือ">เครื่องมือ</button>
+        <button data-family-filter="ระบบติดตาม">ระบบติดตาม</button>
+      </div>
+      <div id="familyGrid" class="family-grid"></div>
+      <small id="sourceHealth" class="source-health"></small>
+      <button id="showAllRepos" class="text-nav">เปิดรายการ Repository ทั้งหมด →</button>
+    </section>
+
+    <section id="pagesSection" hidden>
+      <div class="section-head"><div><div class="overline">PUBLISHED EXPERIENCES</div><h2>เว็บไซต์ GitHub Pages</h2></div><small>เว็บไซต์ที่เปิดใช้งานจริง แยกจาก Source Repository</small></div>
+      <p class="section-intro">หน้านี้รวบรวมเฉพาะเว็บไซต์ที่มีลิงก์เผยแพร่จริง ไม่ใช่รายการโครงการใหม่ และไม่เผยแพร่เนื้อหาภายในของ Private Repo</p>
+      <div id="pagesGrid" class="page-grid"></div>
+      <div class="notice subtle-notice">GitHub Pages ที่เป็น Public อาจมีแหล่งโค้ดเผยแพร่แยกจาก Repository หลักที่เป็น Private; ลิงก์ “Source” ระบุบทบาทของแต่ละ Repository ให้ชัดเจน</div>
+    </section>
+
+    <section id="projectsSection" hidden>
+      <div class="section-head"><div><div class="overline">ALL GITHUB REPOSITORIES</div><h2>Repository Explorer</h2></div><small id="syncstamp">—</small></div>
+      <div class="controls">
+        <input class="field search" id="search" placeholder="⌕ ค้นหาชื่อหรือประเภทงาน" aria-label="ค้นหา Repository">
+        <select class="field" id="category" aria-label="ประเภทโครงการ"><option value="all">ทุกหมวด</option><option>งานแปล ROM</option><option>พัฒนาเกม</option><option>เว็บไซต์</option><option>เครื่องมือแปลเกม</option><option>เครื่องมือ Offline</option><option>ระบบหน่วยงาน</option><option>ระบบติดตาม</option><option>บริหารคอนเทนต์</option><option>บริหารโครงการ</option></select>
+        <select class="field" id="statusFilter" aria-label="สถานะ"><option value="all">ทุกสถานะที่ทำงานอยู่</option><option value="live">เว็บใช้งานได้</option><option value="active">กำลังพัฒนา</option><option value="planning">วางแผน</option><option value="blocked">ติดปัญหา</option><option value="paused">พักงาน</option><option value="archived">Archive</option></select>
+        <select class="field" id="visibilityFilter" aria-label="สิทธิ์เข้าถึง"><option value="all">Public + Private</option><option value="public">Public</option><option value="private">Private</option></select>
+      </div>
+      <label class="archive-toggle"><input type="checkbox" id="showArchived"><span>แสดง Repository ที่ Archive แล้ว</span><small>ซ่อนเป็นค่าเริ่มต้น แต่ยังเก็บข้อมูลไว้</small></label>
+      <div class="section-head"><small id="resultcount">— โครงการ</small><small>เลือกจัดการเพื่อดูรายละเอียด GitHub</small></div>
+      <div class="grid" id="cards"></div>
+    </section>
+
+    <section id="activitySection" hidden>
+      <div class="section-head"><div><div class="overline">NEXT ACTIONS</div><h2>Action Queue</h2></div><small>งานติดขัด / พักไว้ โดยไม่ปะปนกับ Archive</small></div>
+      <div id="activity"></div>
+    </section>
+
+    <section id="atlasSection" hidden>
+      <div class="section-head"><div><div class="overline">ADMINISTRATIVE TOOLING</div><h2>Project Atlas · Control Center</h2></div><small>แยกจากโครงการผลิตงาน</small></div>
+      <div class="atlas-banner"><div><div class="eyebrow">ATLAS / MANAGEMENT ONLY</div><h3>ศูนย์จัดการ Repository และสถานะ</h3><p>Atlas เป็นเครื่องมือจัดการ Portfolio ไม่ใช่งานพัฒนาเกมหรือแพตช์ และไม่นับเป็นโครงการผลิตผลงานในหน้าหลัก</p></div><div class="atlas-orbit" aria-hidden="true">⌘</div></div>
+      <div class="atlas-tools">
+        <a href="https://github.com/rat12-web/project-portfolio" target="_blank" rel="noopener noreferrer"><span class="tool-icon">⌘</span><strong>Source &amp; Configuration</strong><small>แก้โครงสร้างและไฟล์ควบคุมโครงการ</small><span>↗</span></a>
+        <a href="https://github.com/rat12-web/project-portfolio/actions" target="_blank" rel="noopener noreferrer"><span class="tool-icon">↻</span><strong>GitHub Actions</strong><small>ดูการ Deploy และ Sync ล่าสุด</small><span>↗</span></a>
+        <a href="https://github.com/rat12-web/project-portfolio/issues" target="_blank" rel="noopener noreferrer"><span class="tool-icon">◷</span><strong>Issue Tracker</strong><small>ติดตามงานจัดการและข้อผิดพลาด</small><span>↗</span></a>
+      </div>
+      <div class="notice">การพักงานใน Atlas เป็นการบันทึกสถานะเท่านั้น ไม่ได้หยุดเซิร์ฟเวอร์หรือ Actions; การ Archive/Transfer จริงต้องยืนยันผ่าน GitHub และมีสิทธิ์ที่เหมาะสม</div>
+    </section>
+
+    <footer class="footer">Project Explorer by rat12-web · Atlas คือเครื่องมือจัดการ · ข้อมูล Private ที่เห็นในโหมด Public เป็น Metadata ที่เผยแพร่โดยตั้งใจ</footer>
+  </main>
+</div>
+<div class="detail-panel" id="detail" hidden></div>
+<div class="detail-panel" id="authDrawer" hidden></div>
+<div class="toast" id="toast" role="status" hidden></div>
+<script src="./assets/app.js" defer></script>
+<script src="./assets/hierarchy.js" defer></script>
+</body></html>
